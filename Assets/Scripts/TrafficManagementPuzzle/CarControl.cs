@@ -9,12 +9,13 @@ public class CarControl : MonoBehaviour
     private Sprite originalSprite;
     private float deltaX;
     private float deltaY;
+    private float distance;
     private int clickCount;
     [SerializeField] private int carIndex;
     private bool isSelected;
     private bool isTouched;	
     private Vector3 mousePos;
-    private Vector3 previousMousePos;
+    private Vector3 mousePosWhenDrag;
     private Rigidbody2D rb;
     private Collider2D objCollider;
     private SpriteRenderer objRenderer;
@@ -73,19 +74,26 @@ public class CarControl : MonoBehaviour
     {
         if(isSelected && clickCount > 1)
         {
-            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosWhenDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if(objCollider == Physics2D.OverlapPoint(mousePos) && isTouched) rb.MovePosition(new Vector2(mousePos.x - deltaX, mousePos.y - deltaY));
+            if(objCollider == Physics2D.OverlapPoint(mousePosWhenDrag) && isTouched) rb.MovePosition(new Vector2(mousePosWhenDrag.x - deltaX, mousePosWhenDrag.y - deltaY));
         }
     }
 
     void OnMouseUp()
     {
-        if(clickCount > 1 && Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), mousePos) < 0.1f)
+        distance =  Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), mousePos);
+
+        if(clickCount > 1 && distance < 0.1f)
         {
             isSelected = false;
             objRenderer.sprite = originalSprite;
             clickCount = 0;
+        }
+        else if(clickCount > 1 && distance > 0.1f)
+        {
+            Debug.Log("Have Drag");
+            tp.UpdateAvailableMove();
         }
 
         isTouched = false;
