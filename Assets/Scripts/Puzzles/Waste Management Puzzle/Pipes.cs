@@ -4,13 +4,33 @@ using UnityEngine;
 
 public class Pipes : MonoBehaviour
 {
+    private enum Type
+    {
+        horizontalUpper, horizontalLower, vertical, curved1, curved2
+    }
+
+    [SerializeField] private Type pipeType;
     private float[] rotations = {0, 90, 180, 270};
     private float intialRotation;
     [SerializeField] private float[] correctRotations;
+    private float currentRotation;
     private bool isPlaced = false;
     private bool isRotating;
+    private bool isFilled;
     private int possibleRotations;
     [SerializeField] private WastePuzzle wastePuzzle;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite filledSprite;
+    private Sprite originalSprite;
+    [Header("For Curved Pipes")]
+    [SerializeField] private Sprite rotatedSprite;
+
+    void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        originalSprite = spriteRenderer.sprite;
+    }
 
     private void Start()
     {
@@ -19,6 +39,8 @@ public class Pipes : MonoBehaviour
 
         intialRotation = rotations[rand];
         transform.eulerAngles = new Vector3(0, 0, rotations[rand]);
+        
+        CheckRotation();
         
         if(possibleRotations > 1)
         {
@@ -43,13 +65,16 @@ public class Pipes : MonoBehaviour
         if(!isRotating)
         {
             isRotating = true;
+            currentRotation = Mathf.Round(transform.eulerAngles.z);
+
             LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 90.0f, 0.3f).setOnComplete(() => 
             {
                 isRotating = false;
+                CheckRotation();
 
                 if(possibleRotations > 1)
                 {
-                    if(Mathf.Round(transform.eulerAngles.z) == correctRotations[0] || Mathf.Round(transform.eulerAngles.z) == correctRotations[1] && !isPlaced)
+                    if(currentRotation == correctRotations[0] || currentRotation == correctRotations[1] && !isPlaced)
                     {
                         isPlaced = true;
                         wastePuzzle.CorrectMove();
@@ -62,7 +87,7 @@ public class Pipes : MonoBehaviour
                 }
                 else
                 {
-                    if(Mathf.Round(transform.eulerAngles.z) == correctRotations[0] && !isPlaced)
+                    if(currentRotation == correctRotations[0] && !isPlaced)
                     {
                         isPlaced = true;
                         wastePuzzle.CorrectMove();
@@ -77,4 +102,88 @@ public class Pipes : MonoBehaviour
         }
         //transform.Rotate(new Vector3(0, 0, 90));
     }
+
+    public void CheckRotation()
+    {
+        isFilled = false;
+
+        currentRotation = Mathf.Round(transform.eulerAngles.z);
+
+        if(pipeType == Type.horizontalUpper || pipeType == Type.vertical)
+        {
+            spriteRenderer.sprite = originalSprite;
+
+            if(currentRotation == 0 || currentRotation == 90) spriteRenderer.flipX = false;
+
+            if(currentRotation == 180 || currentRotation == 270) spriteRenderer.flipX = true;
+        }
+
+        if(pipeType ==  Type.horizontalLower)
+        {
+            spriteRenderer.sprite = originalSprite;
+            
+            if(currentRotation == 0 || currentRotation == 270) spriteRenderer.flipX = false;
+
+            if(currentRotation == 90 || currentRotation == 180) spriteRenderer.flipX = true;
+        }
+
+        if(pipeType == Type.curved1)
+        {
+            if(currentRotation == 0 || currentRotation == 270)
+            {
+                spriteRenderer.sprite = rotatedSprite;
+                spriteRenderer.flipX = true;
+            }
+
+            if(currentRotation == 90 || currentRotation == 180) 
+            {
+                spriteRenderer.sprite = originalSprite;
+                spriteRenderer.flipX = false;
+            }
+        }
+
+        if(pipeType == Type.curved2)
+        {
+            if(currentRotation == 270)
+            {
+                spriteRenderer.sprite = rotatedSprite;
+                spriteRenderer.flipX = true;
+            }
+
+            if(currentRotation == 0 || currentRotation == 90 || currentRotation == 180) 
+            {
+                spriteRenderer.sprite = originalSprite;
+                spriteRenderer.flipX = false;
+            }
+        }
+    }
+
+    public void ChangeToFilledSprite() 
+    {
+        spriteRenderer.sprite = filledSprite;
+        isFilled = true;
+    }
+
+    public void ChangeToUnfilledSprite()
+    {
+        spriteRenderer.sprite = originalSprite;
+        isFilled = false;
+    }
+
+    public void ResetPipe()
+    {
+        isPlaced = false;
+        isFilled = false;
+    }
+
+    public bool GetIsPlaced()
+    {
+        return isPlaced;
+    }
+
+    public bool GetIsFilled()
+    {
+        return isFilled;
+    }
+
 }
