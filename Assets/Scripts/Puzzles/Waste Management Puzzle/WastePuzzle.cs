@@ -7,34 +7,22 @@ using System;
 public class WastePuzzle : MonoBehaviour
 {
     [SerializeField] private GameObject pipesParent;
-    public GameObject[] pipes;
     [SerializeField] private Pipes[] pipeScripts;
     private int totalPipes = 0;
     private int correctedPipes = 0;
-    private int filledPipes;
     [SerializeField] private  float totalTime;
     private float intialTime;
-    private float[] intialPipeRotations;
     private bool isTimeStart;
+    private bool isComplete;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private SpriteRenderer endPipeSpriteRenderer;
     [SerializeField] private Sprite finishedEndPipeSprite;
 
     void Start()
     {
-        totalPipes = pipesParent.transform.childCount;
+        totalPipes = pipeScripts.Length;
         intialTime = totalTime;
 
-        // pipes = new GameObject[totalPipes];
-        intialPipeRotations = new float[totalPipes];
-
-        for(int i = 0; i < pipeScripts.Length; i++) 
-        {
-            //pipes[i] = pipesParent.transform.GetChild(i).gameObject;
-            // intialPipeRotations[i] = pipes[i].transform.eulerAngles.z;
-            intialPipeRotations[i] = pipeScripts[i].gameObject.transform.eulerAngles.z;
-        }
-    
         StartTimer();
     }
 
@@ -54,6 +42,8 @@ public class WastePuzzle : MonoBehaviour
 
         if(correctedPipes == totalPipes)
         {
+            isComplete = true;
+            isTimeStart = false;
             endPipeSpriteRenderer.sprite = finishedEndPipeSprite;
             Debug.Log("You Win! & Show Report");
         }
@@ -103,16 +93,16 @@ public class WastePuzzle : MonoBehaviour
         }
     }
 
-    private void ResetPuzzle()
+    public void ResetPuzzle()
     {
-        for(int i = 0; i < pipeScripts.Length; i++) 
-        {
-            LeanTween.rotateZ(pipeScripts[i].gameObject, intialPipeRotations[i], 0.0f);
-            pipeScripts[i].ResetPipe();
-            pipeScripts[i].CheckRotation();
-        }
-
+        for(int i = 0; i < pipeScripts.Length; i++) pipeScripts[i].ResetPipe();
+        
         totalTime = intialTime;
         isTimeStart = true;
+    }
+
+    public bool GetIsComplete()
+    {
+        return isComplete;
     }
 }

@@ -62,7 +62,7 @@ public class Pipes : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(!isRotating)
+        if(!isRotating && !wastePuzzle.GetIsComplete())
         {
             isRotating = true;
             currentRotation = Mathf.Round(transform.eulerAngles.z);
@@ -167,6 +167,9 @@ public class Pipes : MonoBehaviour
     public void ChangeToUnfilledSprite()
     {
         spriteRenderer.sprite = originalSprite;
+        
+        if(pipeType == Type.curved1 || pipeType == Type.curved2) CheckRotation();
+        
         isFilled = false;
     }
 
@@ -174,6 +177,27 @@ public class Pipes : MonoBehaviour
     {
         isPlaced = false;
         isFilled = false;
+
+        LeanTween.rotateZ(gameObject, intialRotation, 0.0f);
+
+        CheckRotation();
+        
+        if(possibleRotations > 1)
+        {
+            if(transform.eulerAngles.z == correctRotations[0] || transform.eulerAngles.z == correctRotations[1])
+            {
+                isPlaced = true;
+                wastePuzzle.CorrectMove();
+            }
+        }
+        else
+        {
+            if(transform.eulerAngles.z == correctRotations[0])
+            {
+                isPlaced = true;
+                wastePuzzle.CorrectMove();
+            }
+        }
     }
 
     public bool GetIsPlaced()
