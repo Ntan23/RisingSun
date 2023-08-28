@@ -35,6 +35,8 @@ public class CarControl : MonoBehaviour
 
     void OnMouseDown()
     {
+        if(tp.GetIsWin()) return;
+
         clickCount++;
 
         if(clickCount == 1) isSelected = !isSelected;
@@ -72,16 +74,20 @@ public class CarControl : MonoBehaviour
 
     void OnMouseDrag()
     {
+        if(tp.GetIsWin()) return;
+
         if(isSelected && clickCount > 1)
         {
             mousePosWhenDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if(objCollider == Physics2D.OverlapPoint(mousePosWhenDrag) && isTouched) rb.MovePosition(new Vector2(mousePosWhenDrag.x - deltaX, mousePosWhenDrag.y - deltaY));
+            if(/*objCollider == Physics2D.OverlapPoint(mousePosWhenDrag) &&*/ isTouched) rb.MovePosition(new Vector2(mousePosWhenDrag.x - deltaX, mousePosWhenDrag.y - deltaY));
         }
     }
 
     void OnMouseUp()
     {
+        if(tp.GetIsWin()) return;
+        
         distance =  Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.mousePosition), mousePos);
 
         if(clickCount > 1 && distance < 0.1f)

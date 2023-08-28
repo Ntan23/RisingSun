@@ -66,7 +66,10 @@ public class TrafficPuzzle : MonoBehaviour
         for(int i = 0; i < carControl.Length; i++)
         {
             carControl[i].gameObject.transform.position = initialCarPos[i];
+            carControl[i].ResetValue();
         }
+
+        isWin = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -76,5 +79,10 @@ public class TrafficPuzzle : MonoBehaviour
             isWin = true;
             Debug.Log("You Win & Show Report");
         } 
+    }
+
+    public bool GetIsWin()
+    {
+        return isWin;
     }
 }
