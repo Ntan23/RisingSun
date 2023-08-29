@@ -50,27 +50,36 @@ public class EnergyPuzzle : MonoBehaviour
         {
             isActive = false;
 
-            if(absCurrentArrowRotation >= thresholds[roundIndex].start && absCurrentArrowRotation <= thresholds[roundIndex].end)
+            for(int i = 0; i < thresholds[roundIndex].start.Length; i++)
             {
-                Debug.Log("You Win");
-                roundIndex++;
+                if(i + 1 < thresholds[roundIndex].start.Length)
+                {
+                    if(absCurrentArrowRotation < thresholds[roundIndex].start[i] || absCurrentArrowRotation > thresholds[roundIndex].end[i]) 
+                    {
+                        Debug.Log("You Lose");
+                        ResetPuzzle();
+                    }
+                }
+                
+                if(i + 1 == thresholds[roundIndex].start.Length)
+                {
+                    if(absCurrentArrowRotation >= thresholds[roundIndex].start[i] && absCurrentArrowRotation <= thresholds[roundIndex].end[i])
+                    {
+                        roundIndex++;
 
-                if(roundIndex < rounds.Length)
-                {
-                    roundText.text = "Round " + (roundIndex + 1).ToString() + " / " + rounds.Length.ToString();
-                    ResetPuzzle();
-                    rounds[roundIndex].SetActive(true);
-                    rounds[roundIndex - 1].SetActive(false);
+                        if(roundIndex < rounds.Length)
+                        {
+                            roundText.text = "Round " + (roundIndex + 1).ToString() + " / " + rounds.Length.ToString();
+                            ResetPuzzle();
+                            rounds[roundIndex].SetActive(true);
+                            rounds[roundIndex - 1].SetActive(false);
+                        }
+                        else if(roundIndex == rounds.Length)
+                        {
+                            Debug.Log("Show Report");
+                        }
+                    }
                 }
-                else if(roundIndex == rounds.Length)
-                {
-                    Debug.Log("Show Report");
-                }
-            }
-            else 
-            {
-                Debug.Log("You Lose");
-                ResetPuzzle();
             }
         }
     }

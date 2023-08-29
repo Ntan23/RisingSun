@@ -8,6 +8,7 @@ using System;
 public class ResourcePuzzle : MonoBehaviour
 {
     [SerializeField] private int piecesCount;
+    private int completedPieces;
     private int randomIndex;
     private int[] randomIndexes;
     [SerializeField] private float totalTime;
@@ -141,5 +142,21 @@ public class ResourcePuzzle : MonoBehaviour
 
         totalTime = initialTime;
         isTimeStart = true;
+    }
+
+    public void CheckLevel()
+    {
+        completedPieces++;
+
+        if(completedPieces == piecesCount)
+        {
+            Debug.Log("Show Report");
+            isTimeStart = false;
+        }
+    }
+
+    public int GetPiecesCount()
+    {
+        return piecesCount;
     }
 }

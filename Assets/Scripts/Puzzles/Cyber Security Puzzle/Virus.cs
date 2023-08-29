@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Virus : MonoBehaviour
 {
+    private enum Type 
+    {
+        killable, unkillable
+    }
+
+    [SerializeField] private Type virusType;
     [SerializeField] private int healthCount;
     private CyberPuzzle cyberPuzzle;
     private DataMovement dataMovement;
@@ -21,14 +27,16 @@ public class Virus : MonoBehaviour
 
     void OnMouseDown()
     {
-        healthCount--;
-
-        if(healthCount == 0) 
+        if(virusType == Type.killable)
         {
-            healthCount = cyberPuzzle.GetVirusHealth();
-            
-            cyberPuzzle.UpdateKilledVirus();
-            Destroy(gameObject);
-        }
+            healthCount--;
+
+            if(healthCount == 0) 
+            {
+                healthCount = cyberPuzzle.GetVirusHealth();
+                
+                Destroy(gameObject);
+            }
+        } 
     }
 }

@@ -5,13 +5,18 @@ using UnityEngine;
 public class PuzzlePiece : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
-    private bool isDraging;
     private bool canBeDrag = true;
     private Vector2 initialPosition;
     private Vector2 offset;
     private PuzzleSlot slot;
+    private ResourcePuzzle resourcePuzzle;
 
-    void Start() => initialPosition = transform.position;
+    void Start() 
+    {
+        resourcePuzzle = GetComponentInParent<ResourcePuzzle>();
+
+        initialPosition = transform.position;
+    }
     
     public void Initialization(PuzzleSlot puzzleSlot)
     {
@@ -35,6 +40,8 @@ public class PuzzlePiece : MonoBehaviour
         {
             canBeDrag = false;
             LeanTween.move(gameObject, slot.transform.position, 0.5f).setEaseSpring();
+    
+            resourcePuzzle.CheckLevel();
         }
         else
         {

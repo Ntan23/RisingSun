@@ -7,21 +7,24 @@ public class CyberPuzzle : MonoBehaviour
 {
     [Range(0.0f,1.0f)]
     [SerializeField] private float virusSpawnChances;
+    [Range(0.0f,1.0f)]
+    [SerializeField] private float unkillableVirusSpawnChances;
     private float dataSpawnChances;
     private float randomValue;
     [SerializeField] private float intervalBetweenData;
     private float intialInterval;
     [SerializeField] private float dataSpeed;
-    [SerializeField] private int virusThatNeedToBeKilled;
-    private int killedVirus;
+    // [SerializeField] private int virusThatNeedToBeKilled;
+    // private int killedVirus;
     [SerializeField] private int virusHealth;
     private bool canSpawn = true;
     private GameObject data;
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private GameObject dataPrefab;
     [SerializeField] private GameObject virusPrefab;
+    [SerializeField] private GameObject unkillableVirusPrefab;
     [SerializeField] private Transform objParent;
-    [SerializeField] private TextMeshProUGUI virusKilledText;
+    //[SerializeField] private TextMeshProUGUI virusKilledText;
     private GameManager gm;
 
     void Start()
@@ -31,7 +34,7 @@ public class CyberPuzzle : MonoBehaviour
         dataSpawnChances = 1.0f - virusSpawnChances;
         intialInterval = intervalBetweenData;
 
-        virusKilledText.text = killedVirus.ToString() + " / " + virusThatNeedToBeKilled.ToString();
+        //virusKilledText.text = killedVirus.ToString() + " / " + virusThatNeedToBeKilled.ToString();
     }
 
     void Update()
@@ -61,40 +64,27 @@ public class CyberPuzzle : MonoBehaviour
         }
         else 
         {
-            data = Instantiate(virusPrefab, spawnPosition.position, Quaternion.identity);
-            data.transform.parent = objParent;
-        }
-    }
+            randomValue = Random.value;
 
-    public void UpdateKilledVirus()
-    {
-        killedVirus++;
-
-        virusKilledText.text = killedVirus.ToString() + " / " + virusThatNeedToBeKilled.ToString();
-
-        if(killedVirus == virusThatNeedToBeKilled) 
-        {
-            Debug.Log("You Win & Show Report");
-            canSpawn = false;
-
-            if(objParent.childCount > 0)
+            if(randomValue <= unkillableVirusSpawnChances)
             {
-                for(int i = 0; i < objParent.childCount; i++)
-                {
-                    Destroy(objParent.GetChild(i).gameObject);
-                }
+                data = Instantiate(unkillableVirusPrefab, spawnPosition.position, Quaternion.identity);
+                data.transform.parent = objParent;
             }
-            
-            if(gm.GetDifficultyIndex() < 2) gm.UpdateDifficultyIndex(); 
+            else
+            {
+                data = Instantiate(virusPrefab, spawnPosition.position, Quaternion.identity);
+                data.transform.parent = objParent;
+            }
         }
     }
 
     public void ResetLevel()
     {
         intervalBetweenData = intialInterval;
-        killedVirus = 0;
+        //killedVirus = 0;
 
-        virusKilledText.text = killedVirus.ToString() + " / " + virusThatNeedToBeKilled.ToString();
+        //virusKilledText.text = killedVirus.ToString() + " / " + virusThatNeedToBeKilled.ToString();
 
         if(objParent.childCount > 0)
         {
@@ -104,6 +94,16 @@ public class CyberPuzzle : MonoBehaviour
             }
         }
     }
+
+    public void ShowEndScreen()
+    {
+        if(objParent.childCount > 0)
+        {
+            for(int i = 0; i < objParent.childCount; i++) Destroy(objParent.GetChild(i).gameObject); 
+        }
+            
+        if(gm.GetDifficultyIndex() < 2) gm.UpdateDifficultyIndex(); 
+    } 
 
     public int GetVirusHealth()
     {

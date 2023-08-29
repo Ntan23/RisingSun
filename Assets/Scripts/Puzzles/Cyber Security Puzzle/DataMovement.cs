@@ -58,11 +58,8 @@ public class DataMovement : MonoBehaviour
             {
                 Destroy(gameObject);
 
-                if(gameObject.tag == "Virus") 
-                {
-                    Debug.Log("Game Over");
-                    cyberPuzzle.ResetLevel();
-                }
+                if(gameObject.tag == "Virus") cyberPuzzle.ResetLevel();
+                if(gameObject.tag == "UnkillableVirus") cyberPuzzle.ShowEndScreen();
             }
         }
     }

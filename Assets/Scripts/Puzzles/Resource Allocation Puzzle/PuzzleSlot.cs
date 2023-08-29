@@ -5,9 +5,10 @@ using UnityEngine;
 public class PuzzleSlot : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite originalSprite;
 
     public Sprite GetSlotSprite()
     {
-        return spriteRenderer.sprite;
+        return originalSprite;
     }
 }

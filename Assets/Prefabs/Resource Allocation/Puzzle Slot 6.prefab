@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 7055669647132705868, guid: 187868dd7a49a254f9a358d53124d615, type: 3}
       propertyPath: originalSprite
       value: 
-      objectReference: {fileID: 1891734861, guid: d6fe7d72b55645d46a009cefcf3d1d3f, type: 3}
+      objectReference: {fileID: 198247920, guid: d6fe7d72b55645d46a009cefcf3d1d3f, type: 3}
     - target: {fileID: 7055669647132705869, guid: 187868dd7a49a254f9a358d53124d615, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -58,14 +58,14 @@ PrefabInstance:
     - target: {fileID: 7055669647132705871, guid: 187868dd7a49a254f9a358d53124d615, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2032734419, guid: d6fe7d72b55645d46a009cefcf3d1d3f, type: 3}
+      objectReference: {fileID: -1925896219, guid: d6fe7d72b55645d46a009cefcf3d1d3f, type: 3}
     - target: {fileID: 7055669647132705871, guid: 187868dd7a49a254f9a358d53124d615, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7055669647132705874, guid: 187868dd7a49a254f9a358d53124d615, type: 3}
       propertyPath: m_Name
-      value: Puzzle Slot 4
+      value: Puzzle Slot 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 187868dd7a49a254f9a358d53124d615, type: 3}
