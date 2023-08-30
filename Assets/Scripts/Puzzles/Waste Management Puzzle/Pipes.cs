@@ -6,7 +6,7 @@ public class Pipes : MonoBehaviour
 {
     private enum Type
     {
-        horizontalUpper, horizontalLower, vertical, curved1, curved2
+        horizontalUpper, horizontalLower, vertical, curved1, curved2, curved3, curved4, curved5, curved6
     }
 
     [SerializeField] private Type pipeType;
@@ -67,7 +67,9 @@ public class Pipes : MonoBehaviour
             isRotating = true;
             currentRotation = Mathf.Round(transform.eulerAngles.z);
 
-            LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 90.0f, 0.3f).setOnComplete(() => 
+            currentRotation += 90;
+
+            LeanTween.rotateZ(gameObject, currentRotation, 0.3f).setOnComplete(() => 
             {
                 isRotating = false;
                 CheckRotation();
@@ -156,6 +158,66 @@ public class Pipes : MonoBehaviour
                 spriteRenderer.flipX = false;
             }
         }
+
+        if(pipeType == Type.curved3)
+        {
+            if(currentRotation == 90 || currentRotation == 180 || currentRotation == 270)
+            {
+                spriteRenderer.sprite = rotatedSprite;
+                spriteRenderer.flipY = true;
+            }
+
+            if(currentRotation == 0)
+            {
+                spriteRenderer.sprite = originalSprite;
+                spriteRenderer.flipY = false;
+            }
+        }
+
+        if(pipeType == Type.curved4)
+        {
+            if(currentRotation == 0 || currentRotation == 90)
+            {
+                spriteRenderer.sprite = originalSprite;
+                spriteRenderer.flipY = false;
+            }
+
+            if(currentRotation == 180 || currentRotation == 270)
+            {
+                spriteRenderer.sprite = rotatedSprite;
+                spriteRenderer.flipY = true;
+            }
+        }
+
+        if(pipeType == Type.curved5)
+        {
+            if(currentRotation == 0 || currentRotation == 90)
+            {
+                spriteRenderer.sprite = originalSprite;
+                spriteRenderer.flipX = false;
+            }
+
+            if(currentRotation == 180 || currentRotation == 270)
+            {
+                spriteRenderer.sprite = rotatedSprite;
+                spriteRenderer.flipX = true;
+            }
+        }
+
+        if(pipeType == Type.curved6)
+        {
+            if(currentRotation == 0 || currentRotation == 90)
+            {
+                spriteRenderer.sprite = rotatedSprite;
+                spriteRenderer.flipX = true;
+            }
+
+            if(currentRotation == 180 || currentRotation == 270)
+            {
+                spriteRenderer.sprite = originalSprite;
+                spriteRenderer.flipX = false;
+            }
+        }
     }
 
     public void ChangeToFilledSprite() 
@@ -168,7 +230,7 @@ public class Pipes : MonoBehaviour
     {
         spriteRenderer.sprite = originalSprite;
         
-        if(pipeType == Type.curved1 || pipeType == Type.curved2) CheckRotation();
+        if(pipeType == Type.curved1 || pipeType == Type.curved2 || pipeType == Type.curved3 || pipeType == Type.curved4 || pipeType == Type.curved5 || pipeType == Type.curved6) CheckRotation();
         
         isFilled = false;
     }
@@ -198,6 +260,7 @@ public class Pipes : MonoBehaviour
                 wastePuzzle.CorrectMove();
             }
         }
+       
     }
 
     public bool GetIsPlaced()

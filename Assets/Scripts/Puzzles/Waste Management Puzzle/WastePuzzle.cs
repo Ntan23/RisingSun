@@ -17,6 +17,11 @@ public class WastePuzzle : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private SpriteRenderer endPipeSpriteRenderer;
     [SerializeField] private Sprite finishedEndPipeSprite;
+    [SerializeField] private GameObject puzzleSpriteMask;
+    [SerializeField] private Report report;
+    [SerializeField] private GameObject[] objectThatNeedToDisable; 
+    [SerializeField] private SpriteRenderer bgSpriteRenderer;
+    [SerializeField] private Sprite bgSprite;
 
     void Start()
     {
@@ -46,6 +51,7 @@ public class WastePuzzle : MonoBehaviour
             isTimeStart = false;
             endPipeSpriteRenderer.sprite = finishedEndPipeSprite;
             Debug.Log("You Win! & Show Report");
+            ShowReport();
         }
     }
 
@@ -95,10 +101,26 @@ public class WastePuzzle : MonoBehaviour
 
     public void ResetPuzzle()
     {
+        correctedPipes = 0;
+
         for(int i = 0; i < pipeScripts.Length; i++) pipeScripts[i].ResetPipe();
         
         totalTime = intialTime;
         isTimeStart = true;
+    }
+
+    private void ShowReport()
+    {
+        LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
+        LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
+        {
+            bgSpriteRenderer.sprite = bgSprite;
+
+            foreach(GameObject go in objectThatNeedToDisable) go.SetActive(false);
+            
+            report.gameObject.SetActive(true);
+            StartCoroutine(report.StartReport());
+        });
     }
 
     public bool GetIsComplete()

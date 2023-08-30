@@ -41,7 +41,7 @@ public class PuzzlePiece : MonoBehaviour
             canBeDrag = false;
             LeanTween.move(gameObject, slot.transform.position, 0.5f).setEaseSpring();
     
-            resourcePuzzle.CheckLevel();
+            StartCoroutine(resourcePuzzle.CheckLevel());
         }
         else
         {

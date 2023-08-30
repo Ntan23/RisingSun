@@ -14,6 +14,7 @@ public class ResourcePuzzle : MonoBehaviour
     [SerializeField] private float totalTime;
     private float initialTime;
     private bool isTimeStart;
+    private bool isComplete;
     private Vector3[] intialPiecesPosition;
     [SerializeField] private ValueForRandomizer valuesForRandomizerSO;
     [SerializeField] private List<PuzzleSlot> slotPrefabs;
@@ -26,6 +27,11 @@ public class ResourcePuzzle : MonoBehaviour
     private PuzzlePiece spawnedPiece;
     private PuzzlePiece[] spawnedPieces;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private GameObject puzzleSpriteMask;
+    [SerializeField] private GameObject[] objectThatNeedToDisable;
+    [SerializeField] private SpriteRenderer bgSpriteRenderer;
+    [SerializeField] private Sprite bgSprite;
+    [SerializeField] private Report report;
 
     void Awake()
     {
@@ -132,26 +138,45 @@ public class ResourcePuzzle : MonoBehaviour
         }
     }
 
-    private void ResetPuzzle()
+    public void ResetPuzzle()
     {
-        for(int i = 0; i < piecesCount; i++)
+        if(!isComplete)
         {
-            pieces[i].transform.position = intialPiecesPosition[i];
-            spawnedPieces[i].SetBackCanBeDrag();
-        }
+            completedPieces = 0;
 
-        totalTime = initialTime;
-        isTimeStart = true;
+            for(int i = 0; i < piecesCount; i++)
+            {
+                pieces[i].transform.position = intialPiecesPosition[i];
+                spawnedPieces[i].SetBackCanBeDrag();
+            }
+
+            totalTime = initialTime;
+            isTimeStart = true;
+        }
     }
 
-    public void CheckLevel()
+    public IEnumerator CheckLevel()
     {
         completedPieces++;
+
+        yield return new WaitForSeconds(0.5f);
 
         if(completedPieces == piecesCount)
         {
             Debug.Log("Show Report");
+            isComplete = true;
             isTimeStart = false;
+
+            LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
+            LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
+            {
+                bgSpriteRenderer.sprite = bgSprite;
+                
+                foreach(GameObject go in objectThatNeedToDisable) go.SetActive(false);
+            
+                report.gameObject.SetActive(true);
+                StartCoroutine(report.StartReport());
+            });
         }
     }
 

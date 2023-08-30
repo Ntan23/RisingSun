@@ -64,6 +64,8 @@ public class DataMovement : MonoBehaviour
         }
     }
 
+    public void ChangeCanMoveValue() => canMove = false;   
+    
     IEnumerator Delay()
     {
         yield return new WaitForSeconds(0.1f);

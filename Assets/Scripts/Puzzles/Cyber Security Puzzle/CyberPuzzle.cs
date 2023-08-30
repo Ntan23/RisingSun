@@ -103,6 +103,7 @@ public class CyberPuzzle : MonoBehaviour
         }
             
         if(gm.GetDifficultyIndex() < 2) gm.UpdateDifficultyIndex(); 
+        canSpawn = false;
     } 
 
     public int GetVirusHealth()

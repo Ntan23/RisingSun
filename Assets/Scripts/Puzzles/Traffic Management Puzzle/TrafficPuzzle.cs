@@ -13,6 +13,9 @@ public class TrafficPuzzle : MonoBehaviour
     private bool isFirstTime = true;
     private bool isWin;
     [SerializeField] private TextMeshProUGUI moveCountText;
+    [SerializeField] private GameObject puzzleSpriteMask;
+    [SerializeField] private GameObject[] objectThatNeedToDisable;
+    [SerializeField] private Report report;
 
     void Start()
     {
@@ -60,16 +63,19 @@ public class TrafficPuzzle : MonoBehaviour
 
     public void ResetPuzzle()
     {
-        availableMove = intialAvailableMove;
-        moveCountText.text = availableMove.ToString();
-
-        for(int i = 0; i < carControl.Length; i++)
+        if(!isWin)
         {
-            carControl[i].gameObject.transform.position = initialCarPos[i];
-            carControl[i].ResetValue();
-        }
+            availableMove = intialAvailableMove;
+            moveCountText.text = availableMove.ToString();
 
-        isWin = false;
+            for(int i = 0; i < carControl.Length; i++)
+            {
+                carControl[i].gameObject.transform.position = initialCarPos[i];
+                carControl[i].ResetValue();
+            }
+
+            isWin = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -78,7 +84,21 @@ public class TrafficPuzzle : MonoBehaviour
         {
             isWin = true;
             Debug.Log("You Win & Show Report");
+
+            ShowReport();
         } 
+    }
+
+    private void ShowReport()
+    {
+        LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
+        LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
+        {
+            foreach(GameObject go in objectThatNeedToDisable) go.SetActive(false);
+            
+            report.gameObject.SetActive(true);
+            StartCoroutine(report.StartReport());
+        });
     }
 
     public bool GetIsWin()

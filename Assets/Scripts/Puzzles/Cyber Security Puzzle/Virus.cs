@@ -34,8 +34,11 @@ public class Virus : MonoBehaviour
             if(healthCount == 0) 
             {
                 healthCount = cyberPuzzle.GetVirusHealth();
+
+                dataMovement.ChangeCanMoveValue();
                 
-                Destroy(gameObject);
+                GetComponent<Animator>().Play("VirusKilled");
+                Destroy(gameObject, 0.3f);
             }
         } 
     }
