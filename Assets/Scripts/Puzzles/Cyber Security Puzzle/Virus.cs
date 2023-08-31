@@ -39,6 +39,8 @@ public class Virus : MonoBehaviour
                 
                 GetComponent<Animator>().Play("VirusKilled");
                 Destroy(gameObject, 0.3f);
+
+                if(gm.GetDifficultyIndex() == 2) cyberPuzzle.CheckKilledVirus();
             }
         } 
     }

@@ -20,9 +20,14 @@ public class EnergyPuzzle : MonoBehaviour
     [SerializeField] private GameObject puzzleSpriteMask;
     [SerializeField] private GameObject[] objectThatNeedToDisable;
     [SerializeField] private Report report;
+    private AudioManager am;
 
-    void Start() => roundText.text = "Round " + (roundIndex + 1).ToString() + " / " + rounds.Length.ToString();
-    
+    void Start() 
+    {
+        am = AudioManager.instance;
+        roundText.text = "Round " + (roundIndex + 1).ToString() + " / " + rounds.Length.ToString();
+    }
+
     void Update()
     {
         if(isActive)
@@ -69,6 +74,7 @@ public class EnergyPuzzle : MonoBehaviour
                     {
                         hitCount++;
                         Debug.Log("Hit");
+                        am.PlayHitSFX();
                         isActive = true;
                         break;
                     }
@@ -84,6 +90,7 @@ public class EnergyPuzzle : MonoBehaviour
 
                     if(absCurrentArrowRotation >= thresholds[roundIndex].start[i] && absCurrentArrowRotation <= thresholds[roundIndex].end[i])
                     {
+                        am.PlayHitSFX();
                         hitCount++;
 
                         if(hitCount == thresholds[roundIndex].start.Length)

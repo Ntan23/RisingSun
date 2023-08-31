@@ -36,7 +36,7 @@ public class PuzzlePiece : MonoBehaviour
 
     void OnMouseUp()
     {
-        if(Vector2.Distance(transform.position, slot.transform.position) < 2.5f)
+        if(Vector2.Distance(transform.position, slot.transform.position) < 2.0f)
         {
             canBeDrag = false;
             LeanTween.move(gameObject, slot.transform.position, 0.5f).setEaseSpring().setOnComplete(() =>

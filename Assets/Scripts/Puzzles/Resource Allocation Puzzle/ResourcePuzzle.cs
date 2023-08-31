@@ -41,6 +41,8 @@ public class ResourcePuzzle : MonoBehaviour
         intialPiecesPosition = new Vector3[piecesCount];
         pieces = new GameObject[piecesCount];
         spawnedPieces = new PuzzlePiece[piecesCount];
+
+        gameObject.SetActive(false);
     }
 
     void Start() 
@@ -49,6 +51,12 @@ public class ResourcePuzzle : MonoBehaviour
 
         for(int i = 0; i < piecesCount; i++) valuesForRandomizerSO.value[i] = i;
         
+        // StartCoroutine(Delay());
+    }
+
+    IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.6f);
         Spawn();
     }
 
@@ -59,8 +67,9 @@ public class ResourcePuzzle : MonoBehaviour
         StartCoroutine(Timer());
     }
     
-    private void Spawn()
+    public void Spawn()
     {
+        Debug.Log("Spawn");
         Randomizer();
 
         randomSet = slotPrefabs.OrderBy(s => UnityEngine.Random.value).Take(piecesCount).ToList();

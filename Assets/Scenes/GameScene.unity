@@ -414,7 +414,7 @@ RectTransform:
   - {fileID: 1267389280}
   - {fileID: 25279134}
   m_Father: {fileID: 238970573}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -493,7 +493,7 @@ Transform:
   - {fileID: 1600248022}
   - {fileID: 619634910}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &20395154
 GameObject:
@@ -687,7 +687,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: 21300000, guid: 62ceaa0c421dfec49b6fd9540016a5cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -809,6 +809,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &25279136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,6 +896,141 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &27344957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27344958}
+  - component: {fileID: 27344960}
+  - component: {fileID: 27344959}
+  m_Layer: 5
+  m_Name: Text (TMP) (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &27344958
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27344957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 238970573}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 754.9528, y: 114.7445}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &27344959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27344957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: System Reset.
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
+  m_sharedMaterial: {fileID: 7111594263440607213, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 100
+  m_fontSizeBase: 100
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &27344960
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27344957}
+  m_CullTransparentMesh: 1
 --- !u!1 &29214649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,6 +1492,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayPopUpSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &44972037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1482,7 +1641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &48215151
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1700,7 +1859,7 @@ Transform:
   m_GameObject: {fileID: 77723146}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1004386002}
@@ -1808,7 +1967,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move Left
+  m_text: Moves Left
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
   m_sharedMaterial: {fileID: 7111594263440607213, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
@@ -1835,8 +1994,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 38
+  m_fontSizeBase: 38
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1969,6 +2128,116 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &87389087
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 87389091}
+  - component: {fileID: 87389090}
+  - component: {fileID: 87389089}
+  - component: {fileID: 87389088}
+  - component: {fileID: 87389092}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!95 &87389088
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87389087}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3bd09ff619a5a640834cc1a4010d68c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &87389089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87389087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.30588236, g: 0.85882354, b: 0.18431373, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &87389090
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87389087}
+  m_CullTransparentMesh: 1
+--- !u!224 &87389091
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87389087}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 238970573}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &87389092
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87389087}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &90926138
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,6 +2405,7 @@ MonoBehaviour:
   - {fileID: 1152482003}
   - {fileID: 789199224}
   screenImage: {fileID: 1499696841}
+  gameScene: {fileID: 0}
 --- !u!114 &90926141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2166,7 +2436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &105385613
 Transform:
   m_ObjectHideFlags: 0
@@ -2176,7 +2446,7 @@ Transform:
   m_GameObject: {fileID: 105385612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 555382424}
@@ -2354,8 +2624,8 @@ Transform:
   m_GameObject: {fileID: 106427762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 223546953}
   - {fileID: 648027512}
@@ -2379,16 +2649,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6919dda4afbc154b959c5538ab091ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virusSpawnChances: 0.6
-  unkillableVirusSpawnChances: 0.15
+  virusSpawnChances: 0.7
+  unkillableVirusSpawnChances: 0
   intervalBetweenData: 1
   dataSpeed: 4
+  virusThatNeedToBeKilled: 4
   virusHealth: 2
   spawnPosition: {fileID: 179419385}
   dataPrefab: {fileID: 9081250922374992995, guid: dac2f5f1e730f984f9957ae259b955c7, type: 3}
   virusPrefab: {fileID: 8012825242616570749, guid: 3909a512a89cf5d4fb53f3294fc20377, type: 3}
   unkillableVirusPrefab: {fileID: 8012825242616570749, guid: e88192e18c173854082694fb11a78995, type: 3}
   objParent: {fileID: 2115871500}
+  virusKilledText: {fileID: 1307001223}
 --- !u!1 &110480266
 GameObject:
   m_ObjectHideFlags: 0
@@ -2610,6 +2882,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1773980313}
         m_TargetAssemblyTypeName: WastePuzzle, Assembly-CSharp
         m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3078,7 +3362,7 @@ RectTransform:
   - {fileID: 504660081}
   - {fileID: 1303643172}
   m_Father: {fileID: 238970573}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4215,8 +4499,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.95
-  m_fontSizeBase: 40.95
+  m_fontSize: 43.35
+  m_fontSizeBase: 43.35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4807,6 +5091,116 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
+--- !u!1 &223585789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223585793}
+  - component: {fileID: 223585792}
+  - component: {fileID: 223585791}
+  - component: {fileID: 223585790}
+  - component: {fileID: 223585794}
+  m_Layer: 5
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!95 &223585790
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223585789}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e3bd09ff619a5a640834cc1a4010d68c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &223585791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223585789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.30588236, g: 0.85882354, b: 0.18431373, a: 0.101960786}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &223585792
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223585789}
+  m_CullTransparentMesh: 1
+--- !u!224 &223585793
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223585789}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 238970573}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &223585794
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223585789}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &228092145
 GameObject:
   m_ObjectHideFlags: 0
@@ -5001,6 +5395,7 @@ MonoBehaviour:
   - {fileID: 1077684599}
   - {fileID: 2124014923}
   screenImage: {fileID: 1218125574}
+  gameScene: {fileID: 0}
 --- !u!114 &228092148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5103,6 +5498,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1345179316}
         m_TargetAssemblyTypeName: Report, Assembly-CSharp
         m_MethodName: CloseReport
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5361,6 +5768,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &238144038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5491,6 +5922,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 87389091}
+  - {fileID: 1125172758}
   - {fileID: 1479554143}
   - {fileID: 386063391}
   - {fileID: 1379838130}
@@ -5501,8 +5934,12 @@ RectTransform:
   - {fileID: 1902399438}
   - {fileID: 884162135}
   - {fileID: 153400812}
+  - {fileID: 223585793}
+  - {fileID: 1663792331}
+  - {fileID: 548110315}
+  - {fileID: 27344958}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7201,6 +7638,100 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &360206448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 360206450}
+  - component: {fileID: 360206449}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &360206449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360206448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec2719235950794f9cd8c7f0c55ad19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BGM1
+    clip: {fileID: 8300000, guid: 7a8ff028f9200cd4fa5b64dfa2472bb1, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    audioMixer: {fileID: -498333748085778238, guid: e432e3aaf5ac7624892ec390beda1e3f, type: 2}
+  - name: BGM2
+    clip: {fileID: 8300000, guid: fb4b02ef19767cb45b79ba5a8472d2b4, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    audioMixer: {fileID: -498333748085778238, guid: e432e3aaf5ac7624892ec390beda1e3f, type: 2}
+  - name: Click1
+    clip: {fileID: 8300000, guid: c7a9d8f5c1794e04fa82c00a47e5ef9c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    audioMixer: {fileID: 2316301959193300339, guid: e432e3aaf5ac7624892ec390beda1e3f, type: 2}
+  - name: Click2
+    clip: {fileID: 8300000, guid: e6730210d1dfb0a419d7d23c6ca54eac, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    audioMixer: {fileID: 2316301959193300339, guid: e432e3aaf5ac7624892ec390beda1e3f, type: 2}
+  - name: EnergyHit
+    clip: {fileID: 8300000, guid: a2aaa8c7777075349a474989e61ba3de, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    audioMixer: {fileID: 2316301959193300339, guid: e432e3aaf5ac7624892ec390beda1e3f, type: 2}
+  - name: PopUp
+    clip: {fileID: 8300000, guid: 6b04caad58f369944b8542668b0faa06, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    audioMixer: {fileID: 2316301959193300339, guid: e432e3aaf5ac7624892ec390beda1e3f, type: 2}
+  - name: Warning
+    clip: {fileID: 8300000, guid: 02c192bec070f114f863d9919e65f53d, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    audioMixer: {fileID: 2316301959193300339, guid: e432e3aaf5ac7624892ec390beda1e3f, type: 2}
+--- !u!4 &360206450
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360206448}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2781832, y: -1.2463051, z: 0.021466538}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &369122891
 GameObject:
   m_ObjectHideFlags: 0
@@ -7589,7 +8120,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &386063391
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7605,11 +8136,11 @@ RectTransform:
   - {fileID: 912826284}
   - {fileID: 868573863}
   m_Father: {fileID: 238970573}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -7.9525, y: 122.46268}
+  m_AnchoredPosition: {x: 0.000014781952, y: 79.5373}
   m_SizeDelta: {x: 1697.2883, y: 159.0746}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &386063392
@@ -7673,12 +8204,12 @@ RectTransform:
   - {fileID: 833943754}
   - {fileID: 1038917490}
   m_Father: {fileID: 238970573}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -253.3097, y: -353.3413}
-  m_SizeDelta: {x: 506.6194, y: 706.6826}
+  m_AnchoredPosition: {x: -229.17871, y: -353.3413}
+  m_SizeDelta: {x: 458.3574, y: 706.6826}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &388361981
 MonoBehaviour:
@@ -7862,7 +8393,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1975735065}
   m_Father: {fileID: 388361980}
@@ -7921,6 +8452,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: OpenTaskScreen
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayPopUpSFX
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8276,6 +8819,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1748038893}
         m_TargetAssemblyTypeName: WastePuzzle, Assembly-CSharp
         m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9447,7 +10002,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 452431977}
   m_RootOrder: 3
@@ -9779,6 +10334,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &495849636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10039,7 +10606,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 504660083}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1300086552}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayCyberSecurityMinigame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &504660083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10639,6 +11230,141 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1335.45, y: 2273.54}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &548110314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 548110315}
+  - component: {fileID: 548110317}
+  - component: {fileID: 548110316}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &548110315
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548110314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 238970573}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 754.9528, y: 114.7445}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &548110316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548110314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: System Updating  ...
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
+  m_sharedMaterial: {fileID: 7111594263440607213, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 100
+  m_fontSizeBase: 100
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &548110317
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548110314}
+  m_CullTransparentMesh: 1
 --- !u!1 &550333427
 GameObject:
   m_ObjectHideFlags: 0
@@ -10847,6 +11573,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -11873,139 +12611,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec586433433007f4dbcca4019d785850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reportText: 'Report Date: 8.8.2050
-
-    Report Generated by: Traffic_Anima 2.1
-
-    Time
-    Range: 07:00 AM - 12:00 PM
-
-    Location: Neo-Manhattan Crossing
-
-
-
-    Executive
-    Summary
-
-    The Traffic_Anima 2.1, presents a comprehensive analysis of traffic
-    patterns and management within the designated timeframe. Utilizing advanced data
-    processing and machine learning techniques, this report offers insights into
-    congestion, flow optimization, and recommendations for enhancing urban mobility.
-
-
-
-    Key
-    Findings
-
-    Congestion Analysis
-
-    Peak congestion occurred from 09:30 AM
-    - 11:30 AM, with an average delay of 45 minutes.
-
-    Primary congestion points
-    were identified at Times Square, causing a 16% increase in travel time.
-
-
-
-    Flow
-    Optimization
-
-    Anima-driven traffic signal adjustments led to a 5% increase
-    in traffic flow.
-
-    30% decrease in stop-and-go traffic was observed due to
-    predictive traffic management strategies.
-
-    Dynamic lane allocation based
-    on real-time traffic data resulted in a 59% increase in lane utilization efficiency.
-
-
-
-    Route
-    Diversification
-
-    Recommending alternative routes reduced congestion by 14%.
-
-    2.145
-    users adopted suggested routes, contributing to smoother traffic distribution.
-
-
-
-    Public
-    Transport Integration
-
-    Real-time data sharing with public transportation
-    systems led to improved synchronization, reducing waiting times by 10%.
-
-    465
-    more commuters shifted from private vehicles to public transport, leading to
-    a 7% increase in overall public transportation usage.
-
-
-
-    Recommendations
-
-    Adaptive
-    Traffic Signals
-
-    Further enhance Anima-controlled traffic signals with additional
-    sensors to improve detection accuracy and response time.
-
-
-
-    Predictive Congestion
-    Management
-
-    Develop an advanced congestion prediction model to anticipate
-    traffic bottlenecks and optimize flow proactively.
-
-
-
-    Multi-Model Mobility
-    Platform
-
-    Create a comprehensive app integrating real-time traffic data,
-    public transport schedules, and ride-sharing services to guide users toward optimal
-    routes.
-
-
-
-    Data Sharing Collaboration
-
-    Foster partnerships with private
-    transportation companies to access their data for better overall traffic management.
-
-
-
-    Public
-    Awareness Campaign
-
-    Launch an educational campaign to encourage commuters
-    to adopt eco-friendly modes of transportation during peak hours.
-
-
-
-    Conclusion
-
-    The
-    Traffic_Anima 2.1 has exhibited significant improvements in congestion mitigation,
-    flow optimization, and route diversification. By embracing the recommendations
-    provided, the city can achieve a harmonious balance between efficient urban mobility
-    and environmental sustainability. Further refinement and collaboration will pave
-    the way toward a smarter, more adaptive transportation ecosystem.
-
-
-
-    Disclaimer
-
-    This
-    report is generated by the Traffic_Anima 2.1 system and is based on data collected
-    during the specified time period. While efforts have been made to ensure accuracy,
-    unforeseen variables may influence results. Recommendations should be evaluated
-    in context and customized according to the city''s unique characteristics and
-    needs.
-
-'
+  reportText: "Report Date: 8.8.2050\r\nGenerated by Anima Energy Management System\r\n\r\nExecutive
+    Summary\r\n\r\nThe Anima Energy Management System has conducted a thorough analysis
+    of energy consumption and utilization across the designated facilities during
+    the reporting period. Leveraging advanced algorithms and predictive analytics,
+    the system has identified key trends, opportunities for optimization, and recommendations
+    for enhancing energy efficiency. The following summary highlights the major findings
+    and proposed actions:\r\n\r\n1. Energy Consumption Overview:\r\n\r\nThe AI system
+    monitored energy consumption patterns across various facilities, including electricity,
+    heating, and cooling usage. By tracking real-time data, the system identified
+    peak demand periods and irregularities in consumption, enabling targeted intervention
+    to reduce wastage.\r\n\r\n2. Demand Forecasting and Load Balancing:\r\n\r\nUsing
+    historical data and weather forecasts, the AI system accurately predicted periods
+    of high energy demand. This allowed for proactive load balancing strategies,
+    such as adjusting HVAC settings and deferring non-essential operations during
+    peak hours, thereby reducing energy costs and grid strain.\r\n\r\n3. Equipment
+    Performance Analysis:\r\n\r\nThrough continuous monitoring of equipment and device
+    energy usage, the AI system detected deviations from optimal performance. Timely
+    alerts were generated, enabling maintenance teams to address inefficiencies,
+    faulty equipment, and energy leaks promptly.\r\n\r\n4. Renewable Energy Integration:\r\n\r\nThe
+    AI system evaluated the feasibility of integrating renewable energy sources,
+    such as solar panels or wind turbines, into the energy mix. By assessing available
+    resources and consumption patterns, the system recommended the optimal capacity
+    and placement of renewable installations to offset conventional energy consumption.\r\n\r\n5.
+    Behavioral Insights and Employee Engagement:\r\n\r\nBy analyzing usage patterns
+    and employee behavior, the AI system identified opportunities for behavioral
+    changes that could contribute to energy savings. The system provided insights
+    for employee engagement campaigns and education initiatives to promote energy-conscious
+    habits.\r\n\r\n6. Cost Savings and ROI Analysis:\r\n\r\nThrough predictive modeling,
+    the AI system projected potential cost savings achievable through energy efficiency
+    measures. It calculated return on investment (ROI) timelines for proposed upgrades,
+    helping decision-makers prioritize projects with the most substantial economic
+    and environmental benefits.\r\n\r\n7. Future Recommendations:\r\n\r\nTo further
+    enhance energy management, the AI system suggests exploring battery storage solutions
+    to optimize energy distribution and mitigate grid instability during peak demand.
+    Additionally, integrating machine learning algorithms with energy management
+    systems could enable more accurate predictions and adaptive responses to changing
+    consumption patterns.\r\n\r\nConclusion:\r\n\r\nThe Anima Energy Management System
+    has demonstrated its effectiveness in optimizing energy consumption, reducing
+    costs, and promoting sustainable practices within the monitored facilities. By
+    harnessing the capabilities of artificial intelligence, the system presents a
+    data-driven approach to energy management that aligns with environmental goals
+    and financial objectives.\r"
   reportTextUI: {fileID: 197822830}
   scrollRect: {fileID: 2068852682}
   closeReportButton: {fileID: 1275250603}
@@ -12016,6 +12663,7 @@ MonoBehaviour:
   - {fileID: 829134967}
   - {fileID: 2058548769}
   screenImage: {fileID: 1597554744}
+  gameScene: {fileID: 0}
 --- !u!114 &613306417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12801,6 +13449,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &650106421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13119,6 +13779,7 @@ MonoBehaviour:
   - {fileID: 1697626269}
   - {fileID: 48082415}
   screenImage: {fileID: 523185986}
+  gameScene: {fileID: 0}
 --- !u!114 &657886469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14076,6 +14737,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &702238452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14694,6 +15367,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &711302116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15010,8 +15695,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.95
-  m_fontSizeBase: 40.95
+  m_fontSize: 43.35
+  m_fontSizeBase: 43.35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16095,7 +16780,7 @@ Transform:
   m_GameObject: {fileID: 822434563}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1695069438}
@@ -16121,15 +16806,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virusSpawnChances: 0.5
-  unkillableVirusSpawnChances: 0.5
+  unkillableVirusSpawnChances: 0.3
   intervalBetweenData: 2
   dataSpeed: 2
+  virusThatNeedToBeKilled: 0
   virusHealth: 1
   spawnPosition: {fileID: 2075284467}
   dataPrefab: {fileID: 9081250922374992995, guid: dac2f5f1e730f984f9957ae259b955c7, type: 3}
   virusPrefab: {fileID: 8012825242616570749, guid: 3909a512a89cf5d4fb53f3294fc20377, type: 3}
   unkillableVirusPrefab: {fileID: 8012825242616570749, guid: e88192e18c173854082694fb11a78995, type: 3}
   objParent: {fileID: 2115871500}
+  virusKilledText: {fileID: 0}
 --- !u!1 &823907292
 GameObject:
   m_ObjectHideFlags: 0
@@ -16213,7 +16900,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 823907295}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1300086552}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayResourceAllocationPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &823907295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16447,8 +17158,8 @@ Transform:
   m_GameObject: {fileID: 833368679}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 988918838}
   - {fileID: 1785634613}
@@ -16528,7 +17239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &833469119
 Transform:
   m_ObjectHideFlags: 0
@@ -16538,7 +17249,7 @@ Transform:
   m_GameObject: {fileID: 833469118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1417780421}
@@ -16562,7 +17273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   piecesCount: 5
   totalTime: 15
-  valuesForRandomizerSO: {fileID: 11400000, guid: 617d80491ac2a4c4fa3250229ba2eddc, type: 2}
+  valuesForRandomizerSO: {fileID: 11400000, guid: 3f354a69ad7de1347b23b01cb9866295, type: 2}
   slotPrefabs:
   - {fileID: 941685354860766452, guid: 46f8642bbdbaeef418413a989ed05dc7, type: 3}
   - {fileID: 941685354860766452, guid: e668add40b1e2cf4d9693ac0bdf65505, type: 3}
@@ -16673,6 +17384,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayPopUpSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -17910,7 +18633,7 @@ RectTransform:
   - {fileID: 823907293}
   - {fileID: 1198471727}
   m_Father: {fileID: 238970573}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18190,6 +18913,7 @@ MonoBehaviour:
   - {fileID: 988918837}
   - {fileID: 1785634612}
   screenImage: {fileID: 802025934}
+  gameScene: {fileID: 0}
 --- !u!114 &887040090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18321,9 +19045,9 @@ RectTransform:
   m_Father: {fileID: 386063391}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 848.64417, y: -79.5373}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 159.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &912826285
@@ -18348,8 +19072,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
+  m_sharedMaterial: {fileID: 7111594263440607213, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18373,8 +19097,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -20099,6 +20823,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayPopUpSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1038917492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20632,6 +21368,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1054562936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20884,6 +21632,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayPopUpSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1061837410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21009,6 +21769,18 @@ MonoBehaviour:
       - m_Target: {fileID: 77723148}
         m_TargetAssemblyTypeName: EnergyPuzzle, Assembly-CSharp
         m_MethodName: StartPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22069,6 +22841,116 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1125172757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1125172758}
+  - component: {fileID: 1125172761}
+  - component: {fileID: 1125172760}
+  - component: {fileID: 1125172759}
+  - component: {fileID: 1125172762}
+  m_Layer: 5
+  m_Name: Warning SIgn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1125172758
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125172757}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 238970573}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 511.745, y: 406.46}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1125172759
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125172757}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32658a6657b44244fb1d2fff63113659, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1125172760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125172757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5bc9ad2659ac49544bd466d4955d1665, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1125172761
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125172757}
+  m_CullTransparentMesh: 1
+--- !u!225 &1125172762
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125172757}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1135334604
 GameObject:
   m_ObjectHideFlags: 0
@@ -22623,7 +23505,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1166630910}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1300086552}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayTrafficManagementPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1166630910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22694,7 +23600,7 @@ RectTransform:
   m_Children:
   - {fileID: 1642518227}
   m_Father: {fileID: 238970573}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -23113,6 +24019,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -25541,7 +26459,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1267389282}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1300086552}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayWasteManagementPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1267389282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25834,6 +26776,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1274177005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25975,6 +26929,18 @@ MonoBehaviour:
       - m_Target: {fileID: 613306416}
         m_TargetAssemblyTypeName: Report, Assembly-CSharp
         m_MethodName: CloseReport
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -26464,6 +27430,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1295263809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26614,6 +27592,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1296630541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26709,6 +27699,17 @@ MonoBehaviour:
   - {fileID: 1902399437}
   - {fileID: 884162134}
   - {fileID: 153400811}
+  bgSpriteRenderer: {fileID: 21053031}
+  bgColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 0.8}
+  warning:
+  - {fileID: 87389087}
+  - {fileID: 1125172757}
+  warningAnimator:
+  - {fileID: 87389088}
+  - {fileID: 1125172759}
+  blackScreen: {fileID: 1663792327}
+  sytemUpdateText: {fileID: 548110314}
+  systemResetText: {fileID: 27344957}
 --- !u!4 &1300086553
 Transform:
   m_ObjectHideFlags: 0
@@ -26722,7 +27723,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1303643171
 GameObject:
@@ -26815,6 +27816,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -27785,6 +28798,7 @@ MonoBehaviour:
   - {fileID: 1928578867}
   - {fileID: 508085032}
   screenImage: {fileID: 1837477689}
+  gameScene: {fileID: 0}
 --- !u!1 &1353121873
 GameObject:
   m_ObjectHideFlags: 0
@@ -27871,6 +28885,18 @@ MonoBehaviour:
       - m_Target: {fileID: 833368681}
         m_TargetAssemblyTypeName: TrafficPuzzle, Assembly-CSharp
         m_MethodName: ResetPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -28399,7 +29425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1379838130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28413,7 +29439,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 238970573}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -29766,6 +30792,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1452336670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29830,7 +30868,7 @@ Transform:
   m_GameObject: {fileID: 1456139147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 829134968}
@@ -30475,6 +31513,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1469938243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30802,6 +31864,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1475598250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30879,7 +31953,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1479554143
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30893,7 +31967,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 238970573}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -30908,7 +31982,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479554142}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 297ef7cea35ea954d83c0544d6b95e71, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: bc28a1fd60fd1cb42ad2cd431a8f0cd3, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -30921,14 +31995,12 @@ VideoPlayer:
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0
@@ -31205,7 +32277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1499262380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31264,8 +32336,16 @@ MonoBehaviour:
   - You are The Arboreal Anima.
   videoPlayer: {fileID: 1479554144}
   videos:
-  - {fileID: 32900000, guid: d8f6b567da24df44e9f986496b387381, type: 3}
-  - {fileID: 32900000, guid: 297ef7cea35ea954d83c0544d6b95e71, type: 3}
+  - {fileID: 32900000, guid: 00f1ba53343077d4598563f336e4a39f, type: 3}
+  - {fileID: 32900000, guid: 78ca5f0138f307f4cad4625cabdd8f60, type: 3}
+  - {fileID: 32900000, guid: c4cd3358a9d9ca9498b078c01c9064d4, type: 3}
+  - {fileID: 32900000, guid: 2915aeb889ce8fa4e8e49e2b269fb2aa, type: 3}
+  - {fileID: 32900000, guid: faa15600513bbbd45b1e792f103e6a4f, type: 3}
+  - {fileID: 32900000, guid: 7cae661e41cd01544800c97deffe65ca, type: 3}
+  - {fileID: 32900000, guid: b5da61ad0b3232040bc2f718ecd0b39d, type: 3}
+  endClip: {fileID: 32900000, guid: 0e1951bd8d7b7704ead541e83df288fa, type: 3}
+  blackScreen: {fileID: 1663792327}
+  overlay: {fileID: 223585789}
 --- !u!4 &1499262381
 Transform:
   m_ObjectHideFlags: 0
@@ -33150,10 +34230,10 @@ MonoBehaviour:
 
     DATE   : 08.08.2050
 
-    STATUS
-    : <color="red">INCOMPLETE</color>
+    STATUS :
+    <color="red">INCOMPLETE</color>
 
-    
+
 
 '
   m_isRightToLeft: 0
@@ -33414,12 +34494,12 @@ RectTransform:
   - {fileID: 1166630908}
   - {fileID: 1819882387}
   m_Father: {fileID: 238970573}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: 18}
-  m_SizeDelta: {x: 1550.3, y: 781.83}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 18}
+  m_SizeDelta: {x: -369.69995, y: -298.16998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1648839327
 MonoBehaviour:
@@ -33635,6 +34715,95 @@ Transform:
   m_Father: {fileID: 1456139148}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1663792327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1663792331}
+  - component: {fileID: 1663792330}
+  - component: {fileID: 1663792329}
+  - component: {fileID: 1663792328}
+  m_Layer: 5
+  m_Name: Blackscreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!225 &1663792328
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663792327}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &1663792329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663792327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1663792330
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663792327}
+  m_CullTransparentMesh: 1
+--- !u!224 &1663792331
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663792327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 238970573}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1677084101
 GameObject:
   m_ObjectHideFlags: 0
@@ -34163,7 +35332,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Move Left
+  m_text: Moves  Left
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
   m_sharedMaterial: {fileID: 7111594263440607213, guid: fbb66410665c8cc408e4e0118357c336, type: 2}
@@ -34190,8 +35359,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 38
+  m_fontSizeBase: 38
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -34760,7 +35929,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1719407189}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1300086552}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: PlayEnergyManagementPuzzle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1719407189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35355,7 +36548,7 @@ Transform:
   m_GameObject: {fileID: 1748038891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1152482004}
@@ -35731,7 +36924,7 @@ Transform:
   m_GameObject: {fileID: 1773980311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1481066498}
@@ -36038,139 +37231,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec586433433007f4dbcca4019d785850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reportText: 'Report Date: 8.8.2050
-
-    Report Generated by: Traffic_Anima 2.1
-
-    Time
-    Range: 07:00 AM - 12:00 PM
-
-    Location: Neo-Manhattan Crossing
-
-
-
-    Executive
-    Summary
-
-    The Traffic_Anima 2.1, presents a comprehensive analysis of traffic
-    patterns and management within the designated timeframe. Utilizing advanced data
-    processing and machine learning techniques, this report offers insights into
-    congestion, flow optimization, and recommendations for enhancing urban mobility.
-
-
-
-    Key
-    Findings
-
-    Congestion Analysis
-
-    Peak congestion occurred from 09:30 AM
-    - 11:30 AM, with an average delay of 45 minutes.
-
-    Primary congestion points
-    were identified at Times Square, causing a 16% increase in travel time.
-
-
-
-    Flow
-    Optimization
-
-    Anima-driven traffic signal adjustments led to a 5% increase
-    in traffic flow.
-
-    30% decrease in stop-and-go traffic was observed due to
-    predictive traffic management strategies.
-
-    Dynamic lane allocation based
-    on real-time traffic data resulted in a 59% increase in lane utilization efficiency.
-
-
-
-    Route
-    Diversification
-
-    Recommending alternative routes reduced congestion by 14%.
-
-    2.145
-    users adopted suggested routes, contributing to smoother traffic distribution.
-
-
-
-    Public
-    Transport Integration
-
-    Real-time data sharing with public transportation
-    systems led to improved synchronization, reducing waiting times by 10%.
-
-    465
-    more commuters shifted from private vehicles to public transport, leading to
-    a 7% increase in overall public transportation usage.
-
-
-
-    Recommendations
-
-    Adaptive
-    Traffic Signals
-
-    Further enhance Anima-controlled traffic signals with additional
-    sensors to improve detection accuracy and response time.
-
-
-
-    Predictive Congestion
-    Management
-
-    Develop an advanced congestion prediction model to anticipate
-    traffic bottlenecks and optimize flow proactively.
-
-
-
-    Multi-Model Mobility
-    Platform
-
-    Create a comprehensive app integrating real-time traffic data,
-    public transport schedules, and ride-sharing services to guide users toward optimal
-    routes.
-
-
-
-    Data Sharing Collaboration
-
-    Foster partnerships with private
-    transportation companies to access their data for better overall traffic management.
-
-
-
-    Public
-    Awareness Campaign
-
-    Launch an educational campaign to encourage commuters
-    to adopt eco-friendly modes of transportation during peak hours.
-
-
-
-    Conclusion
-
-    The
-    Traffic_Anima 2.1 has exhibited significant improvements in congestion mitigation,
-    flow optimization, and route diversification. By embracing the recommendations
-    provided, the city can achieve a harmonious balance between efficient urban mobility
-    and environmental sustainability. Further refinement and collaboration will pave
-    the way toward a smarter, more adaptive transportation ecosystem.
-
-
-
-    Disclaimer
-
-    This
-    report is generated by the Traffic_Anima 2.1 system and is based on data collected
-    during the specified time period. While efforts have been made to ensure accuracy,
-    unforeseen variables may influence results. Recommendations should be evaluated
-    in context and customized according to the city''s unique characteristics and
-    needs.
-
-'
+  reportText: "Report Date: 8.8.2050\r\nGenerated by Anima Energy Management System\r\n\r\nExecutive
+    Summary\r\n\r\nThe Anima Energy Management System has conducted a thorough analysis
+    of energy consumption and utilization across the designated facilities during
+    the reporting period. Leveraging advanced algorithms and predictive analytics,
+    the system has identified key trends, opportunities for optimization, and recommendations
+    for enhancing energy efficiency. The following summary highlights the major findings
+    and proposed actions:\r\n\r\n1. Energy Consumption Overview:\r\n\r\nThe AI system
+    monitored energy consumption patterns across various facilities, including electricity,
+    heating, and cooling usage. By tracking real-time data, the system identified
+    peak demand periods and irregularities in consumption, enabling targeted intervention
+    to reduce wastage.\r\n\r\n2. Demand Forecasting and Load Balancing:\r\n\r\nUsing
+    historical data and weather forecasts, the AI system accurately predicted periods
+    of high energy demand. This allowed for proactive load balancing strategies,
+    such as adjusting HVAC settings and deferring non-essential operations during
+    peak hours, thereby reducing energy costs and grid strain.\r\n\r\n3. Equipment
+    Performance Analysis:\r\n\r\nThrough continuous monitoring of equipment and device
+    energy usage, the AI system detected deviations from optimal performance. Timely
+    alerts were generated, enabling maintenance teams to address inefficiencies,
+    faulty equipment, and energy leaks promptly.\r\n\r\n4. Renewable Energy Integration:\r\n\r\nThe
+    AI system evaluated the feasibility of integrating renewable energy sources,
+    such as solar panels or wind turbines, into the energy mix. By assessing available
+    resources and consumption patterns, the system recommended the optimal capacity
+    and placement of renewable installations to offset conventional energy consumption.\r\n\r\n5.
+    Behavioral Insights and Employee Engagement:\r\n\r\nBy analyzing usage patterns
+    and employee behavior, the AI system identified opportunities for behavioral
+    changes that could contribute to energy savings. The system provided insights
+    for employee engagement campaigns and education initiatives to promote energy-conscious
+    habits.\r\n\r\n6. Cost Savings and ROI Analysis:\r\n\r\nThrough predictive modeling,
+    the AI system projected potential cost savings achievable through energy efficiency
+    measures. It calculated return on investment (ROI) timelines for proposed upgrades,
+    helping decision-makers prioritize projects with the most substantial economic
+    and environmental benefits.\r\n\r\n7. Future Recommendations:\r\n\r\nTo further
+    enhance energy management, the AI system suggests exploring battery storage solutions
+    to optimize energy distribution and mitigate grid instability during peak demand.
+    Additionally, integrating machine learning algorithms with energy management
+    systems could enable more accurate predictions and adaptive responses to changing
+    consumption patterns.\r\n\r\nConclusion:\r\n\r\nThe Anima Energy Management System
+    has demonstrated its effectiveness in optimizing energy consumption, reducing
+    costs, and promoting sustainable practices within the monitored facilities. By
+    harnessing the capabilities of artificial intelligence, the system presents a
+    data-driven approach to energy management that aligns with environmental goals
+    and financial objectives.\r"
   reportTextUI: {fileID: 733759334}
   scrollRect: {fileID: 596648403}
   closeReportButton: {fileID: 1274177001}
@@ -36181,6 +37283,7 @@ MonoBehaviour:
   - {fileID: 1004386001}
   - {fileID: 2889114}
   screenImage: {fileID: 1528754774}
+  gameScene: {fileID: 0}
 --- !u!114 &1784602028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36458,6 +37561,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1819882389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36607,7 +37722,7 @@ Transform:
   m_GameObject: {fileID: 1825006732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1077684600}
@@ -37201,6 +38316,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1861247365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37602,7 +38729,7 @@ RectTransform:
   - {fileID: 1719407187}
   - {fileID: 563941145}
   m_Father: {fileID: 238970573}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -38316,7 +39443,7 @@ MonoBehaviour:
     STATUS 
     : <color="red">INCOMPLETE</color>
 
-    
+
 
 '
   m_isRightToLeft: 0
@@ -39341,13 +40468,14 @@ MonoBehaviour:
   reportTextUI: {fileID: 1402135705}
   scrollRect: {fileID: 1044632834}
   closeReportButton: {fileID: 238144034}
-  skipInstruction: {fileID: 933844276}
+  skipInstruction: {fileID: 474165165}
   spriteMask: {fileID: 2019434278}
   screen: {fileID: 1773980311}
   background:
   - {fileID: 1481066497}
   - {fileID: 1277277640}
   screenImage: {fileID: 303065307}
+  gameScene: {fileID: 0}
 --- !u!114 &2050048119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40157,6 +41285,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 360206449}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: PlayClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2087473690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40548,7 +41688,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2115871499
 GameObject:

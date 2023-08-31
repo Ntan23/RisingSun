@@ -28,6 +28,12 @@ public class WastePuzzle : MonoBehaviour
         totalPipes = pipeScripts.Length;
         intialTime = totalTime;
 
+        StartCoroutine(Delay());
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(0.6f);
         StartTimer();
     }
 
