@@ -155,11 +155,9 @@ public class ResourcePuzzle : MonoBehaviour
         }
     }
 
-    public IEnumerator CheckLevel()
+    public void CheckLevel()
     {
         completedPieces++;
-
-        yield return new WaitForSeconds(0.5f);
 
         if(completedPieces == piecesCount)
         {

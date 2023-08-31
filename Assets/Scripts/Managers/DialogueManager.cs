@@ -17,8 +17,14 @@ public class DialogueManager : MonoBehaviour
     [Header("For Video")]
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private VideoClip[] videos;
+    private GameManager gm;
 
-    void Start() => ShowNextDialogue();
+    void Start() 
+    {
+        gm = GameManager.instance;
+
+        ShowNextDialogue();
+    }
     
     public void NextDialogue()
     {
@@ -44,6 +50,7 @@ public class DialogueManager : MonoBehaviour
             videoPlayer.gameObject.SetActive(false);
             dialogueScene.SetActive(false);
             nextDialogueButton.SetActive(false);
+            gm.ShowPopUp();
         }
     }
 

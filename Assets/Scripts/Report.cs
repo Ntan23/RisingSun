@@ -14,6 +14,8 @@ public class Report : MonoBehaviour
     [SerializeField] private GameObject skipInstruction;
     [SerializeField] private GameObject spriteMask;
     [SerializeField] private GameObject screen;
+    [SerializeField] private GameObject[] background;
+    [SerializeField] private GameObject screenImage;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,10 @@ public class Report : MonoBehaviour
 
     public IEnumerator StartReport()
     {
+        foreach(GameObject go in background) go.SetActive(false);
+
+        screenImage.SetActive(true);
+
         reportTextUI.text = "";
         scrollRect.enabled = false;
         yield return new WaitForSeconds(0.2f);
@@ -57,6 +63,7 @@ public class Report : MonoBehaviour
         LeanTween.scale(screen, Vector3.zero, 0.5f).setOnComplete(() =>
         {
             spriteMask.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+            gameObject.SetActive(false);
         });
     }
 }

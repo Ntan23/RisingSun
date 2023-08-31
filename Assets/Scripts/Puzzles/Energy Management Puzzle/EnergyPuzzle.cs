@@ -54,7 +54,7 @@ public class EnergyPuzzle : MonoBehaviour
         if(isActive)
         {
             isActive = false;
-
+            
             for(int i = hitCount; i < thresholds[roundIndex].start.Length; i++)
             {   
                 if(i + 1 < thresholds[roundIndex].start.Length)
@@ -86,20 +86,24 @@ public class EnergyPuzzle : MonoBehaviour
                     {
                         hitCount++;
 
-                        if(roundIndex < rounds.Length && hitCount == thresholds[roundIndex].start.Length)
+                        if(hitCount == thresholds[roundIndex].start.Length)
                         {
                             roundIndex++;
-                            roundText.text = "Round " + (roundIndex + 1).ToString() + " / " + rounds.Length.ToString();
-                            ResetPuzzle();
-                            rounds[roundIndex].SetActive(true);
-                            rounds[roundIndex - 1].SetActive(false);
-                        }
-                        
-                        if(roundIndex == rounds.Length)
-                        {
-                            Debug.Log("Show Report");
-                            isWin = true;
-                            ShowReport();
+
+                            if(roundIndex < rounds.Length)
+                            {
+                                roundText.text = "Round " + (roundIndex + 1).ToString() + " / " + rounds.Length.ToString();
+                                ResetPuzzle();
+                                rounds[roundIndex].SetActive(true);
+                                rounds[roundIndex - 1].SetActive(false);
+                            }
+                            
+                            if(roundIndex == rounds.Length)
+                            {
+                                Debug.Log("Show Report");
+                                isWin = true;
+                                ShowReport();
+                            }
                         }
                     }
                 }

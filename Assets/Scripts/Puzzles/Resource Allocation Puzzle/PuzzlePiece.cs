@@ -39,9 +39,10 @@ public class PuzzlePiece : MonoBehaviour
         if(Vector2.Distance(transform.position, slot.transform.position) < 2.5f)
         {
             canBeDrag = false;
-            LeanTween.move(gameObject, slot.transform.position, 0.5f).setEaseSpring();
-    
-            StartCoroutine(resourcePuzzle.CheckLevel());
+            LeanTween.move(gameObject, slot.transform.position, 0.5f).setEaseSpring().setOnComplete(() =>
+            {
+                resourcePuzzle.CheckLevel();
+            });
         }
         else
         {
