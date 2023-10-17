@@ -25,23 +25,28 @@ public class Virus : MonoBehaviour
         healthCount = cyberPuzzle.GetVirusHealth();
     }
 
-    void OnMouseDown()
-    {
-        if(virusType == Type.killable)
-        {
-            healthCount--;
+    // void OnMouseDown()
+    // {
+    //     if(virusType == Type.killable)
+    //     {
+    //         healthCount--;
 
-            if(healthCount == 0) 
-            {
-                healthCount = cyberPuzzle.GetVirusHealth();
+    //         if(healthCount == 0) 
+    //         {
+    //             healthCount = cyberPuzzle.GetVirusHealth();
 
-                dataMovement.ChangeCanMoveValue();
+    //             dataMovement.ChangeCanMoveValue();
                 
-                GetComponent<Animator>().Play("VirusKilled");
-                Destroy(gameObject, 0.3f);
+    //             GetComponent<Animator>().Play("VirusKilled");
+    //             Destroy(gameObject, 0.3f);
 
-                if(gm.GetDifficultyIndex() == 2) cyberPuzzle.CheckKilledVirus();
-            }
-        } 
+    //             if(gm.GetDifficultyIndex() == 2) cyberPuzzle.CheckKilledVirus();
+    //         }
+    //     } 
+    // }
+
+    public bool IsKillable() 
+    {
+        return virusType == Type.killable;
     }
 }

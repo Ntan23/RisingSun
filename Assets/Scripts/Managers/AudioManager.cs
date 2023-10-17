@@ -91,5 +91,7 @@ public class AudioManager : MonoBehaviour
     public void PlayHitSFX() => Play("EnergyHit");
     public void PlayWarningSFX() => Play("Warning");
     public void StopWarningSFX() => Stop("Warning");
+    public void PlayGlitchCutsceneAudio() => Play("GlitchCutscene");
+    public void StopGlitchCutsceneAudio() => Stop("GlitchCutscene");
 } 
 

@@ -26,7 +26,7 @@ public class TrafficPuzzle : MonoBehaviour
 
         for(int i = 0; i < carControl.Length; i++)
         {
-            initialCarPos[i] = carControl[i].gameObject.transform.position;
+            initialCarPos[i] = carControl[i].gameObject.transform.localPosition;
         }
     }
 
@@ -70,7 +70,7 @@ public class TrafficPuzzle : MonoBehaviour
 
             for(int i = 0; i < carControl.Length; i++)
             {
-                carControl[i].gameObject.transform.position = initialCarPos[i];
+                carControl[i].gameObject.transform.localPosition = initialCarPos[i];
                 carControl[i].ResetValue();
             }
 

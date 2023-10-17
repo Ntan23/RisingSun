@@ -74,9 +74,7 @@ public class CarControl : MonoBehaviour
 
     void OnMouseDrag()
     {
-        if(tp.GetIsWin()) return;
-
-        if(isSelected && clickCount > 1)
+        if(isSelected && clickCount > 1 && !tp.GetIsWin())
         {
             mousePosWhenDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

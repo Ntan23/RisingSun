@@ -27,6 +27,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private VideoClip endClip;
     [SerializeField] private GameObject blackScreen;
     [SerializeField] private GameObject overlay;
+    [SerializeField] private AudioSource audioSource;
     private GameManager gm;
     private AudioManager am;
 
@@ -74,8 +75,10 @@ public class DialogueManager : MonoBehaviour
 
     public void PlayEndClip()
     {
+        am.StopBGM1();
         videoPlayer.gameObject.SetActive(true);
         videoPlayer.clip = endClip;
+        am.PlayGlitchCutsceneAudio();
         videoPlayer.Play();
         videoPlayer.loopPointReached += CheckOver;
     }
@@ -83,8 +86,8 @@ public class DialogueManager : MonoBehaviour
     private void UpdateAlpha(float alpha) => blackScreen.GetComponent<CanvasGroup>().alpha = alpha;
     private void CheckOver(VideoPlayer source)
     {
-        am.StopBGM1();
         videoPlayer.gameObject.SetActive(false);
+        am.StopGlitchCutsceneAudio();
         StartCoroutine(Restart());
     }
 
