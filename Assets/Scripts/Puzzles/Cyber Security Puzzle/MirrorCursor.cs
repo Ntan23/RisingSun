@@ -11,7 +11,6 @@ public class MirrorCursor : MonoBehaviour
     private Vector3 worldMousePosition;
     private Vector3 movementDirection;
     private Vector3 newPosition;
-    private bool thereIsVirus;
     private GameObject virusGO;
     
     void Start()
@@ -36,12 +35,6 @@ public class MirrorCursor : MonoBehaviour
         // Apply the opposite movement to the object to mirror the mouse's movement
         newPosition = transform.position + movementDirection * movementSpeed * Time.deltaTime;
 
-        // Calculate screen boundaries
-        // minX = Camera.main.ViewportToWorldPoint(Vector3.zero).x + boundaryPadding;
-        // maxX = Camera.main.ViewportToWorldPoint(Vector3.one).x - boundaryPadding;
-        // minY = Camera.main.ViewportToWorldPoint(Vector3.zero).y + boundaryPadding;
-        // maxY = Camera.main.ViewportToWorldPoint(Vector3.one).y - boundaryPadding;
-
         // Clamp the object's position within the screen boundaries
         newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
         newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
@@ -50,14 +43,20 @@ public class MirrorCursor : MonoBehaviour
         // Update the object's position
         transform.position = newPosition;
 
-        if(virusGO != null && thereIsVirus && Input.GetMouseButtonDown(0)) Destroy(virusGO);
+        if(virusGO != null && Input.GetMouseButtonDown(0)) 
+        {
+            if(virusGO.GetComponent<Animator>() != null) 
+            {
+                virusGO.GetComponent<Animator>().Play("VirusKilled");
+                Destroy(virusGO, 0.3f);
+            }
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if(other.CompareTag("Virus") && other.GetComponent<Virus>().IsKillable())
         {
-            thereIsVirus = true;
             virusGO = other.gameObject;
 
             Debug.Log(virusGO);
@@ -66,6 +65,6 @@ public class MirrorCursor : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        thereIsVirus = false;
+        virusGO = null;
     }
 }

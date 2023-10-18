@@ -5,8 +5,10 @@ using TMPro;
 
 public class TrafficPuzzle : MonoBehaviour
 {
-    [SerializeField] private CarControl[] carControl;
+    //[SerializeField] private CarControl[] carControl;
+    [SerializeField] private GameObject[] cars;
     private Vector3[] initialCarPos;
+    private Quaternion[] initialRotation;
     private int carSelectedIndex;
     [SerializeField] private int availableMove;
     private int intialAvailableMove;
@@ -19,18 +21,22 @@ public class TrafficPuzzle : MonoBehaviour
 
     void Start()
     {
-        initialCarPos = new Vector3[carControl.Length];
+        initialCarPos = new Vector3[cars.Length];
+        initialRotation = new Quaternion[cars.Length];
         intialAvailableMove = availableMove;
 
         moveCountText.text = availableMove.ToString();
 
-        for(int i = 0; i < carControl.Length; i++)
+        for(int i = 0; i < cars.Length; i++)
         {
-            initialCarPos[i] = carControl[i].gameObject.transform.localPosition;
+            initialCarPos[i] = cars[i].transform.localPosition;
+            initialRotation[i] = cars[i].transform.rotation;
+
+            Debug.Log(initialRotation[i]);
         }
     }
 
-    public void ResetSelectedCar() => carControl[carSelectedIndex].ResetValue();
+    //public void ResetSelectedCar() => carControl[carSelectedIndex].ResetValue();
     
     public void SetIsCarSelectedIndex(int index)
     {
@@ -66,12 +72,17 @@ public class TrafficPuzzle : MonoBehaviour
         if(!isWin)
         {
             availableMove = intialAvailableMove;
-            moveCountText.text = availableMove.ToString();
 
-            for(int i = 0; i < carControl.Length; i++)
+            //moveCountText.text = availableMove.ToString();
+
+            for(int i = 0; i < cars.Length; i++)
             {
-                carControl[i].gameObject.transform.localPosition = initialCarPos[i];
-                carControl[i].ResetValue();
+                LeanTween.cancel(cars[i]);
+                cars[i].transform.localPosition = initialCarPos[i];
+                cars[i].transform.rotation = initialRotation[i];
+
+                if(cars[i].GetComponent<CarMovement>() != null) cars[i].GetComponent<CarMovement>().Reset();
+                // carControl[i].ResetValue();
             }
 
             isWin = false;

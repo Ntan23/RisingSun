@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9081250922374992994}
   - component: {fileID: 9081250922374992993}
-  - component: {fileID: 9081250922374992992}
   m_Layer: 0
   m_Name: Data
   m_TagString: Data
@@ -27,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 9081250922374992995}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.95, y: 5.28, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,17 +84,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
---- !u!114 &9081250922374992992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9081250922374992995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92f5528856f1abf46a398e44772393b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cornerPositions: []
-  targetPosition: {fileID: 0}

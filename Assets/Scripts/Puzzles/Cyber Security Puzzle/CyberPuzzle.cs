@@ -9,6 +9,9 @@ public class CyberPuzzle : MonoBehaviour
     [SerializeField] private float virusSpawnChances;
     [Range(0.0f,1.0f)]
     [SerializeField] private float unkillableVirusSpawnChances;
+    [SerializeField] private float spawnRadius;
+    [SerializeField] private int spawnCount;
+    private int virusSpawnedCount;
     private float dataSpawnChances;
     private float randomValue;
     [SerializeField] private float intervalBetweenData;
@@ -16,6 +19,7 @@ public class CyberPuzzle : MonoBehaviour
     [SerializeField] private float dataSpeed;
     [SerializeField] private int virusThatNeedToBeKilled;
     private int killedVirus;
+    private int unkillableSpawnedCount = 0;
     [SerializeField] private int virusHealth;
     private bool canSpawn = true;
     private GameObject data;
@@ -25,6 +29,8 @@ public class CyberPuzzle : MonoBehaviour
     [SerializeField] private GameObject unkillableVirusPrefab;
     [SerializeField] private Transform objParent;
     [SerializeField] private TextMeshProUGUI virusKilledText;
+    private Vector3 randomPos;
+    [SerializeField] private Vector3 offset;
     private GameManager gm;
     private DialogueManager dm;
     private AudioManager am;
@@ -39,20 +45,54 @@ public class CyberPuzzle : MonoBehaviour
         intialInterval = intervalBetweenData;
 
         if(gm.GetDifficultyIndex() == 2) virusKilledText.text = killedVirus.ToString() + " / " + virusThatNeedToBeKilled.ToString();
+    
+        IntialSpawn();
     }
 
     void Update()
     {
-        if(!canSpawn) return;
+        // if(!canSpawn) return;
 
-        if(canSpawn) 
+        // if(canSpawn) 
+        // {
+        //     Spawn();
+        //     // intervalBetweenData -= Time.deltaTime; 
+
+        //     // if(intervalBetweenData <= 0.0f)
+        //     // {
+        //     //     Spawn();
+        //     //     intervalBetweenData = intialInterval;
+        //     // }
+        // }
+    }
+
+    private void IntialSpawn()
+    {
+        for(int i = 0; i < spawnCount; i++)
         {
-            intervalBetweenData -= Time.deltaTime; 
-
-            if(intervalBetweenData <= 0.0f)
+            if((i + 1) < spawnCount) Spawn();
+            else if((i + 1) == spawnCount)
             {
-                Spawn();
-                intervalBetweenData = intialInterval;
+                if(gm.GetDifficultyIndex() == 1)
+                {
+                    if(unkillableSpawnedCount == 0)  
+                    {
+                        randomPos = Random.insideUnitCircle * spawnRadius;
+
+                        data = Instantiate(unkillableVirusPrefab, offset + randomPos, Quaternion.identity);
+                        data.transform.parent = objParent;
+                        unkillableSpawnedCount++;
+                    }
+                    else if(virusSpawnedCount == 0 && unkillableSpawnedCount > 0) 
+                    {
+                        randomPos = Random.insideUnitCircle * spawnRadius;
+
+                        data = Instantiate(virusPrefab, offset + randomPos, Quaternion.identity);
+                        data.transform.parent = objParent;
+                        virusSpawnedCount++;
+                    }
+                    else if(unkillableSpawnedCount > 0 && virusSpawnedCount > 0) Spawn();
+                }
             }
         }
     }
@@ -60,10 +100,11 @@ public class CyberPuzzle : MonoBehaviour
     private void Spawn()
     {
         randomValue = Random.value;
+        randomPos = Random.insideUnitCircle * spawnRadius;
 
         if(randomValue <= dataSpawnChances) 
         {
-            data = Instantiate(dataPrefab, spawnPosition.position, Quaternion.identity);
+            data = Instantiate(dataPrefab, offset + randomPos, Quaternion.identity);
             data.transform.parent = objParent;
         }
         else 
@@ -72,19 +113,30 @@ public class CyberPuzzle : MonoBehaviour
 
             if(randomValue <= unkillableVirusSpawnChances)
             {
-                data = Instantiate(unkillableVirusPrefab, spawnPosition.position, Quaternion.identity);
+                data = Instantiate(unkillableVirusPrefab, offset + randomPos, Quaternion.identity);
                 data.transform.parent = objParent;
+                unkillableSpawnedCount++;
             }
             else
             {
-                data = Instantiate(virusPrefab, spawnPosition.position, Quaternion.identity);
+                data = Instantiate(virusPrefab, offset + randomPos, Quaternion.identity);
                 data.transform.parent = objParent;
+                virusSpawnedCount++;
             }
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(this.transform.position + offset, spawnRadius);    
+    }
+
     public void ResetLevel()
     {
+        canSpawn = true;
+        unkillableSpawnedCount = 0;
+        virusSpawnedCount = 0;
         intervalBetweenData = intialInterval;
 
         if(gm.GetDifficultyIndex() == 2)
@@ -101,6 +153,8 @@ public class CyberPuzzle : MonoBehaviour
                 Destroy(objParent.GetChild(i).gameObject);
             }
         }
+
+        IntialSpawn();
     }
 
     public void CheckKilledVirus()

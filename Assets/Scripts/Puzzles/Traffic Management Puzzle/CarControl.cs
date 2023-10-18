@@ -50,7 +50,7 @@ public class CarControl : MonoBehaviour
             }
             if(!tp.GetIsFirstTime() && carIndex != tp.GetIsCarSelectedIndex()) 
             {
-                tp.ResetSelectedCar();           
+                //tp.ResetSelectedCar();           
                 tp.SetIsCarSelectedIndex(carIndex);
             }
             
@@ -118,7 +118,7 @@ public class CarControl : MonoBehaviour
 
     IEnumerator ResetCar()
     {
-        tp.ResetSelectedCar();
+        //tp.ResetSelectedCar();
         yield return new WaitForSeconds(0.1f);
         tp.SetIsCarSelectedIndex(carIndex);
     }
