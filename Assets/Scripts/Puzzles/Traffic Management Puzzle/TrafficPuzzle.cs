@@ -31,8 +31,6 @@ public class TrafficPuzzle : MonoBehaviour
         {
             initialCarPos[i] = cars[i].transform.localPosition;
             initialRotation[i] = cars[i].transform.rotation;
-
-            Debug.Log(initialRotation[i]);
         }
     }
 
@@ -81,11 +79,19 @@ public class TrafficPuzzle : MonoBehaviour
                 cars[i].transform.localPosition = initialCarPos[i];
                 cars[i].transform.rotation = initialRotation[i];
 
-                if(cars[i].GetComponent<CarMovement>() != null) cars[i].GetComponent<CarMovement>().Reset();
+                if(cars[i].GetComponent<CarMovement>() != null) cars[i].GetComponent<CarMovement>().ResetValues();
                 // carControl[i].ResetValue();
             }
 
             isWin = false;
+        }
+    }
+
+    public void StartPuzzle()
+    {
+        for(int i = 0; i < cars.Length; i++)
+        {
+            if(cars[i].GetComponent<CarMovement>() != null) cars[i].GetComponent<CarMovement>().StartMove();
         }
     }
 

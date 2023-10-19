@@ -9,6 +9,10 @@ TagManager:
   - Virus
   - UnkillableVirus
   - Right
+  - Left
+  - UTurn
+  - Stop
+  - Cars
   layers:
   - Default
   - TransparentFX
