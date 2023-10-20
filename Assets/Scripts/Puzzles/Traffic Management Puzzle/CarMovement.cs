@@ -16,6 +16,7 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private float timeToTurnLeft;
     [SerializeField] private float timeToTurnRight;
     [SerializeField] private float timeToUTurn;
+    [SerializeField] private float stopTime;
     [SerializeField] private bool canTurnLeft;
     [SerializeField] private bool canTurnRight;
     [SerializeField] private bool canUTurn;
@@ -63,6 +64,13 @@ public class CarMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if(other.gameObject.name == "Traffic Sign Container")
+        {
+            if(other.CompareTag("Right")) ChangeToTurnRightWaypoint();
+            if(other.CompareTag("Left")) ChangeToTurnLeftWaypoint();
+            if(other.CompareTag("UTurn")) ChangeToUTurnWaypoint();
+        }
+
         if(other.CompareTag("Right") && canTurnRight) 
         {
             canTurnRight = false;
@@ -92,11 +100,15 @@ public class CarMovement : MonoBehaviour
                 }
             );
         }
+
+        if(other.CompareTag("Stop")) StartCoroutine(StopCar());
+
+        if(other.CompareTag("Cars") && !other.GetComponent<CarMovement>().GetIsStarted()) StartCoroutine(StopCar());
     }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if(collisionInfo.gameObject.CompareTag("Cars")) StartCoroutine(Crash());
+        if(collisionInfo.gameObject.CompareTag("Cars")) StartCoroutine(tp.Crash());
     }
 
     public void ResetValues()
@@ -109,6 +121,12 @@ public class CarMovement : MonoBehaviour
         canUTurn = initialCanUTurn;
 
         for(int i = 0; i < waypoints.Count; i++) waypoints[i] = intialWaypoints[i];
+    }
+
+    public void CarIdle()
+    {
+        speed = 0.0f;
+        isStarted = false;
     }
 
     public void ChangeToTurnLeftWaypoint()
@@ -144,13 +162,17 @@ public class CarMovement : MonoBehaviour
         speed = intialSpeed;
     }
 
-    IEnumerator Crash()
+    IEnumerator StopCar()
     {
-        LeanTween.cancel(this.gameObject);
-
-        speed = 0.0f;
         isStarted = false;
-        yield return new WaitForSeconds(0.8f);
-        tp.ResetPuzzle();
+        speed = 0.0f;
+        yield return new WaitForSeconds(stopTime);
+        isStarted = true;
+        speed = intialSpeed;
+    }
+
+    public bool GetIsStarted() 
+    {
+        return isStarted;
     }
 }

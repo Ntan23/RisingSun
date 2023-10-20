@@ -95,14 +95,32 @@ public class TrafficPuzzle : MonoBehaviour
         }
     }
 
+    public IEnumerator Crash()
+    {
+        for(int i = 0; i < cars.Length; i++)
+        {
+            LeanTween.cancel(cars[i]);
+
+            cars[i].GetComponent<CarMovement>().CarIdle();
+        }
+
+        yield return new WaitForSeconds(0.8f);
+        ResetPuzzle();
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Target"))
+        if(other.CompareTag("Cars"))
         {
-            isWin = true;
-            Debug.Log("You Win & Show Report");
+            if(other.gameObject.name == "Pink Car")
+            {
+                isWin = true;
+                Debug.Log("You Win & Show Report");
 
-            ShowReport();
+                ShowReport();
+            }
+            
+            Destroy(other.gameObject);
         } 
     }
 
