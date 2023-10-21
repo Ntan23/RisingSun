@@ -14,10 +14,12 @@ public class TrafficPuzzle : MonoBehaviour
     private int intialAvailableMove;
     private bool isFirstTime = true;
     private bool isWin;
+    private bool isPlaying;
     [SerializeField] private TextMeshProUGUI moveCountText;
     [SerializeField] private GameObject puzzleSpriteMask;
     [SerializeField] private GameObject[] objectThatNeedToDisable;
     [SerializeField] private Report report;
+    [SerializeField] private TrafficSign[] ts;
 
     void Start()
     {
@@ -67,31 +69,36 @@ public class TrafficPuzzle : MonoBehaviour
 
     public void ResetPuzzle()
     {
-        if(!isWin)
+        isPlaying = false;
+        availableMove = intialAvailableMove;
+
+        //moveCountText.text = availableMove.ToString();
+
+        for(int i = 0; i < cars.Length; i++)
         {
-            availableMove = intialAvailableMove;
+            LeanTween.cancel(cars[i]);
+            cars[i].transform.localPosition = initialCarPos[i];
+            cars[i].transform.rotation = initialRotation[i];
 
-            //moveCountText.text = availableMove.ToString();
-
-            for(int i = 0; i < cars.Length; i++)
-            {
-                LeanTween.cancel(cars[i]);
-                cars[i].transform.localPosition = initialCarPos[i];
-                cars[i].transform.rotation = initialRotation[i];
-
-                if(cars[i].GetComponent<CarMovement>() != null) cars[i].GetComponent<CarMovement>().ResetValues();
-                // carControl[i].ResetValue();
-            }
-
-            isWin = false;
+            cars[i].GetComponent<CarMovement>().ResetValues();
+            // carControl[i].ResetValue();
         }
+
+        for(int j = 0; j < ts.Length; j++) ts[j].ResetTrafficSign();
+
+        isWin = false;
     }
 
     public void StartPuzzle()
     {
-        for(int i = 0; i < cars.Length; i++)
+        if(!isPlaying)
         {
-            if(cars[i].GetComponent<CarMovement>() != null) cars[i].GetComponent<CarMovement>().StartMove();
+            for(int i = 0; i < cars.Length; i++)
+            {
+                cars[i].GetComponent<CarMovement>().StartMove();
+                isPlaying = true;
+            }
+
         }
     }
 
@@ -112,7 +119,7 @@ public class TrafficPuzzle : MonoBehaviour
     {
         if(other.CompareTag("Cars"))
         {
-            if(other.gameObject.name == "Pink Car")
+            if(other.gameObject.name == "Pink Car" && !isWin)
             {
                 isWin = true;
                 Debug.Log("You Win & Show Report");
@@ -139,5 +146,10 @@ public class TrafficPuzzle : MonoBehaviour
     public bool GetIsWin()
     {
         return isWin;
+    }
+
+    public bool GetIsPlaying()
+    {
+        return isPlaying;
     }
 }

@@ -13,6 +13,8 @@ public class TrafficSign : MonoBehaviour
     private Vector2 initialPosition;
     private Vector2 offset;
     [SerializeField] private GameObject[] trafficSignContainer;
+    [SerializeField] private TrafficPuzzle tp;
+    [SerializeField] private CarMovement[] carThatGetTheEffect;
 
     void Start()
     {
@@ -21,57 +23,75 @@ public class TrafficSign : MonoBehaviour
 
     void OnMouseDown() 
     {
-        if(canBeDrag) offset = GetMousePosition() - (Vector2)transform.position;
-
-        for(int i = 0; i < trafficSignContainer.Length; i++)
+        if(!tp.GetIsPlaying())
         {
-            if(Vector2.Distance(transform.position, trafficSignContainer[i].transform.position) <= 0.1f && !canBeDrag)
+            if(canBeDrag) offset = GetMousePosition() - (Vector2)transform.position;
+
+            for(int i = 0; i < trafficSignContainer.Length; i++)
             {
-                LeanTween.move(gameObject, initialPosition, 0.5f).setEaseSpring().setOnComplete(() =>
+                if(Vector2.Distance(transform.position, trafficSignContainer[i].transform.position) <= 0.1f && !canBeDrag)
                 {
-                    trafficSignContainer[i].tag = "Untagged";
-                    canBeDrag = true;
-                    Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
-                });
-                break;
+                    LeanTween.move(gameObject, initialPosition, 0.5f).setEaseSpring().setOnComplete(() =>
+                    {
+                        trafficSignContainer[i].tag = "Untagged";
+                        canBeDrag = true;
+
+                        if(carThatGetTheEffect.Length > 0) for(int j = 0; j < carThatGetTheEffect.Length; j++) carThatGetTheEffect[j].ResetValues();
+                        // Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
+                    });
+
+                    break;
+                }
+                else continue;
             }
-            else continue;
         }
     }
 
     void OnMouseDrag()
     {
-        if(canBeDrag) transform.position = GetMousePosition() - offset;
+        if(canBeDrag && !tp.GetIsPlaying()) transform.position = GetMousePosition() - offset;
     }
 
     void OnMouseUp()
     {
-        for(int i = 0; i < trafficSignContainer.Length; i++)
+        if(!tp.GetIsPlaying())
         {
-            if(Vector2.Distance(transform.position, trafficSignContainer[i].transform.position) <= 1.0f && canBeDrag)
+            for(int i = 0; i < trafficSignContainer.Length; i++)
             {
-                canBeDrag = false;
-                LeanTween.move(gameObject, trafficSignContainer[i].transform.position, 0.5f).setEaseSpring().setOnComplete(() =>
+                if(Vector2.Distance(transform.position, trafficSignContainer[i].transform.position) <= 1.0f && canBeDrag)
                 {
-                    if(signType == Type.UTurn) trafficSignContainer[i].tag = "UTurn";
-                    if(signType == Type.CantTurnLeft) trafficSignContainer[i].tag = "Right";
-                    if(signType == Type.CantTurnRight) trafficSignContainer[i].tag = "Left";
-                    if(signType == Type.Stop) trafficSignContainer[i].tag = "Stop"; 
+                    canBeDrag = false;
+                    LeanTween.move(gameObject, trafficSignContainer[i].transform.position, 0.5f).setEaseSpring().setOnComplete(() =>
+                    {
+                        if(signType == Type.UTurn) 
+                        {
+                            for(int i = 0; i < carThatGetTheEffect.Length; i++) carThatGetTheEffect[i].ChangeToUTurnWaypoint();
+                        }
+                        if(signType == Type.CantTurnLeft)
+                        {
+                            for(int i = 0; i < carThatGetTheEffect.Length; i++) carThatGetTheEffect[i].ChangeToTurnRightWaypoint();
+                        } 
+                        if(signType == Type.CantTurnRight) 
+                        {
+                            for(int i = 0; i < carThatGetTheEffect.Length; i++) carThatGetTheEffect[i].ChangeToTurnLeftWaypoint();
+                        }
+                        if(signType == Type.Stop) trafficSignContainer[i].tag = "Stop"; 
 
-                    Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
-                });
-                break;
-            }
-            else if(i + 1 < trafficSignContainer.Length) continue;
-            else if(i + 1 == trafficSignContainer.Length)
-            {
-                LeanTween.move(gameObject, initialPosition, 0.5f).setEaseSpring().setOnComplete(() =>
+                        //Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
+                    });
+                    break;
+                }
+                else if(i + 1 < trafficSignContainer.Length) continue;
+                else if(i + 1 == trafficSignContainer.Length)
                 {
-                    trafficSignContainer[i].tag = "Untagged";
-                    canBeDrag = true;
-                    Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
-                });
-                break;
+                    LeanTween.move(gameObject, initialPosition, 0.5f).setEaseSpring().setOnComplete(() =>
+                    {
+                        trafficSignContainer[i].tag = "Untagged";
+                        canBeDrag = true;
+                        //Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
+                    });
+                    break;
+                }
             }
         }
     }
@@ -79,5 +99,16 @@ public class TrafficSign : MonoBehaviour
     private Vector2 GetMousePosition()
     {
         return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    }
+
+    public void ResetTrafficSign()
+    {
+        transform.position = initialPosition;
+        
+        for(int i = 0; i < trafficSignContainer.Length; i++)
+        {
+            trafficSignContainer[i].tag = "Untagged";
+            canBeDrag = true;
+        }
     }
 }

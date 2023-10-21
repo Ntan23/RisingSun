@@ -10,7 +10,6 @@ public class CarMovement : MonoBehaviour
     [SerializeField] private List<Transform> uTurnWaypoints;
     private Transform[] intialWaypoints;
     [SerializeField] private float speed;
-    private float intialSpeed;
     private Vector3 goalPos;
     private int index;
     [SerializeField] private float timeToTurnLeft;
@@ -24,6 +23,7 @@ public class CarMovement : MonoBehaviour
     private bool initialCanTurnRight;
     private bool initialCanUTurn;
     private bool isStarted;
+    private bool isStopBecauseOfStopSign;
     private TrafficPuzzle tp;
 
     // Start is called before the first frame update
@@ -36,7 +36,6 @@ public class CarMovement : MonoBehaviour
 
         for(int i = 0; i < waypoints.Count; i++) intialWaypoints[i] = waypoints[i];
         
-        intialSpeed = speed;
         initialCanTurnLeft = canTurnLeft;
         initialCanTurnRight = canTurnRight;
         initialCanUTurn = canUTurn;
@@ -49,11 +48,11 @@ public class CarMovement : MonoBehaviour
         {
             if(index < waypoints.Count)
             {
-                if(Vector2.Distance(transform.position, goalPos) > 0.0f ) 
+                if(Vector2.Distance(transform.position, goalPos) > 0.0f) 
                 {
                     transform.position = Vector2.MoveTowards(transform.position, waypoints[index].position, speed * Time.deltaTime);
                 }
-                else if(Vector2.Distance(transform.position, goalPos) == 0.0f ) 
+                else if(Vector2.Distance(transform.position, goalPos) == 0.0f) 
                 {
                     index++;
                     if(index < waypoints.Count) goalPos = waypoints[index].position;
@@ -64,13 +63,6 @@ public class CarMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.name == "Traffic Sign Container")
-        {
-            if(other.CompareTag("Right")) ChangeToTurnRightWaypoint();
-            if(other.CompareTag("Left")) ChangeToTurnLeftWaypoint();
-            if(other.CompareTag("UTurn")) ChangeToUTurnWaypoint();
-        }
-
         if(other.CompareTag("Right") && canTurnRight) 
         {
             canTurnRight = false;
@@ -102,8 +94,6 @@ public class CarMovement : MonoBehaviour
         }
 
         if(other.CompareTag("Stop")) StartCoroutine(StopCar());
-
-        if(other.CompareTag("Cars") && !other.GetComponent<CarMovement>().GetIsStarted()) StartCoroutine(StopCar());
     }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
@@ -113,29 +103,26 @@ public class CarMovement : MonoBehaviour
 
     public void ResetValues()
     {
+        for(int i = 0; i < waypoints.Count; i++) if(intialWaypoints[i] != null) waypoints[i] = intialWaypoints[i];
+
+        CarIdle();
         index = 0;
         goalPos = waypoints[index].position;
-        speed = intialSpeed;
         canTurnLeft = initialCanTurnLeft;
         canTurnRight = initialCanTurnRight;
         canUTurn = initialCanUTurn;
 
-        for(int i = 0; i < waypoints.Count; i++) waypoints[i] = intialWaypoints[i];
     }
 
-    public void CarIdle()
-    {
-        speed = 0.0f;
-        isStarted = false;
-    }
-
+    public void CarIdle() => isStarted = false;
+    
     public void ChangeToTurnLeftWaypoint()
     {
         for(int i = 0; i < waypoints.Count; i++) waypoints[i] = toLeftWapoints[i];
 
         canTurnLeft = true;
         canTurnRight = false;
-        canTurnLeft = false;
+        canUTurn = false;
     }
 
     public void ChangeToTurnRightWaypoint()
@@ -144,7 +131,7 @@ public class CarMovement : MonoBehaviour
 
         canTurnLeft = false;
         canTurnRight = true;
-        canTurnLeft = false;
+        canUTurn = false;
     }
 
     public void ChangeToUTurnWaypoint()
@@ -152,23 +139,19 @@ public class CarMovement : MonoBehaviour
         for(int i = 0; i < waypoints.Count; i++) waypoints[i] = uTurnWaypoints[i];
 
         canTurnLeft = false;
-        canTurnRight = true;
-        canTurnLeft = false;
+        canTurnRight = false;
+        canUTurn = true;
     }
 
-    public void StartMove()
-    {
-        isStarted = true;
-        speed = intialSpeed;
-    }
+    public void StartMove() => isStarted = true;
 
     IEnumerator StopCar()
     {
-        isStarted = false;
-        speed = 0.0f;
+        //isStopBecauseOfStopSign = true;
+        CarIdle();
         yield return new WaitForSeconds(stopTime);
-        isStarted = true;
-        speed = intialSpeed;
+        StartMove();
+        //isStopBecauseOfStopSign = false;
     }
 
     public bool GetIsStarted() 
