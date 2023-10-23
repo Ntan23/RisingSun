@@ -25,6 +25,8 @@ public class Virus : MonoBehaviour
         healthCount = cyberPuzzle.GetVirusHealth();
     }
 
+    private void CheckKilledVirus() => cyberPuzzle.CheckKilledVirus();
+
     // void OnMouseDown()
     // {
     //     if(virusType == Type.killable)
