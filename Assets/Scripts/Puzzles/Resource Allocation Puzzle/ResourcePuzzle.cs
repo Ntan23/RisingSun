@@ -32,6 +32,7 @@ public class ResourcePuzzle : MonoBehaviour
     [SerializeField] private SpriteRenderer bgSpriteRenderer;
     [SerializeField] private Sprite bgSprite;
     [SerializeField] private Report report;
+    [SerializeField] private Transform[] points;
 
     void Awake()
     {
@@ -42,7 +43,7 @@ public class ResourcePuzzle : MonoBehaviour
         pieces = new GameObject[piecesCount];
         spawnedPieces = new PuzzlePiece[piecesCount];
 
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     void Start() 
@@ -89,7 +90,7 @@ public class ResourcePuzzle : MonoBehaviour
             spawnedPiece.Initialization(spawnedSlot);
         }
 
-        StartTimer();
+        //StartTimer();
     }
 
     private void Randomizer()

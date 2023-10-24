@@ -13,6 +13,7 @@ TagManager:
   - UTurn
   - Stop
   - Cars
+  - Green
   layers:
   - Default
   - TransparentFX
