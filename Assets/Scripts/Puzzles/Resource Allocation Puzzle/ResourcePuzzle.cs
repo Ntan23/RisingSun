@@ -15,6 +15,7 @@ public class ResourcePuzzle : MonoBehaviour
     private float initialTime;
     private bool isTimeStart;
     private bool isComplete;
+    private bool canSpawn = true;
     private Vector3[] intialPiecesPosition;
     [SerializeField] private ValueForRandomizer valuesForRandomizerSO;
     [SerializeField] private List<PuzzleSlot> slotPrefabs;
@@ -26,13 +27,14 @@ public class ResourcePuzzle : MonoBehaviour
     private PuzzleSlot spawnedSlot;
     private PuzzlePiece spawnedPiece;
     private PuzzlePiece[] spawnedPieces;
+    [SerializeField] private Collider2D[] circleColliders;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject puzzleSpriteMask;
     [SerializeField] private GameObject[] objectThatNeedToDisable;
     [SerializeField] private SpriteRenderer bgSpriteRenderer;
     [SerializeField] private Sprite bgSprite;
     [SerializeField] private Report report;
-    [SerializeField] private Transform[] points;
+    [SerializeField] private ObjectSpawner[] objectSpawners;
 
     void Awake()
     {
@@ -152,16 +154,26 @@ public class ResourcePuzzle : MonoBehaviour
     {
         if(!isComplete)
         {
-            completedPieces = 0;
+            canSpawn = true;
 
-            for(int i = 0; i < piecesCount; i++)
+            foreach(Collider2D collider in circleColliders) 
             {
-                pieces[i].transform.position = intialPiecesPosition[i];
-                spawnedPieces[i].SetBackCanBeDrag();
+                if(collider.enabled == false) collider.enabled = true;
+                else if(collider.enabled == true) continue;
             }
 
-            totalTime = initialTime;
-            isTimeStart = true;
+            foreach(ObjectSpawner objectSpawner in objectSpawners) objectSpawner.ResetObjects();
+            
+            // completedPieces = 0;
+
+            // for(int i = 0; i < piecesCount; i++)
+            // {
+            //     pieces[i].transform.position = intialPiecesPosition[i];
+            //     spawnedPieces[i].SetBackCanBeDrag();
+            // }
+
+            // totalTime = initialTime;
+            // isTimeStart = true;
         }
     }
 
@@ -188,8 +200,15 @@ public class ResourcePuzzle : MonoBehaviour
         }
     }
 
+    public void ChangeCanSpawnValue(bool value) => canSpawn = value; 
+
     public int GetPiecesCount()
     {
         return piecesCount;
+    }
+
+    public bool GetCanSpawn() 
+    {
+        return canSpawn;
     }
 }
