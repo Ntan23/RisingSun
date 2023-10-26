@@ -9,13 +9,19 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] private GameObject objectToSpawn;
     private GameObject[] go;
     [SerializeField] private Transform spawnPosition;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private Color32 inactiveColor;
+    private Color32 intialColor;
     private ResourcePuzzle rp;
     
     void Start()
     {
         rp = GetComponentInParent<ResourcePuzzle>(); 
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         go = new GameObject[maxSpawnCount];
+        
+        intialColor = spriteRenderer.color;
     }   
 
     void OnMouseDown()
@@ -29,15 +35,22 @@ public class ObjectSpawner : MonoBehaviour
             spawnedCount++;
             rp.ChangeCanSpawnValue(false);
         }
+
+        if(spawnedCount == maxSpawnCount) spriteRenderer.color = inactiveColor;
     }
 
-    public void DecreaseSpawnedCount() => spawnedCount--;
+    public void DecreaseSpawnedCount() 
+    {
+        spawnedCount--;
+        spriteRenderer.color = intialColor;
+    }
 
     public void ChangeBackCanSpawnValue() => rp.ChangeCanSpawnValue(true);
 
     public void ResetObjects()
     {
         spawnedCount = 0;
+        spriteRenderer.color = intialColor;
 
         for(int i = 0; i < maxSpawnCount; i++) if(go[i] != null) Destroy(go[i]);
     }

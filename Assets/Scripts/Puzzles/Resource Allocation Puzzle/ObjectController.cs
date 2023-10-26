@@ -16,17 +16,21 @@ public class ObjectController : MonoBehaviour
     private Collider2D objCollider;
     private Transform[] pointsTransform;
     private ObjectSpawner spawner;
-
-    // Start is called before the first frame update
-    void Start()
+    private ResourcePuzzle rp;
+    
+    public void Initialization()
     {
+        spawner = transform.parent.GetChild(index).GetComponent<ObjectSpawner>();
+        rp = spawner.GetComponentInParent<ResourcePuzzle>();
+        //Debug.Log(spawner);
+
         objCollider = GetComponent<Collider2D>();
 
         hittedColliders = new Collider2D[neededHitCount];
         pointsTransform = new Transform[neededHitCount];
+        circleColliders = new Collider2D[transform.childCount];
 
-        // spawner = transform.parent.GetChild(index).GetComponent<ObjectSpawner>();
-        // Debug.Log(spawner);
+        for(int i = 0; i < transform.childCount; i++) circleColliders[i] = transform.GetChild(i).GetComponent<Collider2D>();
     }
 
     void OnMouseDown() 
@@ -47,22 +51,23 @@ public class ObjectController : MonoBehaviour
 
             for(int i = 0; i < hittedColliders.Length; i++)
             {
-                //Debug.Log(hittedColliders[i]);
-                hittedColliders[i].enabled = false;
                 pointsTransform[i] = hittedColliders[i].gameObject.GetComponent<Transform>();
+                hittedColliders[i].enabled = false;
 
-                if((i + 1) == hittedColliders.Length) 
-                {
-                    LeanTween.move(gameObject, CalculateMiddlePoint(pointsTransform), 0.25f).setOnComplete(() =>
+                if(i == hittedColliders.Length - 1) 
+                {   
+                    LeanTween.moveLocal(gameObject, CalculateMiddlePoint(pointsTransform), 0.3f).setOnComplete(() =>
                     {
                         objCollider.enabled = false;
 
                         for(int i = 0; i < transform.childCount; i++) circleColliders[i].enabled = true;
 
                         spawner.ChangeBackCanSpawnValue();
-                    });
 
-                    transform.parent = hittedColliders[hittedColliders.Length - 1].transform.parent;
+                        transform.parent = hittedColliders[hittedColliders.Length - 1].transform.parent;
+
+                        rp.UpdateObject(index);
+                    });
                 }
             }
         }
@@ -76,22 +81,8 @@ public class ObjectController : MonoBehaviour
                 Destroy(this.gameObject);
             });
         }
-
     }
 
-    public void Initialization()
-    {
-        spawner = transform.parent.GetChild(index).GetComponent<ObjectSpawner>();
-        //Debug.Log(spawner);
-
-        objCollider = GetComponent<Collider2D>();
-
-        hittedColliders = new Collider2D[neededHitCount];
-        pointsTransform = new Transform[neededHitCount];
-        circleColliders = new Collider2D[transform.childCount];
-
-        for(int i = 0; i < transform.childCount; i++) circleColliders[i] = transform.GetChild(i).GetComponent<Collider2D>();
-    }
     
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {

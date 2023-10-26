@@ -122,20 +122,20 @@ public class GameManager : MonoBehaviour
         if(difficultyIndex == 1)
         {
             resourceAllocationPuzzles[0].SetActive(true);
-            LeanTween.scale(resourceAllocationPuzzles[0], Vector3.one, 0.5f).setOnComplete(() =>
-            {
-                resourceAllocationPuzzles[0].GetComponent<ResourcePuzzle>().Spawn();
-            });
+            LeanTween.scale(resourceAllocationPuzzles[0], Vector3.one, 0.5f);//.setOnComplete(() =>
+            // {
+            //     resourceAllocationPuzzles[0].GetComponent<ResourcePuzzle>().Spawn();
+            // });
             LeanTween.scale(taskScreen[3], Vector3.zero, 0.5f);
         }
 
         if(difficultyIndex == 2)
         {
             resourceAllocationPuzzles[1].SetActive(true);
-            LeanTween.scale(resourceAllocationPuzzles[1], Vector3.one, 0.5f).setOnComplete(() =>
-            {
-                resourceAllocationPuzzles[1].GetComponent<ResourcePuzzle>().Spawn();
-            });
+            LeanTween.scale(resourceAllocationPuzzles[1], Vector3.one, 0.5f);//.setOnComplete(() =>
+            // {
+            //     resourceAllocationPuzzles[1].GetComponent<ResourcePuzzle>().Spawn();
+            // });
             LeanTween.scale(taskScreen[3], Vector3.zero, 0.5f);
         }
     }
