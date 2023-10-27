@@ -16,6 +16,7 @@ public class ResourcePuzzle : MonoBehaviour
         public int current;
         public TextMeshProUGUI text;
     }
+    
     // [SerializeField] private int piecesCount;
     // private int completedPieces;
     // private int randomIndex;
@@ -46,6 +47,10 @@ public class ResourcePuzzle : MonoBehaviour
     [SerializeField] private Sprite bgSprite;
     [SerializeField] private Report report;
     [SerializeField] private ObjectSpawner[] objectSpawners;
+    [SerializeField] private int phase;
+    [SerializeField] private GameObject warningSign;
+    private Animator warningSignAnimator;
+    private AudioManager am;
 
     // void Awake()
     // {
@@ -65,8 +70,12 @@ public class ResourcePuzzle : MonoBehaviour
 
         // for(int i = 0; i < piecesCount; i++) valuesForRandomizerSO.value[i] = i;
 
+        am = AudioManager.instance;
+
         for(int i = 0; i < items.Length; i++) UpdateObject(i);
         
+        warningSignAnimator = warningSign.GetComponent<Animator>();
+
         // StartCoroutine(Delay());
     }
 
@@ -168,6 +177,9 @@ public class ResourcePuzzle : MonoBehaviour
         if(!isFirstTime) items[index].current++;
         if(isFirstTime && index == items.Length - 1) isFirstTime = false;
 
+        if(items[index].needed == 0) items[index].text.gameObject.SetActive(false);
+        if(items[index].needed > 0) items[index].text.gameObject.SetActive(true);
+
         if(items[index].needed > 0) 
         {
             if(items[index].current == items[index].needed) items[index].text.GetComponentInChildren<Image>().enabled = true;
@@ -221,16 +233,37 @@ public class ResourcePuzzle : MonoBehaviour
             if(items[i].current < items[i].needed) 
             {
                 isComplete = false;
+                ResetPuzzle();
                 break;
             }
+
+            if(items[i].needed == 0 && i < items.Length - 1) continue;
+            if(items[i].needed == 0 && i == items.Length - 1) 
+            {
+                if(phase == 1) isComplete = true;
+                if(phase == 2) 
+                {
+                    StartCoroutine(Warning());
+                    phase = 1;
+                }
+                break;
+            }
+
             if(items[i].current >= items[i].needed && items[i].needed > 0)
             {
                 if(i < items.Length - 1) continue;
-                if(i == items.Length - 1) isComplete = true;
+                if(i == items.Length - 1) 
+                {
+                    if(phase == 1) isComplete = true;
+                    if(phase == 2) 
+                    {
+                        StartCoroutine(Warning());
+                        phase = 1;
+                    }
+                }
             }
         }
         // completedPieces++;
-        Debug.Log(isComplete);
 
         if(isComplete)
         {
@@ -260,5 +293,26 @@ public class ResourcePuzzle : MonoBehaviour
     public bool GetCanSpawn() 
     {
         return canSpawn;
+    }
+
+    IEnumerator Warning()
+    {
+        canSpawn = false;
+        warningSign.SetActive(true);
+        am.PlayWarningSFX();
+        yield return new WaitForSeconds(0.1f);
+        warningSignAnimator.Play("Error_WarningSign");
+        yield return new WaitForSeconds(2.0f);
+        warningSignAnimator.enabled = false;
+        warningSign.SetActive(false);
+
+        for(int i = 0; i < items.Length; i++) 
+        {
+            if(items[i].name == "Food") items[i].needed = 4;
+            else if(items[i].name == "Water") items[i].needed = 5;
+            else items[i].needed = 0;
+
+            if(i == items.Length - 1) ResetPuzzle();
+        }
     }
 }

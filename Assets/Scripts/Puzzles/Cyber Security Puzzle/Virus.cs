@@ -22,7 +22,7 @@ public class Virus : MonoBehaviour
         cyberPuzzle = transform.parent.parent.GetChild(gm.GetDifficultyIndex()).GetComponent<CyberPuzzle>();
         dataMovement = GetComponent<DataMovement>();
 
-        healthCount = cyberPuzzle.GetVirusHealth();
+        //healthCount = cyberPuzzle.GetVirusHealth();
     }
 
     private void CheckKilledVirus() => cyberPuzzle.CheckKilledVirus();

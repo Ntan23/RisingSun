@@ -9,6 +9,7 @@ public class ObjectController : MonoBehaviour
     private int hitCount;
     [SerializeField] private int index;
     private bool canBeDrag = true;
+    private bool canBeRotate = true;
     private Vector2 offset;
     private Vector2 intialPosition;
     private Collider2D[] hittedColliders;
@@ -30,7 +31,22 @@ public class ObjectController : MonoBehaviour
         pointsTransform = new Transform[neededHitCount];
         circleColliders = new Collider2D[transform.childCount];
 
-        for(int i = 0; i < transform.childCount; i++) circleColliders[i] = transform.GetChild(i).GetComponent<Collider2D>();
+        for(int i = 1; i < transform.childCount; i++) circleColliders[i - 1] = transform.GetChild(i).GetComponent<Collider2D>();
+    }
+    
+    void Update()
+    {
+        if(Input.GetMouseButtonDown(1) && Vector2.Distance(transform.position, spawner.GetSpawnPosition().position) == 0.0f && canBeRotate) 
+        {
+            canBeDrag = false;
+            canBeRotate = false;
+
+            LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 90.0f, 0.1f).setOnComplete(() => 
+            {
+                canBeDrag = true;
+                canBeRotate = true;
+            });
+        }
     }
 
     void OnMouseDown() 
@@ -48,6 +64,7 @@ public class ObjectController : MonoBehaviour
         if(hitCount == neededHitCount)
         {
             canBeDrag = false;
+            canBeRotate = false;
 
             for(int i = 0; i < hittedColliders.Length; i++)
             {
@@ -60,7 +77,7 @@ public class ObjectController : MonoBehaviour
                     {
                         objCollider.enabled = false;
 
-                        for(int i = 0; i < transform.childCount; i++) circleColliders[i].enabled = true;
+                        for(int i = 1; i < transform.childCount; i++) circleColliders[i - 1].enabled = true;
 
                         spawner.ChangeBackCanSpawnValue();
 
@@ -72,7 +89,7 @@ public class ObjectController : MonoBehaviour
             }
         }
 
-        if(hitCount < neededHitCount && canBeDrag) 
+        if(hitCount < neededHitCount && canBeDrag && Vector2.Distance(transform.position, spawner.GetSpawnPosition().position) > 0f) 
         {
             LeanTween.move(gameObject, spawner.transform.position, 0.25f).setOnComplete(() =>
             {

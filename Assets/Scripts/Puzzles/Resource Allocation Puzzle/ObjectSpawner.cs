@@ -54,4 +54,9 @@ public class ObjectSpawner : MonoBehaviour
 
         for(int i = 0; i < maxSpawnCount; i++) if(go[i] != null) Destroy(go[i]);
     }
+
+    public Transform GetSpawnPosition()
+    {
+        return spawnPosition;
+    }
 }

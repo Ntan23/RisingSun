@@ -14,17 +14,17 @@ public class CyberPuzzle : MonoBehaviour
     private int virusSpawnedCount;
     private float dataSpawnChances;
     private float randomValue;
-    [SerializeField] private float intervalBetweenData;
-    private float intialInterval;
+    // [SerializeField] private float intervalBetweenData;
+    // private float intialInterval;
     [SerializeField] private float dataSpeed;
-    [SerializeField] private int virusThatNeedToBeKilled;
+    // [SerializeField] private int virusThatNeedToBeKilled;
     private int killedVirus;
     private int unkillableSpawnedCount = 0;
     [SerializeField] private int maxWave;
     private int currentWave;
-    [SerializeField] private int virusHealth;
+    //[SerializeField] private int virusHealth;
     private GameObject data;
-    [SerializeField] private Transform spawnPosition;
+    //[SerializeField] private Transform spawnPosition;
     [SerializeField] private GameObject dataPrefab;
     [SerializeField] private GameObject virusPrefab;
     [SerializeField] private GameObject unkillableVirusPrefab;
@@ -44,7 +44,7 @@ public class CyberPuzzle : MonoBehaviour
         am = AudioManager.instance;
 
         dataSpawnChances = 1.0f - virusSpawnChances;
-        intialInterval = intervalBetweenData;
+        //intialInterval = intervalBetweenData;
         currentWave = 1;
 
         wavesText.text = currentWave.ToString() + " / " + maxWave.ToString();
@@ -151,7 +151,7 @@ public class CyberPuzzle : MonoBehaviour
         currentWave = 1;
         unkillableSpawnedCount = 0;
         virusSpawnedCount = 0;
-        intervalBetweenData = intialInterval;
+        // intervalBetweenData = intialInterval;
 
         killedVirus = 0;
 
@@ -241,10 +241,10 @@ public class CyberPuzzle : MonoBehaviour
         }
     }
 
-    public int GetVirusHealth()
-    {
-        return virusHealth;
-    }
+    // public int GetVirusHealth()
+    // {
+    //     return virusHealth;
+    // }
 
     public float GetDataSpeed()
     {
