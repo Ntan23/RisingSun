@@ -27,8 +27,11 @@ public class CarMovement : MonoBehaviour
     private TrafficPuzzle tp;
 
     // Start is called before the first frame update
-    void Start()
+    void Start() => StartCoroutine(Delay());
+
+    IEnumerator Delay()
     {
+        yield return new WaitForSeconds(0.5f);
         intialWaypoints = new Transform[waypoints.Count];
 
         goalPos = waypoints[index].position;
@@ -111,7 +114,6 @@ public class CarMovement : MonoBehaviour
         canTurnLeft = initialCanTurnLeft;
         canTurnRight = initialCanTurnRight;
         canUTurn = initialCanUTurn;
-
     }
 
     public void CarIdle() => isStarted = false;

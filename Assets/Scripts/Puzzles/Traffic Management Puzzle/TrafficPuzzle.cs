@@ -15,14 +15,19 @@ public class TrafficPuzzle : MonoBehaviour
     private bool isFirstTime = true;
     private bool isWin;
     private bool isPlaying;
+    private bool canDetectCollision;
     [SerializeField] private TextMeshProUGUI moveCountText;
     [SerializeField] private GameObject puzzleSpriteMask;
     [SerializeField] private GameObject[] objectThatNeedToDisable;
     [SerializeField] private Report report;
     [SerializeField] private TrafficSign[] ts;
 
-    void Start()
+    void Start() => StartCoroutine(Delay());
+
+    IEnumerator Delay()
     {
+        yield return new WaitForSeconds(0.5f);
+
         initialCarPos = new Vector3[cars.Length];
         initialRotation = new Quaternion[cars.Length];
         intialAvailableMove = availableMove;
@@ -34,8 +39,9 @@ public class TrafficPuzzle : MonoBehaviour
             initialCarPos[i] = cars[i].transform.localPosition;
             initialRotation[i] = cars[i].transform.rotation;
         }
-    }
 
+        canDetectCollision = true;
+    }
     //public void ResetSelectedCar() => carControl[carSelectedIndex].ResetValue();
     
     public void SetIsCarSelectedIndex(int index)
@@ -98,7 +104,6 @@ public class TrafficPuzzle : MonoBehaviour
                 cars[i].GetComponent<CarMovement>().StartMove();
                 isPlaying = true;
             }
-
         }
     }
 
@@ -117,7 +122,7 @@ public class TrafficPuzzle : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Cars"))
+        if(other.CompareTag("Cars") && canDetectCollision)
         {
             if(other.gameObject.name == "Pink Car" && !isWin)
             {

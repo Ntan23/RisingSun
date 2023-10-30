@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject systemResetText;
     private int completedPuzzle;
     private bool canBeClicked = true;
+    private bool isShowingPopUp;
     private DialogueManager  dm;
     private AudioManager am;
    
@@ -38,15 +39,11 @@ public class GameManager : MonoBehaviour
         am = AudioManager.instance;
     }
 
-    void Update()
-    {
-        
-    }
-
     public void OpenTaskScreen(int index)
     {
         if(canBeClicked)
         {
+            isShowingPopUp = true;
             bgSpriteRenderer.color = bgColor;
             canBeClicked = false;
             LeanTween.scale(needToPopUp[index + 1], Vector3.zero, 0.5f).setOnComplete(() =>
@@ -63,7 +60,7 @@ public class GameManager : MonoBehaviour
         canBeClicked = true;
         needToPopUp[index + 1].SetActive(true);
         LeanTween.scale(needToPopUp[index + 1], Vector3.one, 0.5f);
-        LeanTween.scale(taskScreen[index], Vector3.zero, 0.5f);
+        LeanTween.scale(taskScreen[index], Vector3.zero, 0.5f).setOnComplete(() => isShowingPopUp = false);
     }
 
     public void PlayTrafficManagementPuzzle()
@@ -232,5 +229,10 @@ public class GameManager : MonoBehaviour
     public int GetDifficultyIndex() 
     {
         return difficultyIndex;
+    }
+    
+    public bool GetIsShowingPopUp()
+    {
+        return isShowingPopUp;
     }
 }

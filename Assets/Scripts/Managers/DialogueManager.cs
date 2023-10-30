@@ -13,7 +13,8 @@ public class DialogueManager : MonoBehaviour
     {
         if(instance == null) instance = this;
     }
-    private bool canNext;
+
+    private bool canSkip;
     private int dialogueIndex;
     [Header("For Dialogue")]
     [SerializeField] private GameObject dialogueScene;
@@ -27,6 +28,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private VideoClip endClip;
     [SerializeField] private GameObject blackScreen;
     [SerializeField] private GameObject overlay;
+    [SerializeField] private GameObject skipText;
     [SerializeField] private AudioSource audioSource;
     private GameManager gm;
     private AudioManager am;
@@ -36,7 +38,21 @@ public class DialogueManager : MonoBehaviour
         gm = GameManager.instance;
         am = AudioManager.instance;
 
+        canSkip = PlayerPrefs.GetInt("CanSkip", 0) == 0 ? false : true;
+
+        if(canSkip) skipText.SetActive(true);
+        else if(!canSkip) skipText.SetActive(false);
+
         ShowNextDialogue();
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Return) && canSkip) 
+        {
+            dialogueIndex = dialogues.Length - 1;
+            TurnOffDialogue();
+        }
     }
     
     public void NextDialogue()
@@ -58,19 +74,24 @@ public class DialogueManager : MonoBehaviour
             ShowNextDialogue();
         }
 
-        if(dialogueIndex == dialogues.Length)
-        {
-            videoPlayer.gameObject.SetActive(false);
-            dialogueScene.SetActive(false);
-            nextDialogueButton.SetActive(false);
-            gm.ShowPopUp();
-        }
+        if(dialogueIndex == dialogues.Length) TurnOffDialogue();
     }
 
     private void ShowNextDialogue()
     {
         dialogueText.text = dialogues[dialogueIndex];
         arrowIndicator.SetActive(true);
+    }
+
+    private void TurnOffDialogue()
+    {
+        videoPlayer.gameObject.SetActive(false);
+        dialogueScene.SetActive(false);
+        nextDialogueButton.SetActive(false);
+        gm.ShowPopUp();
+
+        if(!canSkip) PlayerPrefs.SetInt("CanSkip", 1);
+        else if(canSkip) skipText.SetActive(false);
     }
 
     public void PlayEndClip()

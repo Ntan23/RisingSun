@@ -4,42 +4,67 @@ using UnityEngine;
 
 public class LineAnimation : MonoBehaviour
 {
-    [SerializeField] private float animationDuration = 5f ;
+    [SerializeField] private float animationDuration;
     private LineRenderer lineRenderer ;
     [SerializeField] private Vector3[] linePoints;
     private Vector3 startPos, endPos, currentPos;
     private int pointsCount ;
     private float segmentDuration;
     private float startTime;
+    private bool isAnimating;
     [SerializeField] private GameObject imageToShow;
+    private GameManager gm;
 
     private void Start () 
     {
+        gm = GameManager.instance;
+
         lineRenderer = GetComponentInChildren<LineRenderer>();
 
         pointsCount = linePoints.Length;
     }
 
-    public void Hover()
+    public void Hover() 
     {
-        StartCoroutine(AnimateLine(true));
+        if(!gm.GetIsShowingPopUp())
+        {
+            gameObject.SetActive(true);
+
+            if(isAnimating) 
+            {
+                StopAllCoroutines();
+                isAnimating = false;
+            }
+            
+            if(gameObject.activeInHierarchy && !isAnimating) StartCoroutine(AnimateLine(true));
+            else gameObject.SetActive(true);
+        }
     }
 
-    public void Unhover()
+    public void Unhover() 
     {
-        StartCoroutine(AnimateLine(false));
+        if(isAnimating) 
+        {
+            StopAllCoroutines();  
+            isAnimating = false;
+        } 
+        
+        if(!isAnimating) StartCoroutine(AnimateLine(false));
     }
 
     private IEnumerator AnimateLine(bool isHover) 
     {
+        isAnimating = true;
+
         if(!isHover)
         {
             LeanTween.cancel(imageToShow);
-            LeanTween.scaleX(imageToShow, 0.0f, 0.25f).setOnComplete(() => imageToShow.SetActive(false));
+            LeanTween.scaleX(imageToShow, 0.0f, 0.15f).setOnComplete(() => imageToShow.SetActive(false));
             yield return new WaitForSeconds(0.25f);
         }
 
-        segmentDuration = animationDuration / pointsCount ;
+        gameObject.SetActive(true);
+        segmentDuration = animationDuration / pointsCount ; 
 
         for (int i = 0; i < pointsCount - 1; i++) 
         {
@@ -69,13 +94,20 @@ public class LineAnimation : MonoBehaviour
 
                 if(!isHover) for(int j = pointsCount - 1; j > 0; j--) lineRenderer.SetPosition(j, currentPos);
 
-                yield return null ;
+                yield return null;
             }
             
             if(endPos == linePoints[pointsCount - 1] && isHover) 
             {
+                isAnimating = false;
                 imageToShow.SetActive(true);
-                LeanTween.scaleX(imageToShow, 7.0f, 0.25f);
+                LeanTween.scaleX(imageToShow, 15.0f, 0.15f);
+            }
+
+            if(endPos == linePoints[0] && !isHover) 
+            {
+                gameObject.SetActive(false);
+                isAnimating = false;
             }
         }
     }

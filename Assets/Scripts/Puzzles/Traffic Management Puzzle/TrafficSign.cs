@@ -18,7 +18,7 @@ public class TrafficSign : MonoBehaviour
 
     void Start()
     {
-        initialPosition = transform.position;
+        initialPosition = transform.localPosition;
     }
 
     void OnMouseDown() 
@@ -103,7 +103,7 @@ public class TrafficSign : MonoBehaviour
 
     public void ResetTrafficSign()
     {
-        transform.position = initialPosition;
+        transform.localPosition = initialPosition;
         
         for(int i = 0; i < trafficSignContainer.Length; i++)
         {
