@@ -49,6 +49,7 @@ public class ResourcePuzzle : MonoBehaviour
     [SerializeField] private ObjectSpawner[] objectSpawners;
     [SerializeField] private int phase;
     [SerializeField] private GameObject warningSign;
+    [SerializeField] private GameObject fixErrorPopUp;
     private Animator warningSignAnimator;
     private AudioManager am;
 
@@ -305,14 +306,22 @@ public class ResourcePuzzle : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         warningSignAnimator.enabled = false;
         warningSign.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        LeanTween.scale(fixErrorPopUp, Vector3.one, 0.3f);
+    }
 
-        for(int i = 0; i < items.Length; i++) 
+    public void ResetPuzzleWithFixError()
+    {
+        LeanTween.scale(fixErrorPopUp, Vector3.zero, 0.3f).setOnComplete(() =>
         {
-            if(items[i].name == "Food") items[i].needed = 4;
-            else if(items[i].name == "Water") items[i].needed = 5;
-            else items[i].needed = 0;
+            for(int i = 0; i < items.Length; i++) 
+            {
+                if(items[i].name == "Food") items[i].needed = 4;
+                else if(items[i].name == "Water") items[i].needed = 5;
+                else items[i].needed = 0;
 
-            if(i == items.Length - 1) ResetPuzzle();
-        }
+                if(i == items.Length - 1) ResetPuzzle();
+            }
+        });
     }
 }

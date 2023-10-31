@@ -11,7 +11,7 @@ public class ButtonFX : MonoBehaviour
     #region ForPopUp
     public void HoverFX() 
     {
-        if(!gm.GetIsShowingPopUp()) LeanTween.scale(gameObject, new Vector2(1.2f, 1.2f), 0.25f);
+        if(!gm.GetIsShowingPopUp()) LeanTween.scale(gameObject, new Vector2(1.1f, 1.1f), 0.25f);
     }
 
     public void UnhoverFX() 
@@ -21,7 +21,7 @@ public class ButtonFX : MonoBehaviour
     #endregion
 
     #region Other
-    public void ButtonHoverFX() => LeanTween.scale(gameObject, new Vector2(1.2f, 1.2f), 0.25f);
+    public void ButtonHoverFX() => LeanTween.scale(gameObject, new Vector2(1.1f, 1.1f), 0.25f);
 
     public void ButtonUnhoverFX() => LeanTween.scale(gameObject,Vector2.one, 0.25f);
     #endregion
