@@ -49,10 +49,14 @@ public class ObjectSpawner : MonoBehaviour
 
     public void ResetObjects()
     {
-        spawnedCount = 0;
-        spriteRenderer.color = intialColor;
+        if(go[0] != null) 
+        {
+            spawnedCount = 0;
+            spriteRenderer.color = intialColor;
 
-        for(int i = 0; i < maxSpawnCount; i++) if(go[i] != null) Destroy(go[i]);
+            for(int i = 0; i < maxSpawnCount; i++) Destroy(go[i]);
+        }
+        else return;
     }
 
     public Transform GetSpawnPosition()

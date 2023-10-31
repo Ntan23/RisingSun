@@ -9,12 +9,19 @@ using System;
 public class ResourcePuzzle : MonoBehaviour
 {
     [System.Serializable]
-    public class Items
+    private class Items
     {
         public string name;
         public int needed;
         public int current;
         public TextMeshProUGUI text;
+    }
+
+    [System.Serializable]
+    private class PartOfTheBox
+    {
+        public GameObject partGO;
+        public Vector3 partDestination;
     }
     
     // [SerializeField] private int piecesCount;
@@ -25,6 +32,10 @@ public class ResourcePuzzle : MonoBehaviour
     // private float initialTime;
     // private bool isTimeStart;
     [SerializeField] private Items[] items;
+    [SerializeField] private PartOfTheBox[] partOfTheBox;
+    [SerializeField] private GameObject box;
+    [SerializeField] private GameObject boxLid;
+    [SerializeField] private Vector3 boxLidSize;
     private bool isFirstTime = true;
     private bool isComplete;
     private bool canSpawn = true;
@@ -43,6 +54,7 @@ public class ResourcePuzzle : MonoBehaviour
     // [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject puzzleSpriteMask;
     [SerializeField] private GameObject[] objectThatNeedToDisable;
+    [SerializeField] private GameObject container;
     [SerializeField] private SpriteRenderer bgSpriteRenderer;
     [SerializeField] private Sprite bgSprite;
     [SerializeField] private Report report;
@@ -241,7 +253,50 @@ public class ResourcePuzzle : MonoBehaviour
             if(items[i].needed == 0 && i < items.Length - 1) continue;
             if(items[i].needed == 0 && i == items.Length - 1) 
             {
-                if(phase == 1) isComplete = true;
+                if(phase == 1) 
+                {
+                    LeanTween.value(partOfTheBox[0].partGO, UpdateLeftAlpha, 0.0f, 1.0f, 0.5f);
+                    LeanTween.moveLocal(partOfTheBox[0].partGO, partOfTheBox[0].partDestination, 0.5f).setOnComplete(() =>
+                    {
+                        LeanTween.moveLocal(partOfTheBox[1].partGO, partOfTheBox[1].partDestination, 0.5f).setOnComplete(() =>
+                        {
+                            LeanTween.moveLocal(partOfTheBox[2].partGO, partOfTheBox[2].partDestination, 0.5f).setOnComplete(() =>
+                            {
+                                LeanTween.value(partOfTheBox[3].partGO, UpdateBottomAlpha, 0.0f, 1.0f, 0.5f);
+                                LeanTween.moveLocal(partOfTheBox[3].partGO, partOfTheBox[3].partDestination, 0.5f).setOnComplete(() => 
+                                {
+                                    LeanTween.scale(boxLid, boxLidSize, 0.6f).setOnComplete(() =>
+                                    {
+                                        for(int i = 13; i < container.transform.childCount; i++) Destroy(container.transform.GetChild(i).gameObject);
+                                        
+                                        LeanTween.moveX(box, 8.5f, 0.6f).setOnComplete(() =>
+                                        {
+                                            isComplete = true;
+
+                                            if(isComplete)
+                                            {
+                                                Debug.Log("Show Report");
+                                                //isTimeStart = false;
+
+                                                LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
+                                                LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
+                                                {
+                                                    bgSpriteRenderer.sprite = bgSprite;
+                                                    
+                                                    foreach(GameObject go in objectThatNeedToDisable) go.SetActive(false);
+                                                
+                                                    report.gameObject.SetActive(true);
+                                                    StartCoroutine(report.StartReport());
+                                                });
+                                            }
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                    //isComplete = true;
+                }
                 if(phase == 2) 
                 {
                     StartCoroutine(Warning());
@@ -255,7 +310,50 @@ public class ResourcePuzzle : MonoBehaviour
                 if(i < items.Length - 1) continue;
                 if(i == items.Length - 1) 
                 {
-                    if(phase == 1) isComplete = true;
+                    if(phase == 1) 
+                    {
+                        LeanTween.value(partOfTheBox[0].partGO, UpdateLeftAlpha, 0.0f, 1.0f, 0.5f);
+                        LeanTween.moveLocal(partOfTheBox[0].partGO, partOfTheBox[0].partDestination, 0.5f).setOnComplete(() =>
+                        {
+                            LeanTween.moveLocal(partOfTheBox[1].partGO, partOfTheBox[1].partDestination, 0.5f).setOnComplete(() =>
+                            {
+                                LeanTween.moveLocal(partOfTheBox[2].partGO, partOfTheBox[2].partDestination, 0.5f).setOnComplete(() =>
+                                {
+                                    LeanTween.value(partOfTheBox[3].partGO, UpdateBottomAlpha, 0.0f, 1.0f, 0.5f);
+                                    LeanTween.moveLocal(partOfTheBox[3].partGO, partOfTheBox[3].partDestination, 0.5f).setOnComplete(() => 
+                                    {
+                                        LeanTween.scale(boxLid, boxLidSize, 0.6f).setOnComplete(() =>
+                                        {
+                                            for(int i = 13; i < container.transform.childCount; i++) Destroy(container.transform.GetChild(i).gameObject);
+                                            
+                                            LeanTween.moveX(box, 8.5f, 0.6f).setOnComplete(() =>
+                                            {
+                                                isComplete = true;
+
+                                                if(isComplete)
+                                                {
+                                                    Debug.Log("Show Report");
+                                                    //isTimeStart = false;
+
+                                                    LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
+                                                    LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
+                                                    {
+                                                        bgSpriteRenderer.sprite = bgSprite;
+                                                        
+                                                        foreach(GameObject go in objectThatNeedToDisable) go.SetActive(false);
+                                                    
+                                                        report.gameObject.SetActive(true);
+                                                        StartCoroutine(report.StartReport());
+                                                    });
+                                                }
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                        // isComplete = true;
+                    }
                     if(phase == 2) 
                     {
                         StartCoroutine(Warning());
@@ -265,25 +363,12 @@ public class ResourcePuzzle : MonoBehaviour
             }
         }
         // completedPieces++;
-
-        if(isComplete)
-        {
-            Debug.Log("Show Report");
-            //isTimeStart = false;
-
-            LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
-            LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
-            {
-                bgSpriteRenderer.sprite = bgSprite;
-                
-                foreach(GameObject go in objectThatNeedToDisable) go.SetActive(false);
-            
-                report.gameObject.SetActive(true);
-                StartCoroutine(report.StartReport());
-            });
-        }
     }
 
+    private void UpdateLeftAlpha(float alpha) => partOfTheBox[0].partGO.GetComponent<SpriteRenderer>().color = new Color(0, 0.047f, 0.192f, alpha);
+
+     private void UpdateBottomAlpha(float alpha) => partOfTheBox[3].partGO.GetComponent<SpriteRenderer>().color = new Color(0, 0.047f, 0.192f, alpha);
+    
     public void ChangeCanSpawnValue(bool value) => canSpawn = value; 
 
     // public int GetPiecesCount()
