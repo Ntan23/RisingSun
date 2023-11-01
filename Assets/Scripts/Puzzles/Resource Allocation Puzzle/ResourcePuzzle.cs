@@ -39,6 +39,7 @@ public class ResourcePuzzle : MonoBehaviour
     private bool isFirstTime = true;
     private bool isComplete;
     private bool canSpawn = true;
+    private int currentOrderInLayer;
     // private Vector3[] intialPiecesPosition;
     // [SerializeField] private ValueForRandomizer valuesForRandomizerSO;
     // [SerializeField] private List<PuzzleSlot> slotPrefabs;
@@ -185,6 +186,7 @@ public class ResourcePuzzle : MonoBehaviour
     //     }
     // }
 
+
     public void UpdateObject(int index)
     {
         if(!isFirstTime) items[index].current++;
@@ -238,6 +240,8 @@ public class ResourcePuzzle : MonoBehaviour
             // isTimeStart = true;
         }
     }
+
+    public void UpdateOrderInLayer() => currentOrderInLayer++;
 
     public void CheckLevel()
     {
@@ -299,8 +303,32 @@ public class ResourcePuzzle : MonoBehaviour
                 }
                 if(phase == 2) 
                 {
-                    StartCoroutine(Warning());
-                    phase = 1;
+                    LeanTween.value(partOfTheBox[0].partGO, UpdateLeftAlpha, 0.0f, 1.0f, 0.5f);
+                    LeanTween.moveLocal(partOfTheBox[0].partGO, partOfTheBox[0].partDestination, 0.5f).setOnComplete(() =>
+                    {
+                        LeanTween.moveLocal(partOfTheBox[1].partGO, partOfTheBox[1].partDestination, 0.5f).setOnComplete(() =>
+                        {
+                            LeanTween.moveLocal(partOfTheBox[2].partGO, partOfTheBox[2].partDestination, 0.5f).setOnComplete(() =>
+                            {
+                                LeanTween.value(partOfTheBox[3].partGO, UpdateBottomAlpha, 0.0f, 1.0f, 0.5f);
+                                LeanTween.moveLocal(partOfTheBox[3].partGO, partOfTheBox[3].partDestination, 0.5f).setOnComplete(() => 
+                                {
+                                    LeanTween.scale(boxLid, boxLidSize, 0.6f).setOnComplete(() =>
+                                    {
+                                        for(int i = 13; i < container.transform.childCount; i++) Destroy(container.transform.GetChild(i).gameObject);
+                                        
+                                        LeanTween.moveX(box, 8.5f, 0.6f).setOnComplete(() =>
+                                        {
+                                            StartCoroutine(Warning());
+                                            phase = 1;
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                    // StartCoroutine(Warning());
+                    // phase = 1;
                 }
                 break;
             }
@@ -365,9 +393,9 @@ public class ResourcePuzzle : MonoBehaviour
         // completedPieces++;
     }
 
-    private void UpdateLeftAlpha(float alpha) => partOfTheBox[0].partGO.GetComponent<SpriteRenderer>().color = new Color(0, 0.047f, 0.192f, alpha);
+    private void UpdateLeftAlpha(float alpha) => partOfTheBox[0].partGO.GetComponent<SpriteRenderer>().color = new Color(0.0117f, 0.694f, 0.792f, alpha);
 
-     private void UpdateBottomAlpha(float alpha) => partOfTheBox[3].partGO.GetComponent<SpriteRenderer>().color = new Color(0, 0.047f, 0.192f, alpha);
+     private void UpdateBottomAlpha(float alpha) => partOfTheBox[3].partGO.GetComponent<SpriteRenderer>().color = new Color(0.0117f, 0.694f, 0.792f, alpha);
     
     public void ChangeCanSpawnValue(bool value) => canSpawn = value; 
 
@@ -408,5 +436,10 @@ public class ResourcePuzzle : MonoBehaviour
                 if(i == items.Length - 1) ResetPuzzle();
             }
         });
+    }
+
+    public int GetOrderInLayer() 
+    {
+        return currentOrderInLayer;
     }
 }

@@ -36,7 +36,7 @@ public class ObjectController : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetMouseButtonDown(1) && Vector2.Distance(transform.position, spawner.GetSpawnPosition().position) == 0.0f && canBeRotate) 
+        if(Input.GetMouseButtonDown(1) && canBeRotate) 
         {
             canBeDrag = false;
             canBeRotate = false;

@@ -32,7 +32,11 @@ public class ObjectSpawner : MonoBehaviour
             go[spawnedCount].transform.parent = spawnPosition.parent;
             go[spawnedCount].GetComponent<ObjectController>().Initialization();
 
+            if(go[spawnedCount].transform.childCount > 0) go[spawnedCount].transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = rp.GetOrderInLayer();
+            if(go[spawnedCount].transform.childCount == 0) go[spawnedCount].GetComponent<SpriteRenderer>().sortingOrder = rp.GetOrderInLayer();
+
             spawnedCount++;
+            rp.UpdateOrderInLayer();
             rp.ChangeCanSpawnValue(false);
         }
 
@@ -49,14 +53,14 @@ public class ObjectSpawner : MonoBehaviour
 
     public void ResetObjects()
     {
-        if(go[0] != null) 
-        {
-            spawnedCount = 0;
-            spriteRenderer.color = intialColor;
+        spawnedCount = 0;
+        spriteRenderer.color = intialColor;
 
-            for(int i = 0; i < maxSpawnCount; i++) Destroy(go[i]);
+        for(int i = 0; i < maxSpawnCount; i++) 
+        {
+            if(go[i] != null) Destroy(go[i]);
+            else continue;
         }
-        else return;
     }
 
     public Transform GetSpawnPosition()

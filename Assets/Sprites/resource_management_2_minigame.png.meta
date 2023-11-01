@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6f1ab5b77edba7341ab1a65d731c9b4c
+guid: 6a79f58fc104c07428dd982a50f4995e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -129,43 +129,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cars_0
+      name: resource_management_2_minigame_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 64
-        height: 96
-      alignment: 9
-      pivot: {x: 0.5, y: 0.24}
+        y: 301
+        width: 532
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba669b68c28373841aa82e2772a2bce4
-      internalID: 1708316777
+      spriteID: 398f3d52ad6202d4cac3f232585f29cf
+      internalID: -1682767068
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cars_1
+      name: resource_management_2_minigame_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 96
-      alignment: 9
-      pivot: {x: 0.5, y: 0.24}
+        x: 543
+        y: 390
+        width: 170
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e67395b68591b14a86163d62ef89736
-      internalID: -137194632
+      spriteID: 7a7b7b53097d4e24987a1bdbe9609d7b
+      internalID: -1036277584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: resource_management_2_minigame_2
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 89
+        width: 264
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac14e12aaaa8b3148b75f9dde714a043
+      internalID: 1297166542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: resource_management_2_minigame_3
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 19
+        width: 512
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aee08f7119c6e94cb0f7bec52fbe07a
+      internalID: -455071659
       vertices: []
       indices: 
       edges: []
@@ -181,8 +223,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      cars_1: -137194632
-      cars_0: 1708316777
+      resource_management_2_minigame_2: 1297166542
+      resource_management_2_minigame_3: -455071659
+      resource_management_2_minigame_1: -1036277584
+      resource_management_2_minigame_0: -1682767068
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
