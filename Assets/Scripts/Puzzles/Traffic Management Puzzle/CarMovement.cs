@@ -5,10 +5,11 @@ using UnityEngine;
 public class CarMovement : MonoBehaviour
 {
     [SerializeField] private List<Transform> waypoints;
-    [SerializeField] private List<Transform> toLeftWapoints;
-    [SerializeField] private List<Transform> toRightWaypoints;
+    [SerializeField] private List<Transform> CantTurnRightWaypoints;
+    [SerializeField] private List<Transform> CantTurnLeftWaypoints;
     [SerializeField] private List<Transform> uTurnWaypoints;
     private Transform[] intialWaypoints;
+    [SerializeField] private string targetWaypointName;
     [SerializeField] private float speed;
     private Vector3 goalPos;
     private int index;
@@ -68,25 +69,49 @@ public class CarMovement : MonoBehaviour
     {
         if(other.CompareTag("Right") && canTurnRight) 
         {
-            canTurnRight = false;
-            LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
-                {
-                    canTurnRight = true;
-                }
-            );
+            if(other.transform.parent.gameObject.name == targetWaypointName)
+            {
+                canTurnRight = false;
+                LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
+                    {
+                        canTurnRight = true;
+                    }
+                );
+            }
+            else if(other.transform.parent.gameObject.name == "Cant Turn Left Waypoint" || other.transform.parent.gameObject.name == "Cant Turn Right Waypoint")
+            {
+                canTurnRight = false;
+                LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
+                    {
+                        canTurnRight = true;
+                    }
+                );
+            }
         }
 
         if(other.CompareTag("Left") && canTurnLeft) 
         {
-            canTurnLeft = false;
-            LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 90.0f, timeToTurnLeft).setOnComplete(() => 
-                {
-                    canTurnLeft = true;
-                }
-            );
+            if(other.transform.parent.gameObject.name == targetWaypointName)
+            {
+                canTurnLeft = false;
+                LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 90.0f, timeToTurnLeft).setOnComplete(() => 
+                    {
+                        canTurnLeft = true;
+                    }
+                );
+            }
+            else if(other.transform.parent.gameObject.name == "Cant Turn Left Waypoint" || other.transform.parent.gameObject.name == "Cant Turn Right Waypoint")
+            {
+                canTurnRight = false;
+                LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
+                    {
+                        canTurnRight = true;
+                    }
+                );
+            }
         }
 
-        if(other.CompareTag("UTurn") && canUTurn) 
+        if(other.CompareTag("UTurn") && canUTurn && other.transform.parent.gameObject.name == targetWaypointName) 
         {
             canUTurn = false;
             LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 180.0f, timeToUTurn).setOnComplete(() => 
@@ -120,7 +145,7 @@ public class CarMovement : MonoBehaviour
     
     public void ChangeToTurnLeftWaypoint()
     {
-        for(int i = 0; i < waypoints.Count; i++) waypoints[i] = toLeftWapoints[i];
+        for(int i = 0; i < waypoints.Count; i++) waypoints[i] = CantTurnRightWaypoints[i];
 
         canTurnLeft = true;
         canTurnRight = false;
@@ -129,7 +154,7 @@ public class CarMovement : MonoBehaviour
 
     public void ChangeToTurnRightWaypoint()
     {
-        for(int i = 0; i < waypoints.Count; i++) waypoints[i] = toRightWaypoints[i];
+        for(int i = 0; i < waypoints.Count; i++) waypoints[i] = CantTurnLeftWaypoints[i];
 
         canTurnLeft = false;
         canTurnRight = true;

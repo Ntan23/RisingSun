@@ -12,6 +12,7 @@ public class TrafficPuzzle : MonoBehaviour
     private int carSelectedIndex;
     [SerializeField] private int availableMove;
     private int intialAvailableMove;
+    private int currentCarInDestination;
     private bool isFirstTime = true;
     private bool isWin;
     private bool isPlaying;
@@ -124,7 +125,17 @@ public class TrafficPuzzle : MonoBehaviour
     {
         if(other.CompareTag("Cars") && canDetectCollision)
         {
-            if(other.gameObject.name == "Pink Car" && !isWin)
+            // if(other.gameObject.name == "Pink Car" && !isWin)
+            // {
+            //     isWin = true;
+            //     Debug.Log("You Win & Show Report");
+
+            //     ShowReport();
+            // }
+
+            currentCarInDestination++;
+
+            if(currentCarInDestination == cars.Length && !isWin) 
             {
                 isWin = true;
                 Debug.Log("You Win & Show Report");

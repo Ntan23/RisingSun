@@ -16,10 +16,7 @@ public class TrafficSign : MonoBehaviour
     [SerializeField] private TrafficPuzzle tp;
     [SerializeField] private CarMovement[] carThatGetTheEffect;
 
-    void Start()
-    {
-        initialPosition = transform.localPosition;
-    }
+    void Start() => initialPosition = transform.localPosition;
 
     void OnMouseDown() 
     {
@@ -65,15 +62,15 @@ public class TrafficSign : MonoBehaviour
                     {
                         if(signType == Type.UTurn) 
                         {
-                            for(int i = 0; i < carThatGetTheEffect.Length; i++) carThatGetTheEffect[i].ChangeToUTurnWaypoint();
+                            /*for(int i = 0; i < carThatGetTheEffect.Length; i++)*/carThatGetTheEffect[i].ChangeToUTurnWaypoint(); 
                         }
                         if(signType == Type.CantTurnLeft)
                         {
-                            for(int i = 0; i < carThatGetTheEffect.Length; i++) carThatGetTheEffect[i].ChangeToTurnRightWaypoint();
+                            /*for(int i = 0; i < carThatGetTheEffect.Length; i++)*/carThatGetTheEffect[i].ChangeToTurnRightWaypoint();
                         } 
                         if(signType == Type.CantTurnRight) 
                         {
-                            for(int i = 0; i < carThatGetTheEffect.Length; i++) carThatGetTheEffect[i].ChangeToTurnLeftWaypoint();
+                            /*for(int i = 0; i < carThatGetTheEffect.Length; i++)*/ carThatGetTheEffect[i].ChangeToTurnLeftWaypoint();
                         }
                         if(signType == Type.Stop) trafficSignContainer[i].tag = "Stop"; 
 
