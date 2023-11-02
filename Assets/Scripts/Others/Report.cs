@@ -19,14 +19,8 @@ public class Report : MonoBehaviour
     [SerializeField] private GameObject gameScene;
     private GameManager gm;
 
-    // Start is called before the first frame update
     void Start() => gm = GameManager.instance;
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public IEnumerator StartReport()
     {
@@ -53,6 +47,7 @@ public class Report : MonoBehaviour
 		    yield return null;
 		}
 
+        skipInstruction.SetActive(false);
         scrollRect.enabled = true;
         LeanTween.scale(closeReportButton, Vector3.one, 0.5f).setEaseSpring();
     }

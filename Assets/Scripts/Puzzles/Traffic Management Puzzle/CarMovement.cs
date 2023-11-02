@@ -24,14 +24,16 @@ public class CarMovement : MonoBehaviour
     private bool initialCanTurnRight;
     private bool initialCanUTurn;
     private bool isStarted;
-    private bool isStopBecauseOfStopSign;
     private TrafficPuzzle tp;
+    private GameManager gm;
 
     // Start is called before the first frame update
     void Start() => StartCoroutine(Delay());
 
     IEnumerator Delay()
     {
+        gm = GameManager.instance;
+
         yield return new WaitForSeconds(0.5f);
         intialWaypoints = new Transform[waypoints.Count];
 
@@ -126,11 +128,14 @@ public class CarMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
+        if(collisionInfo.gameObject.CompareTag("AccidentCar")) tp.ShowError();
         if(collisionInfo.gameObject.CompareTag("Cars")) StartCoroutine(tp.Crash());
     }
 
     public void ResetValues()
     {
+        StopAllCoroutines();
+
         for(int i = 0; i < waypoints.Count; i++) if(intialWaypoints[i] != null) waypoints[i] = intialWaypoints[i];
 
         CarIdle();
@@ -146,19 +151,19 @@ public class CarMovement : MonoBehaviour
     public void ChangeToTurnLeftWaypoint()
     {
         for(int i = 0; i < waypoints.Count; i++) waypoints[i] = CantTurnRightWaypoints[i];
-
-        canTurnLeft = true;
-        canTurnRight = false;
-        canUTurn = false;
+        
+        // canTurnLeft = true;
+        // canTurnRight = false;
+        // canUTurn = false;
     }
 
     public void ChangeToTurnRightWaypoint()
     {
         for(int i = 0; i < waypoints.Count; i++) waypoints[i] = CantTurnLeftWaypoints[i];
 
-        canTurnLeft = false;
-        canTurnRight = true;
-        canUTurn = false;
+        // canTurnLeft = false;
+        // canTurnRight = true;
+        // canUTurn = false;
     }
 
     public void ChangeToUTurnWaypoint()

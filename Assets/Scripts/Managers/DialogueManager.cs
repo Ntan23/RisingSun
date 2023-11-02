@@ -23,6 +23,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject arrowIndicator;
     [SerializeField] private string[] dialogues;
     [Header("For Video")]
+    private bool alreadyPlay;
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private VideoClip[] videos;
     [SerializeField] private VideoClip endClip;
@@ -48,7 +49,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return) && canSkip) 
+        if(Input.GetKeyDown(KeyCode.Return) && canSkip && !alreadyPlay) 
         {
             dialogueIndex = dialogues.Length - 1;
             TurnOffDialogue();
@@ -85,6 +86,7 @@ public class DialogueManager : MonoBehaviour
 
     private void TurnOffDialogue()
     {
+        alreadyPlay = true;
         videoPlayer.gameObject.SetActive(false);
         dialogueScene.SetActive(false);
         nextDialogueButton.SetActive(false);

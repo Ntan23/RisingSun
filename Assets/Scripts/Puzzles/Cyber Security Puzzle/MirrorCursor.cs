@@ -62,8 +62,9 @@ public class MirrorCursor : MonoBehaviour
             if(virusGO.GetComponent<Animator>() != null) 
             {
                 Debug.Log("Hit");
-                virusGO.GetComponent<Animator>().Play("VirusKilled");
-                Destroy(virusGO, 0.3f);
+                // virusGO.GetComponent<Animator>().Play("VirusKilled");
+                // Destroy(virusGO, 0.4f);
+                StartCoroutine(KillVirus());
             }
         }
     }
@@ -73,11 +74,8 @@ public class MirrorCursor : MonoBehaviour
         if(other.CompareTag("Virus") && other.GetComponent<Virus>().IsKillable()) virusGO = other.gameObject;
     }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        virusGO = null;
-    }
-
+    void OnTriggerExit2D(Collider2D other) => virusGO = null;
+    
     public void ChangeMode()
     {
         randomValue = Random.Range(0,2);
@@ -92,5 +90,13 @@ public class MirrorCursor : MonoBehaviour
             mirrorType = Type.vertical;
             bg.sprite = bgSprites[1];
         }
+    }
+
+    IEnumerator KillVirus()
+    {
+        virusGO.GetComponent<Animator>().Play("VirusKilled");
+        yield return new WaitForSeconds(0.35f);
+        cp.CheckKilledVirus();
+        Destroy(virusGO); 
     }
 }

@@ -66,126 +66,14 @@ public class ResourcePuzzle : MonoBehaviour
     private Animator warningSignAnimator;
     private AudioManager am;
 
-    // void Awake()
-    // {
-    //     randomIndexes = new int[piecesCount];
-    //     valuesForRandomizerSO.value = new int[piecesCount];
-    //     valuesForRandomizerSO.isUsed = new bool[piecesCount];
-    //     intialPiecesPosition = new Vector3[piecesCount];
-    //     pieces = new GameObject[piecesCount];
-    //     spawnedPieces = new PuzzlePiece[piecesCount];
-
-    //     //gameObject.SetActive(false);
-    // }
-
     void Start() 
     {
-        // initialTime = totalTime;
-
-        // for(int i = 0; i < piecesCount; i++) valuesForRandomizerSO.value[i] = i;
-
         am = AudioManager.instance;
 
         for(int i = 0; i < items.Length; i++) UpdateObject(i);
         
         warningSignAnimator = warningSign.GetComponent<Animator>();
-
-        // StartCoroutine(Delay());
     }
-
-    // IEnumerator Delay()
-    // {
-    //     yield return new WaitForSeconds(0.6f);
-    //     Spawn();
-    // }
-
-    // public void StartTimer() 
-    // {
-    //     isTimeStart = true;
-        
-    //     StartCoroutine(Timer());
-    // }
-    
-    // public void Spawn()
-    // {
-    //     Debug.Log("Spawn");
-    //     Randomizer();
-
-    //     randomSet = slotPrefabs.OrderBy(s => UnityEngine.Random.value).Take(piecesCount).ToList();
-
-    //     for(int i = 0; i < randomSet.Count; i++)
-    //     {
-    //         spawnedPiece = Instantiate(piecePrefab, pieceParent.GetChild(i).position, Quaternion.identity);
-    //         spawnedPiece.gameObject.transform.parent = pieceParent.GetChild(i);
-
-    //         spawnedSlot = Instantiate(randomSet[i], slotParent.GetChild(randomIndexes[i]).position, Quaternion.identity);
-    //         spawnedSlot.gameObject.transform.parent = slotParent.GetChild(randomIndexes[i]);
-
-    //         intialPiecesPosition[i] = spawnedPiece.gameObject.transform.position;
-    //         pieces[i] = spawnedPiece.gameObject;
-    //         spawnedPieces[i] = spawnedPiece;
-
-    //         spawnedPiece.Initialization(spawnedSlot);
-    //     }
-
-    //     //StartTimer();
-    // }
-
-    // private void Randomizer()
-    // {
-    //     for(int i = 0; i < piecesCount; i++)
-    //     {
-    //         randomIndex = UnityEngine.Random.Range(0, piecesCount);
-
-    //         if(i == 0)
-    //         {
-    //             randomIndexes[i] = valuesForRandomizerSO.value[randomIndex];
-    //             valuesForRandomizerSO.isUsed[randomIndex] = true;
-    //         }
-            
-    //         if(i > 0)
-    //         {
-    //             if(!valuesForRandomizerSO.isUsed[randomIndex]) 
-    //             {
-    //                 randomIndexes[i] = valuesForRandomizerSO.value[randomIndex];
-    //                 valuesForRandomizerSO.isUsed[randomIndex] = true;
-    //                 continue;
-    //             }
-
-    //             while(valuesForRandomizerSO.isUsed[randomIndex]) 
-    //             {
-    //                 randomIndex = UnityEngine.Random.Range(0, piecesCount);
-
-    //                 if(!valuesForRandomizerSO.isUsed[randomIndex]) 
-    //                 {
-    //                     randomIndexes[i] = valuesForRandomizerSO.value[randomIndex];
-    //                     valuesForRandomizerSO.isUsed[randomIndex] = true;
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-    // IEnumerator Timer()
-    // {
-    //     while(isTimeStart)
-    //     {
-    //         totalTime -= Time.deltaTime;
-
-    //         timerText.text = TimeSpan.FromSeconds(totalTime).ToString("mm':'ss");
-
-    //         if(totalTime <= 0.0f) 
-    //         {
-    //             isTimeStart = false;
-    //             Debug.Log("You Lose");
-    //             ResetPuzzle();
-    //         }
-
-    //         yield return null;
-    //     }
-    // }
-
 
     public void UpdateObject(int index)
     {
@@ -227,17 +115,6 @@ public class ResourcePuzzle : MonoBehaviour
             }
 
             foreach(ObjectSpawner objectSpawner in objectSpawners) objectSpawner.ResetObjects();
-            
-            // completedPieces = 0;
-
-            // for(int i = 0; i < piecesCount; i++)
-            // {
-            //     pieces[i].transform.position = intialPiecesPosition[i];
-            //     spawnedPieces[i].SetBackCanBeDrag();
-            // }
-
-            // totalTime = initialTime;
-            // isTimeStart = true;
         }
     }
 
@@ -280,7 +157,6 @@ public class ResourcePuzzle : MonoBehaviour
                                             if(isComplete)
                                             {
                                                 Debug.Log("Show Report");
-                                                //isTimeStart = false;
 
                                                 LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
                                                 LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
@@ -299,7 +175,6 @@ public class ResourcePuzzle : MonoBehaviour
                             });
                         });
                     });
-                    //isComplete = true;
                 }
                 if(phase == 2) 
                 {
@@ -327,8 +202,6 @@ public class ResourcePuzzle : MonoBehaviour
                             });
                         });
                     });
-                    // StartCoroutine(Warning());
-                    // phase = 1;
                 }
                 break;
             }
@@ -361,7 +234,6 @@ public class ResourcePuzzle : MonoBehaviour
                                                 if(isComplete)
                                                 {
                                                     Debug.Log("Show Report");
-                                                    //isTimeStart = false;
 
                                                     LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
                                                     LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
@@ -380,7 +252,6 @@ public class ResourcePuzzle : MonoBehaviour
                                 });
                             });
                         });
-                        // isComplete = true;
                     }
                     if(phase == 2) 
                     {
@@ -390,19 +261,13 @@ public class ResourcePuzzle : MonoBehaviour
                 }
             }
         }
-        // completedPieces++;
     }
 
-    private void UpdateLeftAlpha(float alpha) => partOfTheBox[0].partGO.GetComponent<SpriteRenderer>().color = new Color(0.0117f, 0.694f, 0.792f, alpha);
+    private void UpdateLeftAlpha(float alpha) => partOfTheBox[0].partGO.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f, alpha);
 
-     private void UpdateBottomAlpha(float alpha) => partOfTheBox[3].partGO.GetComponent<SpriteRenderer>().color = new Color(0.0117f, 0.694f, 0.792f, alpha);
+     private void UpdateBottomAlpha(float alpha) => partOfTheBox[3].partGO.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f, alpha);
     
     public void ChangeCanSpawnValue(bool value) => canSpawn = value; 
-
-    // public int GetPiecesCount()
-    // {
-    //     return piecesCount;
-    // }
 
     public bool GetCanSpawn() 
     {
@@ -420,6 +285,7 @@ public class ResourcePuzzle : MonoBehaviour
         warningSignAnimator.enabled = false;
         warningSign.SetActive(false);
         yield return new WaitForSeconds(0.1f);
+        am.PlayPopUpSFX();
         LeanTween.scale(fixErrorPopUp, Vector3.one, 0.3f);
     }
 

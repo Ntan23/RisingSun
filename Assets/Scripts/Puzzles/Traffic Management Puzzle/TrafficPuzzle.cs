@@ -5,21 +5,19 @@ using TMPro;
 
 public class TrafficPuzzle : MonoBehaviour
 {
-    //[SerializeField] private CarControl[] carControl;
     [SerializeField] private GameObject[] cars;
     private Vector3[] initialCarPos;
     private Quaternion[] initialRotation;
-    private int carSelectedIndex;
-    [SerializeField] private int availableMove;
-    private int intialAvailableMove;
     private int currentCarInDestination;
-    private bool isFirstTime = true;
     private bool isWin;
     private bool isPlaying;
     private bool canDetectCollision;
-    [SerializeField] private TextMeshProUGUI moveCountText;
+    private bool isError;
     [SerializeField] private GameObject puzzleSpriteMask;
     [SerializeField] private GameObject[] objectThatNeedToDisable;
+    [SerializeField] private GameObject popUpError;
+    [SerializeField] private GameObject accidentCar;
+    [SerializeField] private AccidentalCar accidentalCar;
     [SerializeField] private Report report;
     [SerializeField] private TrafficSign[] ts;
 
@@ -31,9 +29,6 @@ public class TrafficPuzzle : MonoBehaviour
 
         initialCarPos = new Vector3[cars.Length];
         initialRotation = new Quaternion[cars.Length];
-        intialAvailableMove = availableMove;
-
-        moveCountText.text = availableMove.ToString();
 
         for(int i = 0; i < cars.Length; i++)
         {
@@ -43,52 +38,22 @@ public class TrafficPuzzle : MonoBehaviour
 
         canDetectCollision = true;
     }
-    //public void ResetSelectedCar() => carControl[carSelectedIndex].ResetValue();
-    
-    public void SetIsCarSelectedIndex(int index)
-    {
-        carSelectedIndex = index;
-    }
-
-    public int GetIsCarSelectedIndex()
-    {
-        return carSelectedIndex;
-    }
-
-    public bool GetIsFirstTime()
-    {
-        return isFirstTime;
-    }
-
-    public void UpdateAvailableMove()
-    {
-        availableMove--;
-        moveCountText.text = availableMove.ToString();
-
-        if(availableMove == 0 && !isWin) 
-        {
-            Debug.Log("You Lose");
-            ResetPuzzle();
-        }
-    }
-
-    public void ChangeIsFirstTimeValue() => isFirstTime = false;
 
     public void ResetPuzzle()
     {
+        currentCarInDestination = 0;
         isPlaying = false;
-        availableMove = intialAvailableMove;
-
-        //moveCountText.text = availableMove.ToString();
 
         for(int i = 0; i < cars.Length; i++)
         {
-            LeanTween.cancel(cars[i]);
-            cars[i].transform.localPosition = initialCarPos[i];
-            cars[i].transform.rotation = initialRotation[i];
+            if(cars[i] != null)
+            {
+                LeanTween.cancel(cars[i]);
+                cars[i].transform.localPosition = initialCarPos[i];
+                cars[i].transform.rotation = initialRotation[i];
 
-            cars[i].GetComponent<CarMovement>().ResetValues();
-            // carControl[i].ResetValue();
+                cars[i].GetComponent<CarMovement>().ResetValues();
+            }
         }
 
         for(int j = 0; j < ts.Length; j++) ts[j].ResetTrafficSign();
@@ -110,31 +75,51 @@ public class TrafficPuzzle : MonoBehaviour
 
     public IEnumerator Crash()
     {
+        yield return new WaitForSeconds(0.1f);
+
+        if(!isError)
+        {
+            for(int i = 0; i < cars.Length; i++)
+            {
+                if(cars[i] != null)
+                {
+                    LeanTween.cancel(cars[i]);
+
+                    cars[i].GetComponent<CarMovement>().CarIdle();
+                }
+            }
+
+            yield return new WaitForSeconds(0.8f);
+            ResetPuzzle();
+        }
+    }
+
+    public void ShowError()
+    {
+        isError = true;
+
+        accidentCar.GetComponent<CarMovement>().CarIdle();
+
         for(int i = 0; i < cars.Length; i++)
         {
-            LeanTween.cancel(cars[i]);
+            if(cars[i] != null)
+            {
+                LeanTween.cancel(cars[i]);
 
-            cars[i].GetComponent<CarMovement>().CarIdle();
+                cars[i].GetComponent<CarMovement>().StopAllCoroutines();
+                cars[i].GetComponent<CarMovement>().CarIdle();
+            }
         }
 
-        yield return new WaitForSeconds(0.8f);
-        ResetPuzzle();
+        LeanTween.scale(popUpError, Vector3.one, 0.3f);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Cars") && canDetectCollision)
         {
-            // if(other.gameObject.name == "Pink Car" && !isWin)
-            // {
-            //     isWin = true;
-            //     Debug.Log("You Win & Show Report");
-
-            //     ShowReport();
-            // }
-
             currentCarInDestination++;
-
+            
             if(currentCarInDestination == cars.Length && !isWin) 
             {
                 isWin = true;
@@ -143,7 +128,7 @@ public class TrafficPuzzle : MonoBehaviour
                 ShowReport();
             }
             
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
         } 
     }
 
@@ -159,9 +144,15 @@ public class TrafficPuzzle : MonoBehaviour
         });
     }
 
-    public bool GetIsWin()
+    public void ResetWithFixError()
     {
-        return isWin;
+        LeanTween.scale(popUpError, Vector3.zero, 0.3f).setOnComplete(() =>
+        {
+            isError = false;
+            accidentalCar.enabled = false;
+            Destroy(accidentCar);
+            ResetPuzzle();
+        });
     }
 
     public bool GetIsPlaying()

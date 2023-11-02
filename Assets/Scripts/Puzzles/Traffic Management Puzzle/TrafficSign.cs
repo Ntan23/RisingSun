@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class TrafficSign : MonoBehaviour
 {
+    [System.Serializable]
+    public class TrafficSignContainers
+    {
+        public GameObject container;
+        public CarMovement[] carsThatGetTheEffect;
+    } 
+
     private enum Type{
         UTurn, CantTurnLeft, CantTurnRight, Stop
     }
@@ -12,9 +19,10 @@ public class TrafficSign : MonoBehaviour
     private bool canBeDrag = true;
     private Vector2 initialPosition;
     private Vector2 offset;
-    [SerializeField] private GameObject[] trafficSignContainer;
+    //[SerializeField] private GameObject[] trafficSignContainer;
     [SerializeField] private TrafficPuzzle tp;
-    [SerializeField] private CarMovement[] carThatGetTheEffect;
+    //[SerializeField] private CarMovement[] carThatGetTheEffect;
+    [SerializeField] private TrafficSignContainers[] trafficSignContainers;
 
     void Start() => initialPosition = transform.localPosition;
 
@@ -24,17 +32,16 @@ public class TrafficSign : MonoBehaviour
         {
             if(canBeDrag) offset = GetMousePosition() - (Vector2)transform.position;
 
-            for(int i = 0; i < trafficSignContainer.Length; i++)
+            for(int i = 0; i < trafficSignContainers.Length; i++)
             {
-                if(Vector2.Distance(transform.position, trafficSignContainer[i].transform.position) <= 0.1f && !canBeDrag)
+                if(Vector2.Distance(transform.position, trafficSignContainers[i].container.transform.position) <= 0.1f && !canBeDrag)
                 {
                     LeanTween.move(gameObject, initialPosition, 0.5f).setEaseSpring().setOnComplete(() =>
                     {
-                        trafficSignContainer[i].tag = "Untagged";
+                        trafficSignContainers[i].container.tag = "Untagged";
                         canBeDrag = true;
 
-                        if(carThatGetTheEffect.Length > 0) for(int j = 0; j < carThatGetTheEffect.Length; j++) carThatGetTheEffect[j].ResetValues();
-                        // Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
+                        if(trafficSignContainers[i].carsThatGetTheEffect.Length > 0) for(int j = 0; j < trafficSignContainers[i].carsThatGetTheEffect.Length; j++) trafficSignContainers[i].carsThatGetTheEffect[j].ResetValues();
                     });
 
                     break;
@@ -53,37 +60,37 @@ public class TrafficSign : MonoBehaviour
     {
         if(!tp.GetIsPlaying())
         {
-            for(int i = 0; i < trafficSignContainer.Length; i++)
+            for(int i = 0; i < trafficSignContainers.Length; i++)
             {
-                if(Vector2.Distance(transform.position, trafficSignContainer[i].transform.position) <= 1.0f && canBeDrag)
+                if(Vector2.Distance(transform.position, trafficSignContainers[i].container.transform.position) <= 0.5f && canBeDrag)
                 {
                     canBeDrag = false;
-                    LeanTween.move(gameObject, trafficSignContainer[i].transform.position, 0.5f).setEaseSpring().setOnComplete(() =>
+                    LeanTween.move(gameObject, trafficSignContainers[i].container.transform.position, 0.5f).setEaseSpring().setOnComplete(() =>
                     {
                         if(signType == Type.UTurn) 
                         {
-                            /*for(int i = 0; i < carThatGetTheEffect.Length; i++)*/carThatGetTheEffect[i].ChangeToUTurnWaypoint(); 
+                            for(int j = 0; j < trafficSignContainers[i].carsThatGetTheEffect.Length; j++) trafficSignContainers[i].carsThatGetTheEffect[j].ChangeToUTurnWaypoint(); 
                         }
                         if(signType == Type.CantTurnLeft)
                         {
-                            /*for(int i = 0; i < carThatGetTheEffect.Length; i++)*/carThatGetTheEffect[i].ChangeToTurnRightWaypoint();
+                            for(int j = 0; j < trafficSignContainers[i].carsThatGetTheEffect.Length; j++) trafficSignContainers[i].carsThatGetTheEffect[j].ChangeToTurnRightWaypoint();
                         } 
                         if(signType == Type.CantTurnRight) 
                         {
-                            /*for(int i = 0; i < carThatGetTheEffect.Length; i++)*/ carThatGetTheEffect[i].ChangeToTurnLeftWaypoint();
+                            for(int j = 0; j < trafficSignContainers[i].carsThatGetTheEffect.Length; j++) trafficSignContainers[i].carsThatGetTheEffect[j].ChangeToTurnLeftWaypoint();
                         }
-                        if(signType == Type.Stop) trafficSignContainer[i].tag = "Stop"; 
+                        if(signType == Type.Stop) trafficSignContainers[i].container.tag = "Stop"; 
 
                         //Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
                     });
                     break;
                 }
-                else if(i + 1 < trafficSignContainer.Length) continue;
-                else if(i + 1 == trafficSignContainer.Length)
+                else if(i + 1 < trafficSignContainers.Length) continue;
+                else if(i + 1 == trafficSignContainers.Length)
                 {
                     LeanTween.move(gameObject, initialPosition, 0.5f).setEaseSpring().setOnComplete(() =>
                     {
-                        trafficSignContainer[i].tag = "Untagged";
+                        trafficSignContainers[i].container.tag = "Untagged";
                         canBeDrag = true;
                         //Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
                     });
@@ -102,9 +109,9 @@ public class TrafficSign : MonoBehaviour
     {
         transform.localPosition = initialPosition;
         
-        for(int i = 0; i < trafficSignContainer.Length; i++)
+        for(int i = 0; i < trafficSignContainers.Length; i++)
         {
-            trafficSignContainer[i].tag = "Untagged";
+            trafficSignContainers[i].container.tag = "Untagged";
             canBeDrag = true;
         }
     }

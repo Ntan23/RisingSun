@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     private bool isShowingPopUp;
     private DialogueManager  dm;
     private AudioManager am;
+    [SerializeField] private CreditsUI creditsUI;
    
     void Start()
     {
@@ -204,6 +205,8 @@ public class GameManager : MonoBehaviour
         systemResetText.SetActive(true);
         LeanTween.scale(systemResetText, new Vector3(1.2f, 1.2f, 1.2f), 0.8f).setLoopPingPong();
         yield return new WaitForSeconds(1.7f);
+        systemResetText.gameObject.SetActive(false);
+
         Debug.Log("Quit");
         Application.Quit();
     }

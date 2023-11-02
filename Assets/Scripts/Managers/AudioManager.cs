@@ -87,7 +87,11 @@ public class AudioManager : MonoBehaviour
         if(gm.GetDifficultyIndex() == 2) Play("Click2");
     }
 
-    public void PlayPopUpSFX() => Play("PopUp");
+    public void PlayPopUpSFX() 
+    {
+        if(!gm.GetIsShowingPopUp()) Play("PopUp");
+    }
+
     public void PlayHitSFX() => Play("EnergyHit");
     public void PlayWarningSFX() => Play("Warning");
     public void StopWarningSFX() => Stop("Warning");
