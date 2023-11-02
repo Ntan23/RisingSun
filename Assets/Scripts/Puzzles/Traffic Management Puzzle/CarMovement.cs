@@ -26,6 +26,7 @@ public class CarMovement : MonoBehaviour
     private bool isStarted;
     private TrafficPuzzle tp;
     private GameManager gm;
+    private ParticleSystem particles;
 
     // Start is called before the first frame update
     void Start() => StartCoroutine(Delay());
@@ -33,6 +34,8 @@ public class CarMovement : MonoBehaviour
     IEnumerator Delay()
     {
         gm = GameManager.instance;
+
+        particles = GetComponentInChildren<ParticleSystem>();
 
         yield return new WaitForSeconds(0.5f);
         intialWaypoints = new Transform[waypoints.Count];
@@ -129,7 +132,11 @@ public class CarMovement : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if(collisionInfo.gameObject.CompareTag("AccidentCar")) tp.ShowError();
-        if(collisionInfo.gameObject.CompareTag("Cars")) StartCoroutine(tp.Crash());
+        if(collisionInfo.gameObject.CompareTag("Cars")) 
+        {
+            if(particles != null) particles.Play();
+            StartCoroutine(tp.Crash());
+        }
     }
 
     public void ResetValues()

@@ -38,6 +38,7 @@ public class TrafficSign : MonoBehaviour
                 {
                     LeanTween.move(gameObject, initialPosition, 0.5f).setEaseSpring().setOnComplete(() =>
                     {
+                        trafficSignContainers[i].container.GetComponent<TrafficSignContainer>().SetBackIsFilled();
                         trafficSignContainers[i].container.tag = "Untagged";
                         canBeDrag = true;
 
@@ -62,8 +63,10 @@ public class TrafficSign : MonoBehaviour
         {
             for(int i = 0; i < trafficSignContainers.Length; i++)
             {
-                if(Vector2.Distance(transform.position, trafficSignContainers[i].container.transform.position) <= 0.5f && canBeDrag)
+                if(Vector2.Distance(transform.position, trafficSignContainers[i].container.transform.position) <= 0.5f && canBeDrag && !trafficSignContainers[i].container.GetComponent<TrafficSignContainer>().GetIsFilled())
                 {
+                    trafficSignContainers[i].container.GetComponent<TrafficSignContainer>().SetIsFilled();
+
                     canBeDrag = false;
                     LeanTween.move(gameObject, trafficSignContainers[i].container.transform.position, 0.5f).setEaseSpring().setOnComplete(() =>
                     {
@@ -90,7 +93,17 @@ public class TrafficSign : MonoBehaviour
                 {
                     LeanTween.move(gameObject, initialPosition, 0.5f).setEaseSpring().setOnComplete(() =>
                     {
-                        trafficSignContainers[i].container.tag = "Untagged";
+                        if(!trafficSignContainers[i].container.GetComponent<TrafficSignContainer>().GetIsFilled()) trafficSignContainers[i].container.tag = "Untagged";
+                        canBeDrag = true;
+                        //Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
+                    });
+                    break;
+                }
+                else if(trafficSignContainers[i].container.GetComponent<TrafficSignContainer>().GetIsFilled())
+                {
+                    LeanTween.move(gameObject, initialPosition, 0.5f).setEaseSpring().setOnComplete(() =>
+                    {
+                        //trafficSignContainers[i].container.tag = "Untagged";
                         canBeDrag = true;
                         //Debug.Log("Container " + i + " tag : " + trafficSignContainer[i].tag);
                     });
@@ -112,6 +125,7 @@ public class TrafficSign : MonoBehaviour
         for(int i = 0; i < trafficSignContainers.Length; i++)
         {
             trafficSignContainers[i].container.tag = "Untagged";
+            trafficSignContainers[i].container.GetComponent<TrafficSignContainer>().SetBackIsFilled();
             canBeDrag = true;
         }
     }
