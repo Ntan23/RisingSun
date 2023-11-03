@@ -36,23 +36,14 @@ public class ResourcePuzzle : MonoBehaviour
     [SerializeField] private GameObject box;
     [SerializeField] private GameObject boxLid;
     [SerializeField] private Vector3 boxLidSize;
+    [SerializeField] private Vector3[] intialBoxPartPosition;
     private bool isFirstTime = true;
     private bool isComplete;
     private bool canSpawn = true;
+    private bool isAnimating;
+    private bool isOpen = false;
     private int currentOrderInLayer;
-    // private Vector3[] intialPiecesPosition;
-    // [SerializeField] private ValueForRandomizer valuesForRandomizerSO;
-    // [SerializeField] private List<PuzzleSlot> slotPrefabs;
-    // private List<PuzzleSlot> randomSet;
-    // [SerializeField] private PuzzlePiece piecePrefab;
-    // [SerializeField] private Transform slotParent;
-    // [SerializeField] private Transform pieceParent;
-    // private GameObject[] pieces;
-    // private PuzzleSlot spawnedSlot;
-    // private PuzzlePiece spawnedPiece;
-    // private PuzzlePiece[] spawnedPieces;
     [SerializeField] private Collider2D[] circleColliders;
-    // [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject puzzleSpriteMask;
     [SerializeField] private GameObject[] objectThatNeedToDisable;
     [SerializeField] private GameObject container;
@@ -73,6 +64,13 @@ public class ResourcePuzzle : MonoBehaviour
         for(int i = 0; i < items.Length; i++) UpdateObject(i);
         
         warningSignAnimator = warningSign.GetComponent<Animator>();
+
+        intialBoxPartPosition = new Vector3[partOfTheBox.Length];
+
+        for(int i = 0; i < partOfTheBox.Length; i++)
+        {
+            intialBoxPartPosition[i] = partOfTheBox[i].partGO.transform.localPosition;
+        }
     }
 
     public void UpdateObject(int index)
@@ -122,97 +120,23 @@ public class ResourcePuzzle : MonoBehaviour
 
     public void CheckLevel()
     {
-        for(int i = 0; i < items.Length; i++)
+        if(!isAnimating)
         {
-            if(items[i].current < items[i].needed) 
+            for(int i = 0; i < items.Length; i++)
             {
-                isComplete = false;
-                ResetPuzzle();
-                break;
-            }
-
-            if(items[i].needed == 0 && i < items.Length - 1) continue;
-            if(items[i].needed == 0 && i == items.Length - 1) 
-            {
-                if(phase == 1) 
+                if(items[i].current < items[i].needed) 
                 {
-                    LeanTween.value(partOfTheBox[0].partGO, UpdateLeftAlpha, 0.0f, 1.0f, 0.5f);
-                    LeanTween.moveLocal(partOfTheBox[0].partGO, partOfTheBox[0].partDestination, 0.5f).setOnComplete(() =>
-                    {
-                        LeanTween.moveLocal(partOfTheBox[1].partGO, partOfTheBox[1].partDestination, 0.5f).setOnComplete(() =>
-                        {
-                            LeanTween.moveLocal(partOfTheBox[2].partGO, partOfTheBox[2].partDestination, 0.5f).setOnComplete(() =>
-                            {
-                                LeanTween.value(partOfTheBox[3].partGO, UpdateBottomAlpha, 0.0f, 1.0f, 0.5f);
-                                LeanTween.moveLocal(partOfTheBox[3].partGO, partOfTheBox[3].partDestination, 0.5f).setOnComplete(() => 
-                                {
-                                    LeanTween.scale(boxLid, boxLidSize, 0.6f).setOnComplete(() =>
-                                    {
-                                        for(int i = 13; i < container.transform.childCount; i++) Destroy(container.transform.GetChild(i).gameObject);
-                                        
-                                        LeanTween.moveX(box, 8.5f, 0.6f).setOnComplete(() =>
-                                        {
-                                            isComplete = true;
-
-                                            if(isComplete)
-                                            {
-                                                Debug.Log("Show Report");
-
-                                                LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
-                                                LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
-                                                {
-                                                    bgSpriteRenderer.sprite = bgSprite;
-                                                    
-                                                    foreach(GameObject go in objectThatNeedToDisable) go.SetActive(false);
-                                                
-                                                    report.gameObject.SetActive(true);
-                                                    StartCoroutine(report.StartReport());
-                                                });
-                                            }
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    });
+                    isComplete = false;
+                    ResetPuzzle();
+                    break;
                 }
-                if(phase == 2) 
-                {
-                    LeanTween.value(partOfTheBox[0].partGO, UpdateLeftAlpha, 0.0f, 1.0f, 0.5f);
-                    LeanTween.moveLocal(partOfTheBox[0].partGO, partOfTheBox[0].partDestination, 0.5f).setOnComplete(() =>
-                    {
-                        LeanTween.moveLocal(partOfTheBox[1].partGO, partOfTheBox[1].partDestination, 0.5f).setOnComplete(() =>
-                        {
-                            LeanTween.moveLocal(partOfTheBox[2].partGO, partOfTheBox[2].partDestination, 0.5f).setOnComplete(() =>
-                            {
-                                LeanTween.value(partOfTheBox[3].partGO, UpdateBottomAlpha, 0.0f, 1.0f, 0.5f);
-                                LeanTween.moveLocal(partOfTheBox[3].partGO, partOfTheBox[3].partDestination, 0.5f).setOnComplete(() => 
-                                {
-                                    LeanTween.scale(boxLid, boxLidSize, 0.6f).setOnComplete(() =>
-                                    {
-                                        for(int i = 13; i < container.transform.childCount; i++) Destroy(container.transform.GetChild(i).gameObject);
-                                        
-                                        LeanTween.moveX(box, 8.5f, 0.6f).setOnComplete(() =>
-                                        {
-                                            StartCoroutine(Warning());
-                                            phase = 1;
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    });
-                }
-                break;
-            }
 
-            if(items[i].current >= items[i].needed && items[i].needed > 0)
-            {
-                if(i < items.Length - 1) continue;
-                if(i == items.Length - 1) 
+                if(items[i].needed == 0 && i < items.Length - 1) continue;
+                if(items[i].needed == 0 && i == items.Length - 1) 
                 {
                     if(phase == 1) 
                     {
+                        isAnimating = true;
                         LeanTween.value(partOfTheBox[0].partGO, UpdateLeftAlpha, 0.0f, 1.0f, 0.5f);
                         LeanTween.moveLocal(partOfTheBox[0].partGO, partOfTheBox[0].partDestination, 0.5f).setOnComplete(() =>
                         {
@@ -253,19 +177,123 @@ public class ResourcePuzzle : MonoBehaviour
                             });
                         });
                     }
+
                     if(phase == 2) 
                     {
-                        StartCoroutine(Warning());
-                        phase = 1;
+                        isAnimating = true;
+
+                        LeanTween.value(partOfTheBox[0].partGO, UpdateLeftAlpha, 0.0f, 1.0f, 0.5f);
+                        LeanTween.moveLocal(partOfTheBox[0].partGO, partOfTheBox[0].partDestination, 0.5f).setOnComplete(() =>
+                        {
+                            LeanTween.moveLocal(partOfTheBox[1].partGO, partOfTheBox[1].partDestination, 0.5f).setOnComplete(() =>
+                            {
+                                LeanTween.moveLocal(partOfTheBox[2].partGO, partOfTheBox[2].partDestination, 0.5f).setOnComplete(() =>
+                                {
+                                    LeanTween.value(partOfTheBox[3].partGO, UpdateBottomAlpha, 0.0f, 1.0f, 0.5f);
+                                    LeanTween.moveLocal(partOfTheBox[3].partGO, partOfTheBox[3].partDestination, 0.5f).setOnComplete(() => 
+                                    {
+                                        LeanTween.scale(boxLid, boxLidSize, 0.6f).setOnComplete(() =>
+                                        {
+                                            for(int i = 13; i < container.transform.childCount; i++) Destroy(container.transform.GetChild(i).gameObject);
+                                            
+                                            LeanTween.moveX(box, 8.5f, 0.6f).setOnComplete(() =>
+                                            {
+                                                if(!isOpen) StartCoroutine(Warning());
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    }
+                    break;
+                }
+
+                if(items[i].current >= items[i].needed && items[i].needed > 0)
+                {
+                    if(i < items.Length - 1) continue;
+                    if(i == items.Length - 1) 
+                    {
+                        if(phase == 1) 
+                        {
+                            isAnimating = true;
+                            LeanTween.value(partOfTheBox[0].partGO, UpdateLeftAlpha, 0.0f, 1.0f, 0.5f);
+                            LeanTween.moveLocal(partOfTheBox[0].partGO, partOfTheBox[0].partDestination, 0.5f).setOnComplete(() =>
+                            {
+                                LeanTween.moveLocal(partOfTheBox[1].partGO, partOfTheBox[1].partDestination, 0.5f).setOnComplete(() =>
+                                {
+                                    LeanTween.moveLocal(partOfTheBox[2].partGO, partOfTheBox[2].partDestination, 0.5f).setOnComplete(() =>
+                                    {
+                                        LeanTween.value(partOfTheBox[3].partGO, UpdateBottomAlpha, 0.0f, 1.0f, 0.5f);
+                                        LeanTween.moveLocal(partOfTheBox[3].partGO, partOfTheBox[3].partDestination, 0.5f).setOnComplete(() => 
+                                        {
+                                            LeanTween.scale(boxLid, boxLidSize, 0.6f).setOnComplete(() =>
+                                            {
+                                                for(int i = 13; i < container.transform.childCount; i++) Destroy(container.transform.GetChild(i).gameObject);
+                                                
+                                                LeanTween.moveX(box, 8.5f, 0.6f).setOnComplete(() =>
+                                                {
+                                                    isComplete = true;
+
+                                                    if(isComplete)
+                                                    {
+                                                        Debug.Log("Show Report");
+
+                                                        LeanTween.rotateZ(puzzleSpriteMask, 90.0f, 0.5f);
+                                                        LeanTween.rotateZ(gameObject, 90.0f, 0.5f).setOnComplete(() =>
+                                                        {
+                                                            bgSpriteRenderer.sprite = bgSprite;
+                                                            
+                                                            foreach(GameObject go in objectThatNeedToDisable) go.SetActive(false);
+                                                        
+                                                            report.gameObject.SetActive(true);
+                                                            StartCoroutine(report.StartReport());
+                                                        });
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        }
+                        
+                        if(phase == 2) 
+                        {
+                            isAnimating = true;
+                            LeanTween.value(partOfTheBox[0].partGO, UpdateLeftAlpha, 0.0f, 1.0f, 0.5f);
+                            LeanTween.moveLocal(partOfTheBox[0].partGO, partOfTheBox[0].partDestination, 0.5f).setOnComplete(() =>
+                            {
+                                LeanTween.moveLocal(partOfTheBox[1].partGO, partOfTheBox[1].partDestination, 0.5f).setOnComplete(() =>
+                                {
+                                    LeanTween.moveLocal(partOfTheBox[2].partGO, partOfTheBox[2].partDestination, 0.5f).setOnComplete(() =>
+                                    {
+                                        LeanTween.value(partOfTheBox[3].partGO, UpdateBottomAlpha, 0.0f, 1.0f, 0.5f);
+                                        LeanTween.moveLocal(partOfTheBox[3].partGO, partOfTheBox[3].partDestination, 0.5f).setOnComplete(() => 
+                                        {
+                                            LeanTween.scale(boxLid, boxLidSize, 0.6f).setOnComplete(() =>
+                                            {
+                                                for(int i = 13; i < container.transform.childCount; i++) Destroy(container.transform.GetChild(i).gameObject);
+                                                
+                                                LeanTween.moveX(box, 8.5f, 0.6f).setOnComplete(() =>
+                                                {
+                                                    if(!isOpen) StartCoroutine(Warning());
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        }
                     }
                 }
             }
         }
     }
 
-    private void UpdateLeftAlpha(float alpha) => partOfTheBox[0].partGO.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f, alpha);
+    private void UpdateLeftAlpha(float alpha) => partOfTheBox[0].partGO.GetComponent<SpriteRenderer>().color = new Color(0.0f, 0.386f, 0.372f, alpha);
 
-     private void UpdateBottomAlpha(float alpha) => partOfTheBox[3].partGO.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f, alpha);
+     private void UpdateBottomAlpha(float alpha) => partOfTheBox[3].partGO.GetComponent<SpriteRenderer>().color = new Color(0.0f, 0.386f, 0.372f, alpha);
     
     public void ChangeCanSpawnValue(bool value) => canSpawn = value; 
 
@@ -276,23 +304,31 @@ public class ResourcePuzzle : MonoBehaviour
 
     IEnumerator Warning()
     {
+        isOpen = true;
+        phase = 1;
         canSpawn = false;
         warningSign.SetActive(true);
-        am.PlayWarningSFX();
+        //am.PlayWarningSFX();
         yield return new WaitForSeconds(0.1f);
         warningSignAnimator.Play("Error_WarningSign");
         yield return new WaitForSeconds(2.0f);
         warningSignAnimator.enabled = false;
         warningSign.SetActive(false);
+        //am.StopWarningSFX();
         yield return new WaitForSeconds(0.1f);
+        isOpen = false;
         am.PlayPopUpSFX();
         LeanTween.scale(fixErrorPopUp, Vector3.one, 0.3f);
     }
 
     public void ResetPuzzleWithFixError()
     {
+        isAnimating = false;
+
         LeanTween.scale(fixErrorPopUp, Vector3.zero, 0.3f).setOnComplete(() =>
         {
+            ResetDeliverBox();
+
             for(int i = 0; i < items.Length; i++) 
             {
                 if(items[i].name == "Food") items[i].needed = 4;
@@ -302,6 +338,20 @@ public class ResourcePuzzle : MonoBehaviour
                 if(i == items.Length - 1) ResetPuzzle();
             }
         });
+    }
+
+    private void ResetDeliverBox()
+    {
+        box.transform.localPosition = Vector3.zero;
+        boxLid.transform.localScale = Vector3.zero;
+        
+        partOfTheBox[0].partGO.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f, 0.0f);
+        partOfTheBox[3].partGO.GetComponent<SpriteRenderer>().color = new Color(0.3f, 0.3f, 0.3f, 0.0f);
+
+        for(int i = 0; i < partOfTheBox.Length; i++)
+        {
+            partOfTheBox[i].partGO.transform.localPosition = intialBoxPartPosition[i];
+        }
     }
 
     public int GetOrderInLayer() 

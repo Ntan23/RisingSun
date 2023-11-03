@@ -78,8 +78,10 @@ public class AudioManager : MonoBehaviour
     //         if(s.name != "BGM") s.source.Stop();
     //     }
     // }
+    public void PlayBGM1() => Play("BGM1");
     public void StopBGM1() => Stop("BGM1");
     public void PlayBGM2() => Play("BGM2");
+    public void StopBGM2() => Stop("BGM2");
 
     public void PlayClickSFX()
     {
@@ -97,5 +99,18 @@ public class AudioManager : MonoBehaviour
     public void StopWarningSFX() => Stop("Warning");
     public void PlayGlitchCutsceneAudio() => Play("GlitchCutscene");
     public void StopGlitchCutsceneAudio() => Stop("GlitchCutscene");
+    public void PlayTrafficPopUp() => Play("TrafficPopUp");
+    public void StopTrafficPopUp() => Stop("TrafficPopUp");
+    public void PlayEnergyPopUp() => Play("EnergyPopUp");
+    public void StopEnergyPopUp() => Stop("EnergyPopUp");
+    public void PlayWastePopUp() => Play("WastePopUp");
+    public void StopWastePopUp() => Stop("WastePopUp");
+    public void PlayCyberPopUp() => Play("CyberPopUp");
+    public void StopCyberPopUp() => Stop("CyberPopUp");
+    public void PlayResourcePopUp() => Play("ResourcePopUp");
+    public void StopResourcePopUp() => Stop("ResourcePopUp");
+    public void PlayCarCrashSFX() => Play("CarCrash");
+    public void PlayError2() => Play("Warning2");
+    public void StopError2() => Stop("Warning2");
 } 
 

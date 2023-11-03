@@ -6,6 +6,7 @@ using TMPro;
 public class TrafficPuzzle : MonoBehaviour
 {
     [SerializeField] private GameObject[] cars;
+    [SerializeField] private GameObject[] indicator;
     private Vector3[] initialCarPos;
     private Quaternion[] initialRotation;
     private int currentCarInDestination;
@@ -20,12 +21,15 @@ public class TrafficPuzzle : MonoBehaviour
     [SerializeField] private AccidentalCar accidentalCar;
     [SerializeField] private Report report;
     [SerializeField] private TrafficSign[] ts;
+    private AudioManager am;
 
     void Start() => StartCoroutine(Delay());
 
     IEnumerator Delay()
     {
-        yield return new WaitForSeconds(0.5f);
+        am = AudioManager.instance;
+
+        yield return new WaitForSeconds(0.6f);
 
         initialCarPos = new Vector3[cars.Length];
         initialRotation = new Quaternion[cars.Length];
@@ -43,6 +47,8 @@ public class TrafficPuzzle : MonoBehaviour
     {
         currentCarInDestination = 0;
         isPlaying = false;
+
+        for(int i = 0; i < indicator.Length; i++) indicator[i].SetActive(true);
 
         for(int i = 0; i < cars.Length; i++)
         {
@@ -65,6 +71,8 @@ public class TrafficPuzzle : MonoBehaviour
     {
         if(!isPlaying)
         {
+            for(int i = 0; i < indicator.Length; i++) indicator[i].SetActive(false);
+
             for(int i = 0; i < cars.Length; i++)
             {
                 cars[i].GetComponent<CarMovement>().StartMove();
@@ -75,6 +83,7 @@ public class TrafficPuzzle : MonoBehaviour
 
     public IEnumerator Crash()
     {
+        if(!isWin) am.PlayCarCrashSFX();
         yield return new WaitForSeconds(0.1f);
 
         if(!isError)
@@ -119,6 +128,8 @@ public class TrafficPuzzle : MonoBehaviour
         if(other.CompareTag("Cars") && canDetectCollision)
         {
             currentCarInDestination++;
+
+            other.GetComponent<CarMovement>().DisablePaticleEffect();
             
             if(currentCarInDestination == cars.Length && !isWin) 
             {
@@ -148,6 +159,8 @@ public class TrafficPuzzle : MonoBehaviour
     {
         LeanTween.scale(popUpError, Vector3.zero, 0.3f).setOnComplete(() =>
         {
+            for(int i = 0; i < indicator.Length; i++) indicator[i].SetActive(true);
+
             isError = false;
             accidentalCar.enabled = false;
             Destroy(accidentCar);

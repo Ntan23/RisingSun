@@ -11,7 +11,7 @@ public class LineAnimation : MonoBehaviour
     private int pointsCount ;
     private float segmentDuration;
     private float startTime;
-    [SerializeField] private GameObject imageToShow;
+    [SerializeField] private GameObject[] imageToShow;
     private GameManager gm;
 
     private void Start () 
@@ -29,7 +29,7 @@ public class LineAnimation : MonoBehaviour
         {
             gameObject.SetActive(true);
 
-            LeanTween.cancel(imageToShow);
+            for(int i = 0; i < imageToShow.Length; i++) LeanTween.cancel(imageToShow[i]);
             StopAllCoroutines();
             
             if(gameObject.activeInHierarchy) StartCoroutine(AnimateLine());
@@ -39,7 +39,17 @@ public class LineAnimation : MonoBehaviour
     public void Unhover() 
     {
         gameObject.SetActive(false);
-        imageToShow.SetActive(false);
+
+        if(gm.GetDifficultyIndex() == 1) 
+        {
+            imageToShow[0].SetActive(false);
+            imageToShow[0].GetComponent<Animator>().ResetTrigger("Activate");
+        }
+        if(gm.GetDifficultyIndex() == 2) 
+        {
+            imageToShow[1].SetActive(false);
+            imageToShow[1].GetComponent<Animator>().ResetTrigger("Activate");
+        }
         // LeanTween.cancel(imageToShow);
         // StopAllCoroutines(); 
         // StartCoroutine(AnimateLine(false));
@@ -49,30 +59,14 @@ public class LineAnimation : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        // if(!isHover)
-        // {
-        //     LeanTween.cancel(imageToShow);
-        //     LeanTween.scaleX(imageToShow, 0.0f, 0.15f).setOnComplete(() => imageToShow.SetActive(false));
-        //     yield return new WaitForSeconds(0.25f);
-        // }
-
         segmentDuration = animationDuration / pointsCount ; 
 
         for (int i = 0; i < pointsCount - 1; i++) 
         {
             float startTime = Time.time;
 
-            // if(isHover)
-            // {
             startPos = linePoints[i];
             endPos = linePoints[i+1];
-            //}
-
-            // if(!isHover)
-            // {
-            //     startPos = linePoints[pointsCount - (i + 1)];
-            //     endPos = linePoints[pointsCount - (i + 2)];
-            // }
 
             currentPos = startPos;
 
@@ -81,19 +75,35 @@ public class LineAnimation : MonoBehaviour
                 float t = (Time.time - startTime) / segmentDuration ;
                 currentPos = Vector3.Lerp(startPos, endPos, t);
 
-                /*if(isHover)*/ for (int j = i + 1; j < pointsCount; j++)
+                for (int j = i + 1; j < pointsCount; j++)
                 lineRenderer.SetPosition(j, currentPos);
-
-                //if(!isHover) for(int j = pointsCount - 1; j > 0; j--) lineRenderer.SetPosition(j, currentPos);
 
                 yield return null;
             }
             
-            if(endPos == linePoints[pointsCount - 1] /*&& isHover*/) 
+            if(endPos == linePoints[pointsCount - 1]) 
             {
-                imageToShow.SetActive(true);
-                imageToShow.transform.localScale = new Vector3(0.0f, imageToShow.transform.localScale.y, imageToShow.transform.localScale.z);
-                LeanTween.scaleX(imageToShow, 15.0f, 0.15f);
+                if(gm.GetDifficultyIndex() == 1) 
+                {
+                    imageToShow[0].SetActive(false);
+                    imageToShow[0].SetActive(true);
+                    imageToShow[0].transform.localScale = new Vector3(0.0f, imageToShow[0].transform.localScale.y, imageToShow[0].transform.localScale.z);
+                    LeanTween.scaleX(imageToShow[0], 0.9f, 0.15f).setOnComplete(() =>
+                    {
+                        imageToShow[0].GetComponent<Animator>().SetTrigger("Activate");
+                    });
+                }
+
+                if(gm.GetDifficultyIndex() == 2) 
+                {
+                    imageToShow[0].SetActive(false);
+                    imageToShow[1].SetActive(true);
+                    imageToShow[1].transform.localScale = new Vector3(0.0f, imageToShow[1].transform.localScale.y, imageToShow[1].transform.localScale.z);
+                    LeanTween.scaleX(imageToShow[1], 0.9f, 0.15f).setOnComplete(() =>
+                    {
+                        imageToShow[1].GetComponent<Animator>().SetTrigger("Activate");
+                    });
+                }
             }
 
             //if(endPos == linePoints[0] && !isHover) gameObject.SetActive(false);

@@ -18,6 +18,7 @@ public class MirrorCursor : MonoBehaviour
     private Vector3 movementDirection;
     private Vector3 newPosition;
     private GameObject virusGO;
+    private bool isDestroying;
     [SerializeField] private SpriteRenderer bg;
     [SerializeField] private Sprite[] bgSprites;
     private CyberPuzzle cp;
@@ -57,7 +58,7 @@ public class MirrorCursor : MonoBehaviour
         // Update the object's position
         transform.position = newPosition;
 
-        if(virusGO != null && Input.GetMouseButtonDown(0)) 
+        if(virusGO != null && Input.GetMouseButtonDown(0) && !isDestroying) 
         {
             if(virusGO.GetComponent<Animator>() != null) 
             {
@@ -71,7 +72,7 @@ public class MirrorCursor : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if(other.CompareTag("Virus") && other.GetComponent<Virus>().IsKillable()) virusGO = other.gameObject;
+        if(other.CompareTag("Virus") && other.GetComponent<Virus>().IsKillable() && !isDestroying) virusGO = other.gameObject;
     }
 
     void OnTriggerExit2D(Collider2D other) => virusGO = null;
@@ -94,9 +95,11 @@ public class MirrorCursor : MonoBehaviour
 
     IEnumerator KillVirus()
     {
+        isDestroying = true;
         virusGO.GetComponent<Animator>().Play("VirusKilled");
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.4f);
         cp.CheckKilledVirus();
         Destroy(virusGO); 
+        isDestroying = false;
     }
 }

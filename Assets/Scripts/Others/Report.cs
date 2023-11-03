@@ -60,6 +60,7 @@ public class Report : MonoBehaviour
             spriteMask.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             gameObject.SetActive(false);
 
+            gm.ChangeBackIsShowingPopUp();
             gm.AddCompletedPuzzle();
             gm.ChangeBackCanBeClicked();
         });

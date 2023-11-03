@@ -18,11 +18,13 @@ public class ObjectController : MonoBehaviour
     private Transform[] pointsTransform;
     private ObjectSpawner spawner;
     private ResourcePuzzle rp;
+    private ParticleSystem particle;
     
     public void Initialization()
     {
         spawner = transform.parent.GetChild(index).GetComponent<ObjectSpawner>();
         rp = spawner.GetComponentInParent<ResourcePuzzle>();
+        particle = GetComponentInChildren<ParticleSystem>();
         //Debug.Log(spawner);
 
         objCollider = GetComponent<Collider2D>();
@@ -73,11 +75,12 @@ public class ObjectController : MonoBehaviour
 
                 if(i == hittedColliders.Length - 1) 
                 {   
+                    if(particle != null) particle.Play();
                     LeanTween.moveLocal(gameObject, CalculateMiddlePoint(pointsTransform), 0.3f).setOnComplete(() =>
                     {
                         objCollider.enabled = false;
 
-                        for(int i = 1; i < transform.childCount; i++) circleColliders[i - 1].enabled = true;
+                        for(int i = 1; i < transform.childCount; i++) if(circleColliders[i - 1] != null) circleColliders[i - 1].enabled = true;
 
                         spawner.ChangeBackCanSpawnValue();
 

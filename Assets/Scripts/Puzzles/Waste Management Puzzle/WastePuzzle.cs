@@ -14,6 +14,7 @@ public class WastePuzzle : MonoBehaviour
     private float intialTime;
     private bool isTimeStart;
     private bool isComplete;
+    [SerializeField] private bool thereIsTutorial;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private SpriteRenderer endPipeSpriteRenderer;
     [SerializeField] private Sprite finishedEndPipeSprite;
@@ -28,7 +29,7 @@ public class WastePuzzle : MonoBehaviour
         totalPipes = pipeScripts.Length;
         intialTime = totalTime;
 
-        //StartCoroutine(Delay());
+        if(!thereIsTutorial) StartCoroutine(Delay());
     }
 
     private IEnumerator Delay()

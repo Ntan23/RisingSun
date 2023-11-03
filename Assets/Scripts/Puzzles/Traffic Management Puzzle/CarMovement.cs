@@ -24,6 +24,7 @@ public class CarMovement : MonoBehaviour
     private bool initialCanTurnRight;
     private bool initialCanUTurn;
     private bool isStarted;
+    private bool canDetectCollision;
     private TrafficPuzzle tp;
     private GameManager gm;
     private ParticleSystem particles;
@@ -37,7 +38,7 @@ public class CarMovement : MonoBehaviour
 
         particles = GetComponentInChildren<ParticleSystem>();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
         intialWaypoints = new Transform[waypoints.Count];
 
         goalPos = waypoints[index].position;
@@ -48,6 +49,8 @@ public class CarMovement : MonoBehaviour
         initialCanTurnLeft = canTurnLeft;
         initialCanTurnRight = canTurnRight;
         initialCanUTurn = canUTurn;
+
+        canDetectCollision = true;
     }
 
     // Update is called once per frame
@@ -72,67 +75,70 @@ public class CarMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Right") && canTurnRight) 
+        if(canDetectCollision)
         {
-            if(other.transform.parent.gameObject.name == targetWaypointName)
+            if(other.CompareTag("Right") && canTurnRight) 
             {
-                canTurnRight = false;
-                LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
-                    {
-                        canTurnRight = true;
-                    }
-                );
-            }
-            else if(other.transform.parent.gameObject.name == "Cant Turn Left Waypoint" || other.transform.parent.gameObject.name == "Cant Turn Right Waypoint")
-            {
-                canTurnRight = false;
-                LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
-                    {
-                        canTurnRight = true;
-                    }
-                );
-            }
-        }
-
-        if(other.CompareTag("Left") && canTurnLeft) 
-        {
-            if(other.transform.parent.gameObject.name == targetWaypointName)
-            {
-                canTurnLeft = false;
-                LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 90.0f, timeToTurnLeft).setOnComplete(() => 
-                    {
-                        canTurnLeft = true;
-                    }
-                );
-            }
-            else if(other.transform.parent.gameObject.name == "Cant Turn Left Waypoint" || other.transform.parent.gameObject.name == "Cant Turn Right Waypoint")
-            {
-                canTurnRight = false;
-                LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
-                    {
-                        canTurnRight = true;
-                    }
-                );
-            }
-        }
-
-        if(other.CompareTag("UTurn") && canUTurn && other.transform.parent.gameObject.name == targetWaypointName) 
-        {
-            canUTurn = false;
-            LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 180.0f, timeToUTurn).setOnComplete(() => 
+                if(other.transform.parent.gameObject.name == targetWaypointName)
                 {
-                    canUTurn = true;
+                    canTurnRight = false;
+                    LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
+                        {
+                            canTurnRight = true;
+                        }
+                    );
                 }
-            );
-        }
+                else if(other.transform.parent.gameObject.name == "Cant Turn Left Waypoint" || other.transform.parent.gameObject.name == "Cant Turn Right Waypoint")
+                {
+                    canTurnRight = false;
+                    LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
+                        {
+                            canTurnRight = true;
+                        }
+                    );
+                }
+            }
 
-        if(other.CompareTag("Stop")) StartCoroutine(StopCar());
+            if(other.CompareTag("Left") && canTurnLeft) 
+            {
+                if(other.transform.parent.gameObject.name == targetWaypointName)
+                {
+                    canTurnLeft = false;
+                    LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 90.0f, timeToTurnLeft).setOnComplete(() => 
+                        {
+                            canTurnLeft = true;
+                        }
+                    );
+                }
+                else if(other.transform.parent.gameObject.name == "Cant Turn Left Waypoint" || other.transform.parent.gameObject.name == "Cant Turn Right Waypoint")
+                {
+                    canTurnRight = false;
+                    LeanTween.rotateZ(gameObject, transform.eulerAngles.z - 90.0f, timeToTurnRight).setOnComplete(() => 
+                        {
+                            canTurnRight = true;
+                        }
+                    );
+                }
+            }
+
+            if(other.CompareTag("UTurn") && canUTurn && other.transform.parent.gameObject.name == targetWaypointName) 
+            {
+                canUTurn = false;
+                LeanTween.rotateZ(gameObject, transform.eulerAngles.z + 180.0f, timeToUTurn).setOnComplete(() => 
+                    {
+                        canUTurn = true;
+                    }
+                );
+            }
+
+            if(other.CompareTag("Stop")) StartCoroutine(StopCar());
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if(collisionInfo.gameObject.CompareTag("AccidentCar")) tp.ShowError();
-        if(collisionInfo.gameObject.CompareTag("Cars")) 
+        if(collisionInfo.gameObject.CompareTag("AccidentCar") && canDetectCollision) tp.ShowError();
+        if(collisionInfo.gameObject.CompareTag("Cars") && canDetectCollision) 
         {
             if(particles != null) particles.Play();
             StartCoroutine(tp.Crash());
@@ -183,6 +189,8 @@ public class CarMovement : MonoBehaviour
     }
 
     public void StartMove() => isStarted = true;
+
+    public void DisablePaticleEffect() => particles.gameObject.SetActive(false);
 
     IEnumerator StopCar()
     {

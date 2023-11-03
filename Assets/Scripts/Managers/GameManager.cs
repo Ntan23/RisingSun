@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] energyManagementPuzzles;
     [SerializeField] private GameObject[] cyberSecurityPuzzles;
     [SerializeField] private GameObject[] needToPopUp;
+    [SerializeField] private GameObject completePopUp;
+    [SerializeField] private GameObject greenOverlay;
+    [SerializeField] private GameObject treeParticles;
     [SerializeField] private GameObject[] taskScreen;
     [SerializeField] private SpriteRenderer bgSpriteRenderer;
     [SerializeField] private Color bgColor;
@@ -32,6 +37,8 @@ public class GameManager : MonoBehaviour
     private DialogueManager  dm;
     private AudioManager am;
     [SerializeField] private CreditsUI creditsUI;
+    [SerializeField] private Volume globalVolume;
+    [SerializeField] private VolumeProfile normalVolumeProfile;
    
     void Start()
     {
@@ -63,6 +70,9 @@ public class GameManager : MonoBehaviour
         LeanTween.scale(needToPopUp[index + 1], Vector3.one, 0.5f);
         LeanTween.scale(taskScreen[index], Vector3.zero, 0.5f).setOnComplete(() => isShowingPopUp = false);
     }
+
+
+    public void ChangeBackIsShowingPopUp() => isShowingPopUp = false;
 
     public void PlayTrafficManagementPuzzle()
     {
@@ -120,20 +130,14 @@ public class GameManager : MonoBehaviour
         if(difficultyIndex == 1)
         {
             resourceAllocationPuzzles[0].SetActive(true);
-            LeanTween.scale(resourceAllocationPuzzles[0], Vector3.one, 0.5f);//.setOnComplete(() =>
-            // {
-            //     resourceAllocationPuzzles[0].GetComponent<ResourcePuzzle>().Spawn();
-            // });
+            LeanTween.scale(resourceAllocationPuzzles[0], Vector3.one, 0.5f);
             LeanTween.scale(taskScreen[3], Vector3.zero, 0.5f);
         }
 
         if(difficultyIndex == 2)
         {
             resourceAllocationPuzzles[1].SetActive(true);
-            LeanTween.scale(resourceAllocationPuzzles[1], Vector3.one, 0.5f);//.setOnComplete(() =>
-            // {
-            //     resourceAllocationPuzzles[1].GetComponent<ResourcePuzzle>().Spawn();
-            // });
+            LeanTween.scale(resourceAllocationPuzzles[1], Vector3.one, 0.5f);
             LeanTween.scale(taskScreen[3], Vector3.zero, 0.5f);
         }
     }
@@ -195,20 +199,35 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator End()
     {
+        treeParticles.SetActive(false);
         blackScreen.SetActive(true);
         LeanTween.value(blackScreen, UpdateAlpha, 0.0f, 1.0f, 0.5f).setOnComplete(() =>{
             sytemUpdateText.SetActive(true);
             LeanTween.scale(sytemUpdateText, new Vector3(1.2f, 1.2f, 1.2f), 0.8f).setLoopPingPong();
         });
         yield return new WaitForSeconds(2.0f);
+        am.StopError2();
+        globalVolume.profile = normalVolumeProfile;
         sytemUpdateText.SetActive(false);
         systemResetText.SetActive(true);
         LeanTween.scale(systemResetText, new Vector3(1.2f, 1.2f, 1.2f), 0.8f).setLoopPingPong();
         yield return new WaitForSeconds(1.7f);
+        am.StopBGM2();
+        am.PlayBGM1();
+        greenOverlay.SetActive(false);
         systemResetText.gameObject.SetActive(false);
-
-        Debug.Log("Quit");
-        Application.Quit();
+        bgSpriteRenderer.color = Color.white;
+        LeanTween.value(blackScreen, UpdateAlpha, 1.0f, 0.0f, 0.5f).setOnComplete(() =>
+        {
+            treeParticles.SetActive(true);
+            LeanTween.scale(completePopUp, Vector3.one, 0.5f);
+        });
+        yield return new WaitForSeconds(4.0f);
+        LeanTween.value(blackScreen, UpdateAlpha, 0.0f, 1.0f, 0.5f).setOnComplete(() =>
+        {   
+            creditsUI.gameObject.SetActive(true);
+            creditsUI.StartCredits();
+        });
     }
 
     private IEnumerator Error()
@@ -224,6 +243,7 @@ public class GameManager : MonoBehaviour
         am.StopWarningSFX();
         warningAnimator[0].enabled = false;
         warningAnimator[1].enabled = false;
+        treeParticles.SetActive(false);
         dm.PlayEndClip();
     }
 

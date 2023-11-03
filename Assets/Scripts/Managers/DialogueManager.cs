@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Video;
 using System;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject nextDialogueButton;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject arrowIndicator;
+    [SerializeField] private GameObject treeParticles;
     [SerializeField] private string[] dialogues;
     [Header("For Video")]
     private bool alreadyPlay;
@@ -31,6 +34,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject overlay;
     [SerializeField] private GameObject skipText;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Volume globalVolume;
+    [SerializeField] private VolumeProfile errorVolumeProfile;
     private GameManager gm;
     private AudioManager am;
 
@@ -86,6 +91,7 @@ public class DialogueManager : MonoBehaviour
 
     private void TurnOffDialogue()
     {
+        treeParticles.SetActive(true);
         alreadyPlay = true;
         videoPlayer.gameObject.SetActive(false);
         dialogueScene.SetActive(false);
@@ -116,14 +122,20 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator Restart()
     {
-        am.PlayBGM2();
+        // am.PlayBGM2();
         blackScreen.GetComponent<CanvasGroup>().blocksRaycasts = true;
         LeanTween.value(blackScreen, UpdateAlpha, 0.0f, 1.0f, 0.3f);
         yield return new WaitForSeconds(1.5f);
         overlay.SetActive(true);
-        LeanTween.value(blackScreen, UpdateAlpha, 1.0f, 0.0f, 1.0f).setOnComplete(() =>
+        am.PlayError2();
+        LeanTween.value(blackScreen, UpdateAlpha, 1.0f, 0.0f, 0.8f).setOnComplete(() =>
         {
+            gm.ChangeBackIsShowingPopUp();
+            treeParticles.SetActive(true);
             blackScreen.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+            globalVolume.profile = errorVolumeProfile;
+
             gm.ShowPopUp();
             gm.ChangeBackCanBeClicked();
         });

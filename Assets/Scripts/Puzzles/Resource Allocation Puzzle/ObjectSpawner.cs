@@ -32,8 +32,8 @@ public class ObjectSpawner : MonoBehaviour
             go[spawnedCount].transform.parent = spawnPosition.parent;
             go[spawnedCount].GetComponent<ObjectController>().Initialization();
 
-            if(go[spawnedCount].transform.childCount > 0) go[spawnedCount].transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = rp.GetOrderInLayer();
-            if(go[spawnedCount].transform.childCount == 0) go[spawnedCount].GetComponent<SpriteRenderer>().sortingOrder = rp.GetOrderInLayer();
+            if(go[spawnedCount].transform.childCount > 1) go[spawnedCount].transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = rp.GetOrderInLayer();
+            if(go[spawnedCount].transform.childCount == 1) go[spawnedCount].GetComponent<SpriteRenderer>().sortingOrder = rp.GetOrderInLayer();
 
             spawnedCount++;
             rp.UpdateOrderInLayer();
